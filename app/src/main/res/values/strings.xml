@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">spa</string>
 
+    <string name="connect_error">连接服务器失败</string>
     <string name="play_error">播放异常</string>
     <string name="live_none">没有此频道</string>
     <string name="exit">再按一次退出应用</string>

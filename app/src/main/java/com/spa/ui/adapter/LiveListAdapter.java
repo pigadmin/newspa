@@ -1,4 +1,4 @@
-package com.spa.bean;
+package com.spa.ui.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.spa.R;
+import com.spa.bean.LiveIP;
 
 import java.util.ArrayList;
 import java.util.List;

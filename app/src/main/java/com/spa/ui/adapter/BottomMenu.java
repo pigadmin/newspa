@@ -1,21 +1,14 @@
 package com.spa.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.spa.R;
-
-import org.w3c.dom.Text;
-
-import de.greenrobot.event.EventBus;
 
 public class BottomMenu extends RecyclerView.Adapter<BottomMenu.ViewHolder> implements View.OnClickListener {
     int[] icon = {R.drawable.bottom_menu1, R.drawable.bottom_menu2, R.drawable.bottom_menu3, R.drawable.bottom_menu4, R.drawable.bottom_menu5,

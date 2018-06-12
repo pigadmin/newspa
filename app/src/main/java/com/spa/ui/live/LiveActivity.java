@@ -22,7 +22,7 @@ import android.widget.VideoView;
 
 import com.spa.R;
 import com.spa.bean.LiveIP;
-import com.spa.bean.LiveListAdapter;
+import com.spa.ui.adapter.LiveListAdapter;
 import com.spa.bean.LiveTypeIP;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;

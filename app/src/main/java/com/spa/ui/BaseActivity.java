@@ -38,7 +38,6 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         app = (App) getApplication();
-        System.out.println("BaseActivity");
         activities.add(this);
     }
 
@@ -156,6 +155,7 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
 
     @Override
     protected void onDestroy() {
+        System.out.println("Base onDestroy");
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
@@ -191,7 +191,7 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
     private List<Backs> backs;
 
     public void onEvent(DataMessage event) {
-//        System.out.println("-----------------" + event.getApi());
+        System.out.println("-----------------" + event.getApi());
         try {   System.out.println("BGBGBGBGBGBG");
             if (event.getApi().equals(Req.logo)) {
                 final AJson<LogoBg> data = App.gson.fromJson(event.getData(),

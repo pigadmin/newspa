@@ -132,8 +132,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
 //                context.startActivity(new Intent(context, MainActivity.class));
 //            }
             context.startActivity(new Intent(context, MainActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
 //            Fragments.To(((Activity) context).getFragmentManager(), new MainFr());
         } else if (v == bottom_menu2) {//介绍
 //            context.startActivity(new Intent(context, IntroActivity.class));

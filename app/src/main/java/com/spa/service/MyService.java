@@ -11,13 +11,12 @@ import android.view.Gravity;
 import com.google.gson.reflect.TypeToken;
 import com.spa.app.App;
 import com.spa.app.Req;
+import com.spa.bean.AJson;
 import com.spa.event.DataMessage;
 import com.spa.service.msg.IScrollState;
-import com.spa.service.msg.MarqueeToast;
 import com.spa.service.msg.Marquee;
+import com.spa.service.msg.MarqueeToast;
 import com.spa.service.msg.TextSurfaceView;
-import com.spa.bean.AJson;
-import com.spa.bean.LiveType;
 
 import java.util.List;
 import java.util.Timer;
@@ -68,11 +67,11 @@ public class MyService extends Service implements IScrollState, Runnable {
     public void onEvent(DataMessage event) {
         try {
             if (event.getApi().equals(Req.marquee)) {
-                System.out.println("...");
+//                System.out.println("...");
                 AJson<List<Marquee>> data = App.gson.fromJson(
                         event.getData(), new TypeToken<AJson<List<Marquee>>>() {
                         }.getType());
-                if (!data.getData().isEmpty()) {
+                if (data.getData() != null) {
                     marquees = data.getData();
                     if (!runmarquee) {
                         runmarquee = true;
@@ -127,7 +126,8 @@ public class MyService extends Service implements IScrollState, Runnable {
 
     @Override
     public void start() {
-        System.out.println("---MyService_start()---");
+
+//        System.out.println("---MyService_start()---");
     }
 
     @Override
@@ -135,7 +135,7 @@ public class MyService extends Service implements IScrollState, Runnable {
         // TODO Auto-generated method stub
 
         try {
-            System.out.println("---MyService_stop()---");
+//            System.out.println("---MyService_stop()---");
             Text.setLoop(false);
             Looper.prepare();
             handler.post(this);
@@ -148,7 +148,7 @@ public class MyService extends Service implements IScrollState, Runnable {
     @Override
     public void run() {
         // TODO Auto-generated method stub
-        System.out.println("---MyService_run()---");
+//        System.out.println("---MyService_run()---");
         showMessage();
     }
 

@@ -91,7 +91,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                         }.getType());
                 menu = data.getData();
 //                System.out.println(menu.size());
-                if (!menu.isEmpty()) {
+                if (menu != null && !menu.isEmpty()) {
                     ResetMenu();
                 }
             } else if (event.getApi().equals(Req.singlelive)) {
@@ -203,7 +203,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         Drawable drawable = null;
         switch (id) {
             case 1:   //服务介绍
-                 drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
+                drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
                 break;
             case 2://电视直播
                 drawable = getResources().getDrawable(R.drawable.main_menu2);
@@ -212,13 +212,13 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                 drawable = getResources().getDrawable(R.drawable.main_menu5);
                 break;
             case 4://技师服务
-                drawable= getResources().getDrawable(R.drawable.main_menu4);
+                drawable = getResources().getDrawable(R.drawable.main_menu4);
                 break;
             case 5://影音娱乐
                 drawable = getResources().getDrawable(R.drawable.main_menu3);
                 break;
             case 6://游戏应用
-                drawable= getResources().getDrawable(R.drawable.main_menu6);
+                drawable = getResources().getDrawable(R.drawable.main_menu6);
                 break;
         }
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
