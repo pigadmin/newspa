@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="200dp"
+        android:background="@mipmap/dialog_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/sp_tips"
+            android:textColor="@color/menu"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/key"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@mipmap/liuwei_edit_bg"
+            android:enabled="false"
+            android:gravity="center"
+            android:hint="@string/showsp_tips"
+            android:textColor="@color/menu"
+            android:textColorHint="@color/menu"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/cancle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn"
+            android:text="@string/cancle"
+            android:textColor="@drawable/menu_name2"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

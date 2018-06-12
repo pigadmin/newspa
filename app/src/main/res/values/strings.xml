@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">spa</string>
+
+    <string name="play_error">播放异常</string>
+    <string name="live_none">没有此频道</string>
+    <string name="exit">再按一次退出应用</string>
+    <string name="useless">此功能尚未开通</string>
+    <string name="gps_network">移动网络已连接</string>
+    <string name="wifi_network">WIFI网络已连接</string>
+    <string name="eth_network">有线网络已连接</string>
+    <string name="disnetwork">您的网络出了一点小故障</string>
+    <string name="success">操作成功</string>
+    <string name="order_success">下单成功！</string>
+    <string name="call_success">呼叫成功！</string>
+    <string name="search_hit">搜索内容</string>
+    <string name="searchjishi_hit">搜索技师</string>
+    <string name="main_menu1">服务介绍</string>
+    <string name="main_menu2">电视直播</string>
+    <string name="main_menu3">影音娱乐</string>
+    <string name="main_menu4">技师服务</string>
+    <string name="main_menu5">酒水饮料</string>
+    <string name="main_menu6">游戏应用</string>
+
+
+    <string name="bottom_menu1">主页</string>
+    <string name="bottom_menu2">介绍</string>
+    <string name="bottom_menu3">技师</string>
+    <string name="bottom_menu4">消费</string>
+    <string name="bottom_menu5">优惠</string>
+    <string name="bottom_menu6">呼叫</string>
+    <string name="bottom_menu7">留位</string>
+    <string name="bottom_menu8">帮助</string>
+    <string name="bottom_menu9">控制</string>
+    <string name="bottom_menu10">返回</string>
+
+    <string name="sp_tips">请刷手牌</string>
+    <string name="showsp_tips">手牌号码显示区</string>
+    <string name="call_tips">是否呼叫服务员？</string>
+    <string name="jsmenu_tips">技师功能</string>
+    <string name="up_z">上钟</string>
+    <string name="down_z">下钟</string>
+    <string name="jie_z">接钟</string>
+    <string name="jia_z">加钟</string>
+    <string name="ok">确认</string>
+    <string name="cancle">取消</string>
+
+    <string name="Download">应用下载</string>
+    <string name="Downloading_update">正在下载升级包。请稍后...</string>
+    <string name="update_title">升级提示</string>
+    <string name="update_content">检测到版本需要升级！是否下载安装？</string>
+    <string name="Downloading_game">正在下载应用。请稍后...</string>
+    <string name="Downloading_live">正在下载直播应用。请稍后...</string>
+    <string name="Downloading_vod">正在下载视频应用。请稍后...</string>
+    <string name="Downloading_music">正在下载音乐应用。请稍后...</string>
+    <string name="Background">后台下载</string>
+    <string name="Complete">下载成功</string>
+    <string name="DownFailed">下载失败</string>
+    <string name="Ok">确\t定</string>
+    <string name="Cancle">取\t消</string>
+
+    <!--bottom-->
+    <string name="bottom_control">键控制</string>
+    <string name="bottom_choose">键选择</string>
+    <string name="bottom_ok">键确定</string>
+    <string name="bottom_back">键返回</string>
+
+    <string name="video_time">上一次观看到x,是否继续播放?</string>
+
+    <string name="dish_name">名称：</string>
+    <string name="no">编号：</string>
+    <string name="dish_time">供应时间：</string>
+    <string name="dish_price">价格：</string>
+    <string name="dish_num">数量：</string>
+    <string name="dish_req">要求：</string>
+    <string name="dish_des">详情：</string>
+    <string name="order">下单</string>
+
+    <string name="all">全部</string>
+    <string name="jishi_sex">性别：</string>
+    <string name="jishi_sex1">男</string>
+    <string name="jishi_sex2">女</string>
+
+    <string name="jishi_city">籍贯：</string>
+    <string name="jishi_kg">体重：</string>
+    <string name="jishi_height">身高：</string>
+    <string name="jishi_status">状态：</string>
+    <string name="jishi_status1">上钟</string>
+    <string name="jishi_status2">空闲</string>
+    <string name="jishi_status3">当前：当值</string>
+    <string name="jishi_status4">当前：未当值</string>
+    <string name="jishi_project">项目：</string>
+</resources>

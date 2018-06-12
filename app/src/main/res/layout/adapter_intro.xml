@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/intro_name"
+        android:layout_width="185dp"
+        android:layout_height="32dp"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingLeft="10dp"
+        android:paddingRight="30dp"
+        android:singleLine="true"
+        android:textColor="@drawable/menu_name"
+        android:textSize="20sp" />
+
+    <!--<Button-->
+    <!--android:id="@+id/intro_name"-->
+    <!--android:layout_width="185dp"-->
+    <!--android:layout_height="32dp"-->
+    <!--android:background="@drawable/test"-->
+    <!--android:ellipsize="marquee"-->
+    <!--android:marqueeRepeatLimit="marquee_forever"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingRight="25dp"-->
+    <!--android:singleLine="true"-->
+    <!--android:text="Name"-->
+    <!--android:textColor="@drawable/menu_name"-->
+    <!--android:textSize="20sp" />-->
+
+</LinearLayout>

@@ -1,0 +1,250 @@
+系统授权验证（终端每天一次请求 ）
+
+注：200代表授权正常  400代表授权失败（具体信息看msg）
+http://localhost:8081/wisdom_hotel/remote/checkAuth
+
+-------------------------------------------------------------------
+//点播接口
+-------------------------------------------------------------------
+0.查询当前开放的点播类型
+参数  : mac：mac地址
+data结构：1/2   （1.本地直播 2.第三方直播）
+http://localhost:8080/wisdom_spa/remote/vod/sel?mac=00:15:18:16:F9:99
+-------------------------------------------------------------------
+1.获取点播分类
+参数  : mac：mac地址
+data结构：List<SourceType>
+http://localhost:8080/wisdom_spa/remote/vodtype?mac=00:15:18:16:F9:99
+
+-------------------------------------------------------------------
+2.获取点播
+参数  :  mac：mac地址, type:类型id , sort【可选】:排序方式 （ 数值类型 1:最新  2:最热） keywd【可选】：搜索关键字
+	  pageSize:每页数量  默认为14    pageNo： 页码  默认为1
+data结构：{
+        "pageNo": 1,      //页码
+        "pageSize": 14,   //一页数量
+        "totalPage": 1,   //总共页数
+        "totalRows": 1,   //总数
+        "hasPrePage": false,  // 是否有上一页
+        "hasNextPage": false, // 是否有下一页
+        "data": [
+            {
+                "id": 18,       //资源id
+                "typeId": 21,   // 类型id
+                "name": "模拟直播1ddd",  // 资源名称
+                "icon": "http://localhost:8080/wisdom_spa/upload/jpg/1503626878369.jpg",  //图标
+                "createDate": 1503637837000,  // 创建日期
+                "vv": 4,    // 播放数量
+                "ad": {     // 广告对象
+                    "id": 5,
+                    "name": "得问问群", // 广告名称
+                    "inter": "12,"   // 插播时间段  单位分钟,
+                    "details": [      // 广告文件内容
+                        {
+                            "id": 17,
+                            "name": "内容1",
+                            "type": 1,
+                            "filePath": "http://localhost:8080/wisdom_spa/upload/png/1503890745980.png",
+                            "ad": 5,
+                            "position": 1
+                        }
+                    ]
+                },
+                "fileType": 2,   // 文件类型
+                					 图片 = 1; 视频 = 2; TXT = 3;
+ 									PPT = 4; PDF = 5; EXCEL = 6; WORD = 7;
+                "types": 1,
+                "cost": 4,      // 价格
+                "details": [    // 资源文件内容
+                    {
+                        "id": 11,
+                        "name": "模拟直播1",
+                        "filePath": "http://localhost:8080/wisdom_spa/upload/wmv/1503626946705.wmv",
+                        "sourceId": 18
+                    }
+                ]
+            }
+        ]
+    }
+
+http://localhost:8080/wisdom_spa/remote/vod?type=21&mac=00:15:18:16:F9:99
+-------------------------------------------------------------------
+5. 添加点播 播放记录
+参数  : mac：mac地址    vid: 资源id
+data结构：
+	  null
+
+http://localhost:8080/wisdom_spa/remote/vrecord?mac=00:15:18:16:F9:99&vid=15
+
+-------------------------------------------------------------------
+3.获取第三方点播
+参数  : mac：mac地址
+data结构：
+	[
+        {
+            "id": id,
+            "name": 名称,
+            "path": 点播apk路径，
+            "package_name": 包名，
+        }
+    ]
+http://localhost:8080/wisdom_spa/remote/vodapp?mac=00:15:18:16:F9:99
+
+-------------------------------------------------------------------
+//直播接口
+-------------------------------------------------------------------
+1.获取直播
+参数  : mac：mac地址
+data结构：
+{
+   type: 1   (1.模拟直播。2.数字直播 3.第三方直播)
+   data: []  （数据类型对应type）
+}
+http://localhost:8080/wisdom_spa/remote/live?mac=00:15:18:16:F9:99
+-------------------------------------------------------------------
+// 终端排版
+-------------------------------------------------------------------
+1.主界面菜单
+http://localhost:8080/wisdom_spa/remote/tmenu?mac=00:15:18:16:F9:99
+参数  : mac：mac地址
+data结构： [
+        {
+            "id": 1,
+            "name": "主菜单1",
+            "icon": "http://localhost:8080/wisdom_spa/upload/png/1502878561073.png",
+            "position": 4,      //位置
+            "subs": [          // 子菜单数组
+                {
+                    "id": 3,
+                    "name": "子菜单1-1",
+                    "icon": "http://localhost:8080/wisdom_spa/upload/png/1502880612465.png",
+                    "position": 2,
+
+                }
+            ]
+        }
+    ],
+
+id =1 服务介绍     2 技师服务   3 酒水饮料  4 电影直播   5 影音娱乐  6 游戏应用
+-------------------------------------------------------------------
+1.获取技师服务类型
+参数  : mac：mac地址
+data结构：
+[{
+    id:,
+    name:,
+}]
+http://localhost:8080/wisdom_spa/remote/teach/type?mac=3331
+
+-------------------------------------------------------------------
+1.获取技师列表
+http://192.168.2.25:8108/wisdom_spa/remote/teach?mac=00:15:18:16:f9:31&status=1&pageNo=1&pageSize=10
+http://localhost:8080/wisdom_spa/remote/teach?mac=00:15:18:16:F9:99
+参数  : mac：mac地址
+参数  : status：技师状态  2空闲 1 忙碌
+参数  : duty：是否值班  2否 1是
+参数  : services：服务  （多个用,号隔开）
+data结构：
+[{
+    id:,
+    name:,
+}]
+-------------------------------------------------------------------
+应用信息
+参数 ：mac
+返回 List<Apply> applies
+http://localhost:8080/wisdom_spa/remote/getApp?mac=3331
+-------------------------------------------------------------------
+菜品分类信息
+参数 ：mac
+返回 List<DishStyle> styles
+http://localhost:8080/wisdom_spa/remote/getDishStyle?mac=3331
+-------------------------------------------------------------------
+菜品详细信息
+参数 ：mac
+    styleId
+
+返回 List<Dish> dishs
+http://localhost:8080/wisdom_spa/remote/getDish?mac=3331&styleId=2
+-------------------------------------------------------------------
+滚动字幕
+参数：mac
+
+返回 List<Subtitle> titles
+//http://localhost:8080/wisdom_spa/remote/getSubTitle?mac=3331
+
+已改为 socketio 事件名称   title
+-------------------------------------------------------------------
+首页广告
+参数：mac
+
+返回 List<WelcomeAd> ads
+http://localhost:8080/wisdom_spa/remote/getWelComeAd?mac=3331
+-------------------------------------------------------------------
+信息发布
+
+参数：mac
+    type  1 优惠信息   2服务介绍  3 帮助
+
+返回   List<Info> infos
+http://localhost:8080/wisdom_spa/remote/getInfo?mac=3331&type=3
+-------------------------------------------------------------------
+获取背景图片，logo+背景音乐
+参数 ：mac
+
+返回  UIVO   Back.type = 1 图片   2 音频
+http://localhost:8080/wisdom_spa/remote/getLogo?mac=3331&type=3
+----------------------------------------------------------------------
+查看升级
+
+参数 ：mac
+    version   double
+
+    返回：有升级时返回url地址
+http://localhost:8080/wisdom_spa/remote/getUpgrade?mac=3331&version=0.1
+-------------------------------------------------------------------
+汇报升级
+参数 ：mac
+    version   double
+
+    返回：有升级时返回url地址
+http://localhost:8080/wisdom_spa/remote/setUpgrade?mac=3331&version=0.1
+-------------------------------------------------------------------
+获取天气
+
+//http://localhost:8080/wisdom_spa/remote/getWeather
+
+已改为 socketio 事件名称   weather
+
+-------------------------------------------------------------------
+新增呼叫
+
+参数 ：mac
+    notifyNews    呼叫内容   （呼叫服务   如果是点餐 直接配内容:果汁：2杯）
+
+http://localhost:8080/wisdom_spa/remote/addNotice?mac=3331&notifyNews=%E5%91%BC%E5%8F%AB%E6%9C%8D%E5%8A%A1
+-------------------------------------------------------------------
+获取呼叫内容
+
+//http://localhost:8080/wisdom_spa/remote/getNotice?mac=3331
+
+已改为 socketio 事件名称   notice
+-------------------------------------------------------------------
+将呼叫内容更改为已处理
+
+http://localhost:8080/wisdom_spa/remote/updateNotice?noticeId=140
+-------------------------------------------------------------------
+获取歌曲分类
+mac
+http://localhost:8080/wisdom_spa/remote/getSongType??mac=3331
+
+-------------------------------------------------------------------
+获取歌曲
+mac
+type   分类id
+keywd  歌曲名称
+pageSize 页码量 默认15
+pageNo   第几页  默认1
+http://localhost:8080/wisdom_spa/remote/getsong?mac=3331
+
+-------------------------------------------------------------------

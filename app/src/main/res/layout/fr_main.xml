@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="910dp"
+    android:layout_height="450dp"
+    android:layout_marginLeft="185dp"
+    android:layout_marginRight="185dp"
+    android:layout_marginTop="106dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="450dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/main_menu1"
+            android:layout_width="450dp"
+            android:layout_height="220dp"
+            android:background="@drawable/main_menu_bg1"
+            android:paddingTop="28dp"
+            android:text="@string/main_menu1"
+            android:textColor="@drawable/menu_name"
+            android:textSize="28sp" />
+
+
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/main_menu2"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:background="@drawable/main_menu_bg2"
+                android:focusable="true"
+                android:paddingTop="28dp"
+                android:text="@string/main_menu2"
+                android:textColor="@drawable/menu_name"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/main_menu3"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_menu_bg2"
+                android:paddingTop="28dp"
+                android:text="@string/main_menu3"
+                android:textColor="@drawable/menu_name"
+                android:textSize="28sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="450dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="220dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/main_menu4"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:background="@drawable/main_menu_bg2"
+                android:paddingTop="28dp"
+                android:text="@string/main_menu4"
+                android:textColor="@drawable/menu_name"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/main_menu5"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_menu_bg2"
+                android:paddingTop="28dp"
+                android:text="@string/main_menu5"
+                android:textColor="@drawable/menu_name"
+                android:textSize="28sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/main_menu6"
+            android:layout_width="450dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_menu_bg1"
+            android:paddingTop="28dp"
+            android:text="@string/main_menu6"
+            android:textColor="@drawable/menu_name"
+            android:textSize="28sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

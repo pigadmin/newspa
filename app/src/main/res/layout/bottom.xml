@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu1"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu1"
+            android:nextFocusLeft="@id/bottom_menu10"
+            android:text="@string/bottom_menu1"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu2"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu2"
+            android:text="@string/bottom_menu2"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu3"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu3"
+            android:text="@string/bottom_menu3"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu4"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu4"
+            android:text="@string/bottom_menu4"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu5"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu5"
+            android:text="@string/bottom_menu5"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu6"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu6"
+            android:text="@string/bottom_menu6"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu7"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu7"
+            android:text="@string/bottom_menu7"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu8"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu8"
+            android:text="@string/bottom_menu8"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu9"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu9"
+            android:text="@string/bottom_menu9"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bottom_menu10"
+            android:layout_width="70dp"
+            android:layout_height="102dp"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/bottom_menu10"
+            android:nextFocusRight="@+id/bottom_menu1"
+            android:text="@string/bottom_menu10"
+            android:textColor="@drawable/menu_name"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</LinearLayout>
