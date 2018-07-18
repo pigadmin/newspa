@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity {
         init();
     }
 
+
     private void init() {
         getlogo();
         getwea();

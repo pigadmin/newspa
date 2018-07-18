@@ -370,15 +370,21 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        System.out.println(event.getAction());
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             try {
+
                 if (popupWindow != null) {
+
+                    System.out.println(popupWindow.isShowing());
+
                     if (popupWindow.isShowing()) {
                         handler.removeMessages(HideLiveList);
                         handler.sendEmptyMessageDelayed(HideLiveList, 10 * 1000);
+                    } else {
+                        show();
                     }
+
                 } else {
                     show();
                 }

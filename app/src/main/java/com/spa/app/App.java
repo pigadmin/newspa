@@ -11,6 +11,7 @@ import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,20 +35,21 @@ public class App extends Application {
     public static OkHttpClient client;
 
     private Toas toas = new Toas();
-    ;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        gson = new GsonBuilder().setDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss").create();
+
         config = getSharedPreferences("config", Context.MODE_PRIVATE);
         config();
         getip();
+
         mac();
         client = new OkHttpClient();
-
+        gson = new GsonBuilder().setDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss").create();
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_TIME_TICK);
@@ -96,6 +98,16 @@ public class App extends Application {
 
         }
     };
+
+    public View getOld() {
+        return old;
+    }
+
+    public void setOld(View old) {
+        this.old = old;
+    }
+
+    View old;
 
     private boolean fstart;
     private static String ip = "192.168.2.25:8108";

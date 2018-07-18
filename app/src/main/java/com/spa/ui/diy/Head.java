@@ -133,17 +133,21 @@ public class Head extends LinearLayout {
                     });
                 }
             } else if (event.getApi().equals(Req.logo)) {
-                logobg = App.gson.fromJson(event.getData(),
-                        new TypeToken<AJson<LogoBg>>() {
-                        }.getType());
-                if (logobg != null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Picasso.with(context).load(logobg.getData().getLogo().getLogoPath()).into(logo);
-                            handler.sendEmptyMessage(bg);
-                        }
-                    });
+                try {
+                    logobg = App.gson.fromJson(event.getData(),
+                            new TypeToken<AJson<LogoBg>>() {
+                            }.getType());
+                    if (logobg.getData() != null) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Picasso.with(context).load(logobg.getData().getLogo().getLogoPath()).into(logo);
+                                handler.sendEmptyMessageDelayed(bg, 1000);
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }

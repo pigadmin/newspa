@@ -36,6 +36,7 @@ import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.ui.live.LiveActivity;
 import com.spa.ui.video.VideoFr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -66,6 +67,20 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        app.setOld(activity.getWindow().getCurrentFocus());
+        System.out.println(app.getOld());
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onResume() {
+        if (app.getOld() != null) {
+            app.getOld().requestFocus();
+        }
+        super.onResume();
+    }
 
     private void init() {
         getmenu();
@@ -77,13 +92,13 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     }
 
 
-    private List<Menu> menu;
+    private List<Menu> menu=new ArrayList<>();
     private Backs backs;
 
     public void onEvent(final DataMessage event) {
         try {
 
-//            System.out.println("--------");
+            System.out.println(event.getData());
 
             if (event.getApi().equals(Req.menu)) {
                 final AJson<List<Menu>> data = App.gson.fromJson(event.getData(),
@@ -367,8 +382,10 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
         int id = menu.get(p).getId();
 
+
         switch (id) {
 //        switch (p + 1) {
+
             case 1://服务绍
                 System.out.println("服务介绍");
 //                startActivity(new Intent(activity, IntroActivity.class));
