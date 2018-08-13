@@ -88,11 +88,12 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
 
     private void getmenu() {
+        System.out.println(Req.menu);
         Req.get(Req.menu);
     }
 
 
-    private List<Menu> menu=new ArrayList<>();
+    private List<Menu> menu = new ArrayList<>();
     private Backs backs;
 
     public void onEvent(final DataMessage event) {
@@ -214,30 +215,34 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     }
 
     private void seticon(int id, Button button) {
+        try {
 //        System.out.println(id + "----" + button);
-        Drawable drawable = null;
-        switch (id) {
-            case 1:   //服务介绍
-                drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
-                break;
-            case 2://电视直播
-                drawable = getResources().getDrawable(R.drawable.main_menu2);
-                break;
-            case 3://酒水饮料
-                drawable = getResources().getDrawable(R.drawable.main_menu5);
-                break;
-            case 4://技师服务
-                drawable = getResources().getDrawable(R.drawable.main_menu4);
-                break;
-            case 5://影音娱乐
-                drawable = getResources().getDrawable(R.drawable.main_menu3);
-                break;
-            case 6://游戏应用
-                drawable = getResources().getDrawable(R.drawable.main_menu6);
-                break;
+            Drawable drawable = null;
+            switch (id) {
+                case 1:   //服务介绍
+                    drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
+                    break;
+                case 2://电视直播
+                    drawable = getResources().getDrawable(R.drawable.main_menu2);
+                    break;
+                case 3://酒水饮料
+                    drawable = getResources().getDrawable(R.drawable.main_menu5);
+                    break;
+                case 4://技师服务
+                    drawable = getResources().getDrawable(R.drawable.main_menu4);
+                    break;
+                case 5://影音娱乐
+                    drawable = getResources().getDrawable(R.drawable.main_menu3);
+                    break;
+                case 6://游戏应用
+                    drawable = getResources().getDrawable(R.drawable.main_menu6);
+                    break;
+            }
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            button.setCompoundDrawables(null, drawable, null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        button.setCompoundDrawables(null, drawable, null, null);
 
     }
 
@@ -365,58 +370,62 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     private Handler handler = new Handler();
 
     private void ToActivity(int p) {
-        if (menu.isEmpty())
-            return;
-        if (menu.get(p).getStatus() == 0) {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toas toas = new Toas();
-                    toas.setMsg(getString(R.string.useless));
-                    toas.show(activity);
-                    toas = null;
-                }
-            });
-            return;
-        }
+        try {
+            if (menu.isEmpty())
+                return;
+            if (menu.get(p).getStatus() == 0) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toas toas = new Toas();
+                        toas.setMsg(getString(R.string.useless));
+                        toas.show(activity);
+                        toas = null;
+                    }
+                });
+                return;
+            }
 
-        int id = menu.get(p).getId();
-
-
-        switch (id) {
-//        switch (p + 1) {
-
-            case 1://服务绍
-                System.out.println("服务介绍");
-//                startActivity(new Intent(activity, IntroActivity.class));
-                Fragments.To(getFragmentManager(), new IntroFr());
-                break;
-            case 2://电视直播
-                System.out.println("电视直播");
-                Req.get(Req.singlelive);
-                break;
-            case 3://酒水饮料
-                System.out.println("酒水饮料");
-//                startActivity(new Intent(activity, DishStyleActivity.class));
-                Fragments.To(getFragmentManager(), new DishStyleFr());
-                break;
-            case 4://技师服务
-                System.out.println("技师服务");
-//                startActivity(new Intent(activity, JishiTypeActivity.class));
-                Fragments.To(getFragmentManager(), new JishiStyleFr());
-                break;
-            case 5://影音娱乐
-                System.out.println("影音娱乐");
-//                startActivity(new Intent(activity, VideoActivity.class));
-                Fragments.To(getFragmentManager(), new VideoFr());
-                break;
-            case 6://游戏应用
-                System.out.println("游戏应用");
-                Fragments.To(getFragmentManager(), new GameFr());
-//                startActivity(new Intent(activity, GameActivity.class));
-                break;
+            int id = menu.get(p).getId();
 
 
+            switch (id) {
+                //        switch (p + 1) {
+
+                case 1://服务绍
+                    System.out.println("服务介绍");
+                    //                startActivity(new Intent(activity, IntroActivity.class));
+                    Fragments.To(getFragmentManager(), new IntroFr());
+                    break;
+                case 2://电视直播
+                    System.out.println("电视直播");
+                    Req.get(Req.singlelive);
+                    break;
+                case 3://酒水饮料
+                    System.out.println("酒水饮料");
+                    //                startActivity(new Intent(activity, DishStyleActivity.class));
+                    Fragments.To(getFragmentManager(), new DishStyleFr());
+                    break;
+                case 4://技师服务
+                    System.out.println("技师服务");
+                    //                startActivity(new Intent(activity, JishiTypeActivity.class));
+                    Fragments.To(getFragmentManager(), new JishiStyleFr());
+                    break;
+                case 5://影音娱乐
+                    System.out.println("影音娱乐");
+                    //                startActivity(new Intent(activity, VideoActivity.class));
+                    Fragments.To(getFragmentManager(), new VideoFr());
+                    break;
+                case 6://游戏应用
+                    System.out.println("游戏应用");
+                    Fragments.To(getFragmentManager(), new GameFr());
+                    //                startActivity(new Intent(activity, GameActivity.class));
+                    break;
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -30,6 +30,8 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         find();
+        System.out.println(Req.check);
+        System.out.println(App.mac);
         if (App.network_type > 0) {
             check();
         }

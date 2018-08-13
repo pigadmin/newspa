@@ -4,6 +4,6 @@
     <item android:drawable="@mipmap/btn_n" android:state_focused="true"></item>
     <item android:drawable="@mipmap/btn_p" android:state_focused="false"></item>
 
-    <item android:drawable="@mipmap/btn_n" android:state_pressed="true"></item>
+    <!--<item android:drawable="@mipmap/btn_n" android:state_pressed="true"></item>-->
 
 </selector>

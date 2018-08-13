@@ -67,7 +67,7 @@ public class MyService extends Service implements IScrollState, Runnable {
     public void onEvent(DataMessage event) {
         try {
             if (event.getApi().equals(Req.marquee)) {
-//                System.out.println("...");
+//                System.out.println(". 2..");
                 AJson<List<Marquee>> data = App.gson.fromJson(
                         event.getData(), new TypeToken<AJson<List<Marquee>>>() {
                         }.getType());
