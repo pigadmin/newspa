@@ -3,17 +3,14 @@ package com.spa.ui;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -40,8 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainFr extends BaseFr implements View.OnClickListener {
 
@@ -49,11 +44,11 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     private Activity activity;
     private App app;
 
+    private ImageView main_menu1, main_menu2, main_menu3, main_menu4, main_menu5, main_menu6;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-//        System.out.println("-----------------" + (view == null));
         if (view == null) {
             view = inflater.inflate(R.layout.fr_main, container, false);
             activity = getActivity();
@@ -62,7 +57,6 @@ public class MainFr extends BaseFr implements View.OnClickListener {
             find();
             init();
         }
-
 
         return view;
     }
@@ -108,7 +102,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                 menu = data.getData();
 //                System.out.println(menu.size());
                 if (menu != null && !menu.isEmpty()) {
-                    ResetMenu();
+//                    ResetMenu();
                 }
             } else if (event.getApi().equals(Req.singlelive)) {
                 AJson<LiveType> data = App.gson.fromJson(
@@ -164,174 +158,83 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    private void ResetMenu() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    main_menu1.setText(menu.get(0).getName());
-                    main_menu2.setText(menu.get(1).getName());
-                    main_menu3.setText(menu.get(2).getName());
-                    main_menu4.setText(menu.get(3).getName());
-                    main_menu5.setText(menu.get(4).getName());
-                    main_menu6.setText(menu.get(5).getName());
-
-//                    loadWeb();
-
-                    for (int i = 0; i < menu.size(); i++) {
-                        int id = menu.get(i).getId();
-                        switch (i) {
-                            case 0:
-                                seticon(id, main_menu1);
-                                break;
-                            case 1:
-                                seticon(id, main_menu2);
-                                break;
-                            case 2:
-                                seticon(id, main_menu3);
-                                break;
-                            case 3:
-                                seticon(id, main_menu4);
-                                break;
-                            case 4:
-                                seticon(id, main_menu5);
-                                break;
-                            case 5:
-                                seticon(id, main_menu6);
-                                break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        });
-
-    }
-
-    private void seticon(int id, Button button) {
-        try {
-//        System.out.println(id + "----" + button);
-            Drawable drawable = null;
-            switch (id) {
-                case 1:   //服务介绍
-                    drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
-                    break;
-                case 2://电视直播
-                    drawable = getResources().getDrawable(R.drawable.main_menu2);
-                    break;
-                case 3://酒水饮料
-                    drawable = getResources().getDrawable(R.drawable.main_menu5);
-                    break;
-                case 4://技师服务
-                    drawable = getResources().getDrawable(R.drawable.main_menu4);
-                    break;
-                case 5://影音娱乐
-                    drawable = getResources().getDrawable(R.drawable.main_menu3);
-                    break;
-                case 6://游戏应用
-                    drawable = getResources().getDrawable(R.drawable.main_menu6);
-                    break;
-            }
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            button.setCompoundDrawables(null, drawable, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    private void loadWeb() {
-        for (int i = 0; i < menu.size(); i++) {
-            final int p = i;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        System.out.println(menu.get(p).getIcon() + "------------");
-                        Request request = new Request.Builder().url(menu.get(p).getIcon()).build();
-                        Response response = App.client.newCall(request).execute();
-                        if (response.code() == 200) {
-                            final byte[] b = response.body().bytes();
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
-                                    Drawable drawable = new BitmapDrawable(bitmap);
-                                    StateListDrawable stateListDrawable = new StateListDrawable();
-                                    stateListDrawable.addState(new int[]{android.R.attr.state_focused}, null);
-                                    stateListDrawable.addState(new int[]{}, drawable);
-                                    stateListDrawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                                    switch (p) {
-                                        case 0:
-                                            main_menu1.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                        case 1:
-                                            main_menu2.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                        case 2:
-                                            main_menu3.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                        case 3:
-                                            main_menu4.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                        case 4:
-                                            main_menu5.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                        case 5:
-                                            main_menu6.setCompoundDrawables(null, stateListDrawable, null, null);
-                                            break;
-                                    }
-
-                                }
-                            });
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-            }).start();
-        }
-
-    }
-
-//    private void ResetMenu(final int p){
+//    private void ResetMenu() {
 //        handler.post(new Runnable() {
 //            @Override
 //            public void run() {
-//                System.out.println(p + "=================" + menu.get(p).getName());
-//                buttons.get(p).setText(menu.get(p).getName());
+//                try {
+//                    main_menu1.setText(menu.get(0).getName());
+//                    main_menu2.setText(menu.get(1).getName());
+//                    main_menu3.setText(menu.get(2).getName());
+//                    main_menu4.setText(menu.get(3).getName());
+//                    main_menu5.setText(menu.get(4).getName());
+//                    main_menu6.setText(menu.get(5).getName());
 //
-//                Picasso.with(activity).load(menu.get(p).getIcon()).into(new Target() {
-//                    @Override
-//                    public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-//                        Drawable drawable = new BitmapDrawable(bitmap);
-//                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-//                        buttons.get(p).setCompoundDrawables(null, drawable, null, null);
+////                    loadWeb();
+//
+//                    for (int i = 0; i < menu.size(); i++) {
+//                        int id = menu.get(i).getId();
+//                        switch (i) {
+//                            case 0:
+//                                seticon(id, main_menu1);
+//                                break;
+//                            case 1:
+//                                seticon(id, main_menu2);
+//                                break;
+//                            case 2:
+//                                seticon(id, main_menu3);
+//                                break;
+//                            case 3:
+//                                seticon(id, main_menu4);
+//                                break;
+//                            case 4:
+//                                seticon(id, main_menu5);
+//                                break;
+//                            case 5:
+//                                seticon(id, main_menu6);
+//                                break;
+//                        }
 //                    }
-//
-//                    @Override
-//                    public void onBitmapFailed(Drawable drawable) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onPrepareLoad(Drawable drawable) {
-//
-//                    }
-//                });
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //            }
-//        });
 //
+//
+//        });
 //    }
 
-    private Button main_menu1, main_menu2, main_menu3, main_menu4, main_menu5, main_menu6;
-
+//    private void seticon(int id, TextView button) {
+//        try {
+//            Drawable drawable = null;
+//            switch (id) {
+//                case 1:   //服务介绍
+//                    drawable = activity.getResources().getDrawable(R.drawable.main_menu1);
+//                    break;
+//                case 2://电视直播
+//                    drawable = getResources().getDrawable(R.drawable.main_menu2);
+//                    break;
+//                case 3://酒水饮料
+//                    drawable = getResources().getDrawable(R.drawable.main_menu5);
+//                    break;
+//                case 4://技师服务
+//                    drawable = getResources().getDrawable(R.drawable.main_menu4);
+//                    break;
+//                case 5://影音娱乐
+//                    drawable = getResources().getDrawable(R.drawable.main_menu3);
+//                    break;
+//                case 6://游戏应用
+//                    drawable = getResources().getDrawable(R.drawable.main_menu6);
+//                    break;
+//            }
+//            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//            button.setCompoundDrawables(null, drawable, null, null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void find() {
         main_menu1 = view.findViewById(R.id.main_menu1);
@@ -346,9 +249,60 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         main_menu4.setOnClickListener(this);
         main_menu5.setOnClickListener(this);
         main_menu6.setOnClickListener(this);
-
-
     }
+
+//    private void loadWeb() {
+//        for (int i = 0; i < menu.size(); i++) {
+//            final int p = i;
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        System.out.println(menu.get(p).getIcon() + "------------");
+//                        Request request = new Request.Builder().url(menu.get(p).getIcon()).build();
+//                        Response response = App.client.newCall(request).execute();
+//                        if (response.code() == 200) {
+//                            final byte[] b = response.body().bytes();
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+//                                    Drawable drawable = new BitmapDrawable(bitmap);
+//                                    StateListDrawable stateListDrawable = new StateListDrawable();
+//                                    stateListDrawable.addState(new int[]{android.R.attr.state_focused}, null);
+//                                    stateListDrawable.addState(new int[]{}, drawable);
+//                                    stateListDrawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//                                    switch (p) {
+//                                        case 0:
+//                                            main_menu1.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                        case 1:
+//                                            main_menu2.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                        case 2:
+//                                            main_menu3.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                        case 3:
+//                                            main_menu4.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                        case 4:
+//                                            main_menu5.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                        case 5:
+//                                            main_menu6.setCompoundDrawables(null, stateListDrawable, null, null);
+//                                            break;
+//                                    }
+//
+//                                }
+//                            });
+//                        }
+//                    } catch (Exception e) {
+//                    }
+//                }
+//            }).start();
+//        }
+//
+//    }
 
     @Override
     public void onClick(View v) {
@@ -387,47 +341,29 @@ public class MainFr extends BaseFr implements View.OnClickListener {
             }
 
             int id = menu.get(p).getId();
-
-
+            Log.d("MainFr", "id.." + id);
             switch (id) {
-                //        switch (p + 1) {
-
-                case 1://服务绍
-                    System.out.println("服务介绍");
-                    //                startActivity(new Intent(activity, IntroActivity.class));
+                case 1://服务介绍
                     Fragments.To(getFragmentManager(), new IntroFr());
                     break;
                 case 2://电视直播
-                    System.out.println("电视直播");
                     Req.get(Req.singlelive);
                     break;
                 case 3://酒水饮料
-                    System.out.println("酒水饮料");
-                    //                startActivity(new Intent(activity, DishStyleActivity.class));
                     Fragments.To(getFragmentManager(), new DishStyleFr());
                     break;
                 case 4://技师服务
-                    System.out.println("技师服务");
-                    //                startActivity(new Intent(activity, JishiTypeActivity.class));
                     Fragments.To(getFragmentManager(), new JishiStyleFr());
                     break;
                 case 5://影音娱乐
-                    System.out.println("影音娱乐");
-                    //                startActivity(new Intent(activity, VideoActivity.class));
                     Fragments.To(getFragmentManager(), new VideoFr());
                     break;
                 case 6://游戏应用
-                    System.out.println("游戏应用");
                     Fragments.To(getFragmentManager(), new GameFr());
-                    //                startActivity(new Intent(activity, GameActivity.class));
                     break;
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }
