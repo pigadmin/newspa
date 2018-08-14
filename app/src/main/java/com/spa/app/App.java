@@ -111,7 +111,7 @@ public class App extends Application {
 
     private boolean fstart;
     private static String ip = "192.168.2.25:8108";
-//private static String ip = "192.168.2.89:8108";
+    //private static String ip = "192.168.2.89:8108";
     public static String version;
 
     private void config() {
@@ -142,7 +142,7 @@ public class App extends Application {
         }
     }
 
-    public static String mac;
+    public static String mac = "";
 
     private void mac() {
         try {
@@ -214,6 +214,7 @@ public class App extends Application {
         }
         return false;
     }
+
     private String Key = "";
 
     public String getKey() {
