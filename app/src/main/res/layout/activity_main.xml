@@ -1,136 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:layout_height="wrap_content">
 
     <com.spa.ui.diy.Head
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.spa.ui.diy.Head>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"></FrameLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="185dp"
-        android:layout_marginRight="185dp"
-        android:layout_marginTop="106dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/main_menu1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/main_menu_bg1"
-                android:drawableTop="@drawable/main_menu1"
-                android:paddingTop="28dp"
-                android:text="@string/main_menu1"
-                android:textColor="@drawable/menu_name"
-                android:textSize="28sp" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/main_menu2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/main_menu_bg2"
-                    android:drawableTop="@drawable/main_menu2"
-                    android:focusable="true"
-                    android:paddingTop="28dp"
-                    android:text="@string/main_menu2"
-                    android:textColor="@drawable/menu_name"
-                    android:textSize="28sp" />
-
-                <Button
-                    android:id="@+id/main_menu3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/main_menu_bg2"
-                    android:drawableTop="@drawable/main_menu3"
-                    android:paddingTop="28dp"
-                    android:text="@string/main_menu3"
-                    android:textColor="@drawable/menu_name"
-                    android:textSize="28sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/main_menu4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/main_menu_bg2"
-                    android:drawableTop="@drawable/main_menu4"
-                    android:paddingTop="28dp"
-                    android:text="@string/main_menu4"
-                    android:textColor="@drawable/menu_name"
-                    android:textSize="28sp" />
-
-                <Button
-                    android:id="@+id/main_menu5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/main_menu_bg2"
-                    android:drawableTop="@drawable/main_menu5"
-                    android:paddingTop="28dp"
-                    android:text="@string/main_menu5"
-                    android:textColor="@drawable/menu_name"
-                    android:textSize="28sp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/main_menu6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/main_menu_bg1"
-                android:drawableTop="@drawable/main_menu6"
-                android:paddingTop="28dp"
-                android:text="@string/main_menu6"
-                android:textColor="@drawable/menu_name"
-                android:textSize="28sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+        android:layout_centerVertical="true"
+        android:layout_gravity="center" />
 
     <com.spa.ui.diy.Bottom
         android:layout_width="match_parent"
@@ -138,7 +21,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"></com.spa.ui.diy.Bottom>
-
+        android:layout_marginRight="50dp" />
 
 </RelativeLayout>

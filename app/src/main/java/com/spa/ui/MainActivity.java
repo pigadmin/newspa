@@ -25,7 +25,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Fragments.To(getFragmentManager(), new MainFr());
 
         init();
@@ -36,7 +35,6 @@ public class MainActivity extends BaseActivity {
         getlogo();
         getwea();
         checkupdate();
-
     }
 
     private void getlogo() {
@@ -92,7 +90,6 @@ public class MainActivity extends BaseActivity {
 
 
     private void exit() {
-        // TODO Auto-generated method stub
         if (System.currentTimeMillis() - exitTime > 2000) {
             exitTime = System.currentTimeMillis();
             handler.post(new Runnable() {
