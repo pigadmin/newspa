@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
@@ -60,7 +61,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     }
 
     //    RecyclerView bottom_menu;
-    Button bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
+    ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
 
     private void find() {
 //        bottom_menu = findViewById(R.id.bottom_menu);
