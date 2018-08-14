@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.spa.app.Req;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
 import com.spa.ui.MainActivity;
-import com.spa.ui.adapter.BottomMenu;
 import com.spa.ui.bottom.OrderFr;
 import com.spa.ui.bottom.YouhuiFr;
 import com.spa.ui.bottom.help.HelpFr;
@@ -33,12 +31,10 @@ import com.spa.ui.jishi.JishiStyleFr;
 
 import java.net.URLEncoder;
 
-//public class Bottom extends LinearLayout implements BottomMenu.OnItemClickListener {
 public class Bottom extends LinearLayout implements View.OnClickListener {
     View view;
 
     App app;
-    int retry = 0;
     Context context;
 
     public Bottom(Context context, AttributeSet attrs) {
@@ -47,27 +43,11 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         app = (App) context.getApplicationContext();
         this.context = context;
         find();
-        init();
     }
 
-    LinearLayoutManager layoutManager;
-    BottomMenu bottomMenu;
-
-
-    private void init() {
-//        bottomMenu = new BottomMenu(context);
-//        bottom_menu.setAdapter(bottomMenu);
-//        bottomMenu.setOnItemClickListener(this);
-    }
-
-    //    RecyclerView bottom_menu;
     ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
 
     private void find() {
-//        bottom_menu = findViewById(R.id.bottom_menu);
-//        layoutManager = new LinearLayoutManager(context);
-//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        bottom_menu.setLayoutManager(layoutManager);
         bottom_menu1 = findViewById(R.id.bottom_menu1);
         bottom_menu2 = findViewById(R.id.bottom_menu2);
         bottom_menu3 = findViewById(R.id.bottom_menu3);
@@ -89,9 +69,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         bottom_menu8.setOnClickListener(this);
         bottom_menu9.setOnClickListener(this);
         bottom_menu10.setOnClickListener(this);
-
     }
-
 
     private AlertDialog dialog_call;
     private Button ok;
@@ -310,12 +288,10 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
             switch (msg.what) {
                 case 0:
                     try {
-                        // key.setText(key_temp.trim());
                         app.setKey(key_temp.substring(1, 8).trim());
                         handler2.sendEmptyMessageDelayed(1, 500);
 
                     } catch (Exception e) {
-                        // TODO Auto-generated catch block
                     }
 
                     break;

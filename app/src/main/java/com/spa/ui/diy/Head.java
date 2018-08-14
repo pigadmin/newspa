@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -24,7 +23,6 @@ import com.spa.event.DataMessage;
 import com.spa.event.UpdateTime;
 import com.spa.ui.diy.wea.NewWea;
 import com.spa.ui.diy.wea.Wea;
-import com.spa.ui.diy.wea.WeaIcon;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,7 +42,6 @@ public class Head extends LinearLayout {
             switch (msg.what) {
                 case bg:
                     try {
-//                        System.out.println(bgbitmap.size() + "ggg" + logobg.getData().getBacks().size() + "sssssssssss" + currentbg + (bgbitmap.size() < logobg.getData().getBacks().size()));
                         if (!logobg.getData().getBacks().isEmpty()) {
                             if (bgbitmap.size() < logobg.getData().getBacks().size()) {
                                 bgpath = logobg.getData().getBacks().get(currentbg).getPath();
@@ -83,11 +80,6 @@ public class Head extends LinearLayout {
     }
 
     private ImageView logo;
-    private TextView no;
-    private ImageView wea_icon;
-    private TextView time;
-    private TextView city;
-    private TextView date;
 
     private void init() {
         EventBus.getDefault().post(new UpdateTime(System.currentTimeMillis()));
@@ -95,12 +87,6 @@ public class Head extends LinearLayout {
 
     private void find() {
         logo = findViewById(R.id.logo);
-
-        no = findViewById(R.id.no);
-        wea_icon = findViewById(R.id.wea_icon);
-        time = findViewById(R.id.time);
-        city = findViewById(R.id.city);
-        date = findViewById(R.id.date);
     }
 
     public void onEvent(final UpdateTime event) {
@@ -108,8 +94,6 @@ public class Head extends LinearLayout {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                time.setText(event.getHm());
-                date.setText(event.getYmd());
             }
         });
     }
@@ -127,8 +111,7 @@ public class Head extends LinearLayout {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            city.setText(wea.getCity());
-                            wea_icon.setImageResource(WeaIcon.parseIcon(wea.getData().getForecast().get(0).getType()));
+
                         }
                     });
                 }
@@ -141,7 +124,7 @@ public class Head extends LinearLayout {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Picasso.with(context).load(logobg.getData().getLogo().getLogoPath()).into(logo);
+//                                Picasso.with(context).load(logobg.getData().getLogo().getLogoPath()).into(logo);
                                 handler.sendEmptyMessageDelayed(bg, 1000);
                             }
                         });
@@ -175,5 +158,4 @@ public class Head extends LinearLayout {
         System.out.println("Head onDetachedFromWindow");
         EventBus.getDefault().unregister(this);
     }
-
 }
