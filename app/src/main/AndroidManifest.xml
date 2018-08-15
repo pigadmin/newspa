@@ -44,8 +44,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.live.LiveActivity" />
         <activity android:name=".ui.game.GameActivity" />
-        <activity android:name=".ui.jishi.JishiTypeActivity" />
-        <activity android:name=".ui.video.VideoActivity" />
         <activity android:name=".ui.dish.DishStyleActivity" />
         <activity android:name=".ui.intro.IntroActivity" />
         <activity android:name=".ui.bottom.help.HelpActivity" />
