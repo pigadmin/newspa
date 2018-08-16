@@ -24,7 +24,6 @@ import com.spa.bean.Info;
 import com.spa.event.DataMessage;
 import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.IntroAdapter;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -120,8 +119,11 @@ public class YouhuiFr extends BaseFr implements AdapterView.OnItemClickListener 
     private void resetUI(int p) {
         try {
             item_title.setText(list.get(p).getName());
-            Picasso.with(activity).load(list.get(p).getPath()).into(item_icon);
-            item_content.loadDataWithBaseURL(null, list.get(p).getContent(),
+//            Picasso.with(activity).load(list.get(p).getPath()).into(item_icon);
+            item_icon.setVisibility(View.GONE);
+            String img = "<img style='float:left; width:250px;height:160px;margin:0 10px 0 0;' src='" + list.get(p).getPath() + "' />";
+            item_content.loadDataWithBaseURL(null, img + list.get(p).getContent().replace
+                            ("background-color: rgb(255, 255, 255)", "background-color: transparent"),
                     "text/html", "utf-8", null);
         } catch (Exception e) {
             e.printStackTrace();

@@ -124,9 +124,7 @@ public class IntroFr extends BaseFr implements AdapterView.OnItemClickListener {
             item_title.setText(list.get(p).getName());
 //            Picasso.with(activity).load(list.get(p).getPath()).into(item_icon);
             item_icon.setVisibility(View.GONE);
-            System.out.println(list.get(p).getContent());
-
-            String img = "<img style='float:left;width:250px;hei:160px;margin:0 10px 0 0;' src='" + list.get(p).getPath() + "' />";
+            String img = "<img style='float:left;width:250px;height:160px;margin:0 10px 0 0;' src='" + list.get(p).getPath() + "' />";
             item_content.loadDataWithBaseURL(null, img + list.get(p).getContent().replace
                             ("background-color: rgb(255, 255, 255)", "background-color: transparent"),
                     "text/html", "utf-8", null);

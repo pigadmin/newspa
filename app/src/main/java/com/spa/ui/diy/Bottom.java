@@ -112,19 +112,14 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
 //            }
             context.startActivity(new Intent(context, MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-//            Fragments.To(((Activity) context).getFragmentManager(), new MainFr());
         } else if (v == bottom_menu2) {//介绍
-//            context.startActivity(new Intent(context, IntroActivity.class));
             Fragments.To(((Activity) context).getFragmentManager(), new IntroFr());
-        } else if (v == bottom_menu3) {//技师
-//            context.startActivity(new Intent(context, JishiTypeActivity.class));
-            Fragments.To(((Activity) context).getFragmentManager(), new JishiStyleFr());
-        } else if (v == bottom_menu4) {//消费
-//            context.startActivity(new Intent(context, OrderActivity.class));
-            Fragments.To(((Activity) context).getFragmentManager(), new OrderFr());
-        } else if (v == bottom_menu5) {//优惠
-//            context.startActivity(new Intent(context, YouhuiActivity.class));
+        } else if (v == bottom_menu3) {//优惠
             Fragments.To(((Activity) context).getFragmentManager(), new YouhuiFr());
+        } else if (v == bottom_menu4) {//技师
+            Fragments.To(((Activity) context).getFragmentManager(), new JishiStyleFr());
+        } else if (v == bottom_menu5) {//消费
+            Fragments.To(((Activity) context).getFragmentManager(), new OrderFr());
         } else if (v == bottom_menu6) {//呼叫
             showCall();
         } else if (v == bottom_menu7) {//留位

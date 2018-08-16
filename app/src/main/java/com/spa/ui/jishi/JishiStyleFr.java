@@ -56,6 +56,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
     private void init() {
         Req.get(Req.teachtype);
     }
