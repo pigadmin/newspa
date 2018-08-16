@@ -355,7 +355,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                 case 4://技师服务
                     Fragments.To(getFragmentManager(), new JishiStyleFr());
                     break;
-                case 5://影音娱乐
+                case 5://点播资源
                     Fragments.To(getFragmentManager(), new VideoFr());
                     break;
                 case 6://游戏应用
