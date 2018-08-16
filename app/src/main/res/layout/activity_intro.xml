@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:divider="@color/transparent"
+        android:divider="@null"
         android:dividerHeight="8dp"
+        android:listSelector="@mipmap/youce_k"
         android:paddingLeft="5dp"
         android:paddingTop="10dp"
         android:scrollbars="none" />
