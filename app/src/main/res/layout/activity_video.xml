@@ -4,65 +4,50 @@
     android:layout_height="490dp"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
-    android:layout_marginTop="90dp"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:layout_marginTop="70dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/video_keyword"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|center|center_horizontal"
+        android:background="@mipmap/top_icon_2"
+        android:gravity="center"
+        android:hint="@string/search_hit"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/menu"
+        android:textSize="15sp" />
 
     <LinearLayout
-        android:layout_width="204dp"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <EditText
-            android:id="@+id/video_keyword"
-            android:layout_width="186dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
-            android:background="@mipmap/edit_search"
-            android:gravity="center"
-            android:hint="@string/search_hit"
-            android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="5dp"
-            android:singleLine="true"
-            android:textColor="@color/menu"
-            android:textColorHint="@color/menu" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/content_k_1"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <ListView
             android:id="@+id/left_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="3"
             android:divider="@color/transparent"
             android:dividerHeight="1dp"
-            android:focusable="false"
-            android:listSelector="@drawable/list_selector"
-            android:scrollbars="none"></ListView>
-    </LinearLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/menu"></View>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+            android:scrollbars="none" />
 
         <GridView
             android:id="@+id/right_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@mipmap/video_selector"
+            android:layout_weight="1"
             android:numColumns="6"
             android:scrollbars="none"
-            android:verticalSpacing="7dp"></GridView>
-    </LinearLayout>
+            android:verticalSpacing="7dp" />
 
+    </LinearLayout>
 
 </LinearLayout>

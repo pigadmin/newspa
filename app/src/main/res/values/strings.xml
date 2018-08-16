@@ -13,7 +13,7 @@
     <string name="success">操作成功</string>
     <string name="order_success">下单成功！</string>
     <string name="call_success">呼叫成功！</string>
-    <string name="search_hit">搜索内容</string>
+    <string name="search_hit">在这里输入你想要搜索的内容</string>
     <string name="searchjishi_hit">搜索技师</string>
     <string name="main_menu1">服务介绍</string>
     <string name="main_menu2">电视直播</string>
