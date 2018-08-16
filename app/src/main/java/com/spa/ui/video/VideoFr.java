@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         view = inflater.inflate(R.layout.activity_video, container, false);
         activity = getActivity();
         app = (App) activity.getApplication();
@@ -58,7 +58,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
     }
-
 
     private void init() {
         Req.get(Req.videotype);
@@ -89,12 +88,9 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
-
                 handler.removeMessages(search);
                 handler.sendEmptyMessageDelayed(search, 1000);
             }
-
-
         });
     }
 
@@ -117,7 +113,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     private List<VideoType> list;
     private VideoTypeAdapter adapter;
-
 
     private Video grid;
 
@@ -176,7 +171,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private void resetList() {
         adapter = new VideoTypeAdapter(activity, list);
         left_list.setAdapter(adapter);
-        left_list.requestFocus();
 
         type = "&type=" + list.get(0).getId();
         Req.get(Req.video + type);
@@ -204,12 +198,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 teledialog();
             } else {
                 play(0);
-
             }
-
         }
-
-
     }
 
     static AlertDialog teleplay_dialog;
@@ -236,8 +226,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 play(i);
             }
         });
-
-
     }
 
     private void play(int position) {
@@ -254,5 +242,4 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             e.printStackTrace();
         }
     }
-
 }

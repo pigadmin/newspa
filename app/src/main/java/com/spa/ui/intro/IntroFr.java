@@ -54,7 +54,6 @@ public class IntroFr extends BaseFr implements AdapterView.OnItemClickListener {
         EventBus.getDefault().unregister(this);
     }
 
-
     private void init() {
         Req.get(Req.intro);
     }
@@ -115,7 +114,6 @@ public class IntroFr extends BaseFr implements AdapterView.OnItemClickListener {
     private void resetList() {
         adapter = new IntroAdapter(activity, list);
         left_list.setAdapter(adapter);
-        left_list.requestFocus();
         resetUI(0);
     }
 
@@ -143,5 +141,4 @@ public class IntroFr extends BaseFr implements AdapterView.OnItemClickListener {
             }
         });
     }
-
 }
