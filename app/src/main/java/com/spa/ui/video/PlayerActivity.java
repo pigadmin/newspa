@@ -18,7 +18,6 @@ import com.spa.bean.VideoDetails;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
 import com.spa.ui.diy.Toas;
-import com.spa.ui.live.LiveActivity;
 
 public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
@@ -151,7 +150,7 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
         update_content.setText(getString(R.string.video_time).replace("x", getTimeStr(vodtime)));
 
-        ImageButton update_ok = vod_time_dialog.findViewById(R.id.update_ok);
+        ImageButton update_ok = (ImageButton) vod_time_dialog.findViewById(R.id.update_ok);
 
         update_ok.setOnClickListener(new View.OnClickListener() {
 
@@ -164,7 +163,7 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
                 vod_time_dialog.dismiss();
             }
         });
-        ImageButton update_cancle = vod_time_dialog
+        ImageButton update_cancle = (ImageButton) vod_time_dialog
                 .findViewById(R.id.update_cancle);
         update_cancle.setOnClickListener(new View.OnClickListener() {
 

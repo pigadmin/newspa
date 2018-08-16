@@ -43,11 +43,6 @@
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.live.LiveActivity" />
-        <activity android:name=".ui.game.GameActivity" />
-        <activity android:name=".ui.dish.DishStyleActivity" />
-        <activity android:name=".ui.intro.IntroActivity" />
-        <activity android:name=".ui.bottom.help.HelpActivity" />
-        <activity android:name=".ui.dish.DishActivity" />
         <activity android:name=".ui.video.PlayerActivity" />
         <activity android:name=".ui.bottom.liuwei.LiuweiActivity" />
     </application>
