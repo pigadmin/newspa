@@ -124,12 +124,11 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
             showCall();
         } else if (v == bottom_menu7) {//留位
             showLiuwei();
-        } else if (v == bottom_menu8) {//帮助
-//            context.startActivity(new Intent(context, HelpActivity.class));
-            Fragments.To(((Activity) context).getFragmentManager(), new HelpFr());
-        } else if (v == bottom_menu9) {//控制
+        } else if (v == bottom_menu8) {//控制
             showCtrl();
-        } else if (v == bottom_menu10) {//返回
+        }else if (v == bottom_menu9) {//帮助
+            Fragments.To(((Activity) context).getFragmentManager(), new HelpFr());
+        }  else if (v == bottom_menu10) {//返回
             if (((Activity) context).getFragmentManager().getBackStackEntryCount() > 1) {
                 ((Activity) context).getFragmentManager().popBackStack();
             } else {

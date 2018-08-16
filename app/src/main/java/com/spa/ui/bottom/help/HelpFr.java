@@ -2,6 +2,7 @@ package com.spa.ui.bottom.help;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class HelpFr extends BaseFr {
         WebSettings websettings = help_web.getSettings();
         websettings.setJavaScriptEnabled(true);
         websettings.setBuiltInZoomControls(true);
+        help_web.setBackgroundColor(Color.TRANSPARENT);
         help_web.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -106,7 +108,10 @@ public class HelpFr extends BaseFr {
 
     private void resetUI() {
         help_title.setText(list.get(0).getName());
-        help_web.loadDataWithBaseURL(null, list.get(0).getContent(),
+        System.out.println(list.get(0).getContent().replace
+                ("background-color: rgb(255, 255, 255);", "background-color: transparent;"));
+        help_web.loadDataWithBaseURL(null, list.get(0).getContent().replace
+                        ("background-color: rgb(255, 255, 255);", "background-color: transparent;"),
                 "text/html", "utf-8", null);
 
         handler.post(new Runnable() {

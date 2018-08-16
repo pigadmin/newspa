@@ -8,11 +8,8 @@
     android:layout_marginLeft="185dp"
     android:layout_marginRight="185dp"
     android:layout_marginTop="106dp"
-    android:background="@mipmap/center_bg"
     android:orientation="vertical">
 
-
-    >
 
     <TextView
         android:id="@+id/help_title"
@@ -20,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
         android:gravity="center"
-        android:textColor="@color/menu"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
 
