@@ -17,17 +17,17 @@
     <ImageView
         android:id="@+id/bottom_menu3"
         style="@style/bottom_menu_style"
-        android:src="@drawable/select_jishi_menu" />
+        android:src="@drawable/select_youhui_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu4"
         style="@style/bottom_menu_style"
-        android:src="@drawable/select_xiaofei_menu" />
+        android:src="@drawable/select_jishi_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu5"
         style="@style/bottom_menu_style"
-        android:src="@drawable/select_youhui_menu" />
+        android:src="@drawable/select_xiaofei_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu6"
@@ -42,12 +42,12 @@
     <ImageView
         android:id="@+id/bottom_menu8"
         style="@style/bottom_menu_style"
-        android:src="@drawable/select_bangzhu_menu" />
+        android:src="@drawable/select_kongzhi_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu9"
         style="@style/bottom_menu_style"
-        android:src="@drawable/select_kongzhi_menu" />
+        android:src="@drawable/select_bangzhu_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu10"
