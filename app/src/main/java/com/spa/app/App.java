@@ -142,7 +142,7 @@ public class App extends Application {
         }
     }
 
-    public static String mac = "";
+    public static String mac = "error";
 
     private void mac() {
         try {

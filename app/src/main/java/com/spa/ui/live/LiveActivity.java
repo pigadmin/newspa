@@ -97,7 +97,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
     }
 
 
-    String testurl = "http://192.168.31.250:8105/wisdom_hotel/upload/1.ts";
+    private String testurl = "http://192.168.31.250:8105/wisdom_hotel/upload/1.ts";
 
     private void play() {
         // TODO Auto-generated method stub

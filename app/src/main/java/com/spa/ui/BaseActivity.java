@@ -116,24 +116,24 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
 //                                    new BitmapDrawable(app.getBack().get(cutbg)));
 //                        } else {
 //                            System.out.println(backs.get(cutbg).getPath());
-                            Picasso.with(BaseActivity.this).load(backs.get(cutbg).getPath()).into(new Target() {
-                                @Override
-                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-                                    getWindow().getDecorView().setBackground(
-                                            new BitmapDrawable(bitmap));
-                                    app.getBack().add(bitmap);
-                                }
+                        Picasso.with(BaseActivity.this).load(backs.get(cutbg).getPath()).into(new Target() {
+                            @Override
+                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+                                getWindow().getDecorView().setBackground(
+                                        new BitmapDrawable(bitmap));
+                                app.getBack().add(bitmap);
+                            }
 
-                                @Override
-                                public void onBitmapFailed(Drawable drawable) {
+                            @Override
+                            public void onBitmapFailed(Drawable drawable) {
 
-                                }
+                            }
 
-                                @Override
-                                public void onPrepareLoad(Drawable drawable) {
+                            @Override
+                            public void onPrepareLoad(Drawable drawable) {
 
-                                }
-                            });
+                            }
+                        });
 //                        }
                         if (backs.size() > 1) {
                             System.out.println("cutbg：" + cutbg + "----s：" + backs.get(cutbg).getInter());
@@ -192,7 +192,8 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
 
     public void onEvent(DataMessage event) {
         System.out.println("-----------------" + event.getApi());
-        try {   System.out.println("BGBGBGBGBGBG");
+        try {
+            System.out.println("BGBGBGBGBGBG");
             if (event.getApi().equals(Req.logo)) {
                 final AJson<LogoBg> data = App.gson.fromJson(event.getData(),
                         new TypeToken<AJson<LogoBg>>() {
@@ -200,7 +201,7 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
                 backs = data.getData().getBacks();
                 System.out.println(backs.size() + "@@@@@@@@@@@@@@");
                 if (!backs.isEmpty()) {
-                    handler.sendEmptyMessage(backsmsg);
+//                    handler.sendEmptyMessage(backsmsg);
                 }
 
             }
