@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -43,15 +44,19 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private Activity activity;
     private App app;
 
+    private Spinner spinner1;
+    private Spinner spinner2;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+
         view = inflater.inflate(R.layout.activity_jishi, container, false);
         activity = getActivity();
         app = (App) activity.getApplication();
         EventBus.getDefault().register(this);
         find();
+        initView();
         init();
         return view;
     }
@@ -69,25 +74,25 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private ListView left_list;
     private GridView right_grid;
     EditText keyword;
-    RadioButton jishi_all, jishi_sex1, jishi_sex2, status1, status2, status_all;
+//    RadioButton jishi_all, jishi_sex1, jishi_sex2, status1, status2, status_all;
 
     private void find() {
         left_list = view.findViewById(R.id.left_list);
         left_list.setOnItemClickListener(this);
         right_grid = view.findViewById(R.id.right_grid);
         right_grid.setOnItemClickListener(this);
-        jishi_all = view.findViewById(R.id.jishi_all);
-        jishi_sex1 = view.findViewById(R.id.jishi_sex1);
-        jishi_sex2 = view.findViewById(R.id.jishi_sex2);
-        status_all = view.findViewById(R.id.status_all);
-        status1 = view.findViewById(R.id.status1);
-        status2 = view.findViewById(R.id.status2);
-        jishi_all.setOnClickListener(this);
-        jishi_sex1.setOnClickListener(this);
-        jishi_sex2.setOnClickListener(this);
-        status1.setOnClickListener(this);
-        status2.setOnClickListener(this);
-        status_all.setOnClickListener(this);
+//        jishi_all = view.findViewById(R.id.jishi_all);
+//        jishi_sex1 = view.findViewById(R.id.jishi_sex1);
+//        jishi_sex2 = view.findViewById(R.id.jishi_sex2);
+//        status_all = view.findViewById(R.id.status_all);
+//        status1 = view.findViewById(R.id.status1);
+//        status2 = view.findViewById(R.id.status2);
+//        jishi_all.setOnClickListener(this);
+//        jishi_sex1.setOnClickListener(this);
+//        jishi_sex2.setOnClickListener(this);
+//        status1.setOnClickListener(this);
+//        status2.setOnClickListener(this);
+//        status_all.setOnClickListener(this);
 
         keyword = view.findViewById(R.id.keyword);
         keyword.addTextChangedListener(new TextWatcher() {
@@ -296,25 +301,67 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     @Override
     public void onClick(View v) {
 
-        if (v == jishi_all) {
-            sex = "";
-            Req.get(Req.teach + keywd + sex + status);
-        } else if (v == jishi_sex1) {
-            sex = "&sex=1";
-            Req.get(Req.teach + keywd + sex + status);
-        } else if (v == jishi_sex2) {
-            sex = "&sex=2";
-            Req.get(Req.teach + keywd + sex + status);
-        } else if (v == status_all) {
-            status = "";
-            Req.get(Req.teach + keywd + sex + status);
-        } else if (v == status1) {
-            status = "&status=1";
-            Req.get(Req.teach + keywd + sex + status);
-        } else if (v == status2) {
-            status = "&status=2";
-            Req.get(Req.teach + keywd + sex + status);
-        }
+//        if (v == jishi_all) {
+//            sex = "";
+//            Req.get(Req.teach + keywd + sex + status);
+//        } else if (v == jishi_sex1) {
+//            sex = "&sex=1";
+//            Req.get(Req.teach + keywd + sex + status);
+//        } else if (v == jishi_sex2) {
+//            sex = "&sex=2";
+//            Req.get(Req.teach + keywd + sex + status);
+//        } else if (v == status_all) {
+//            status = "";
+//            Req.get(Req.teach + keywd + sex + status);
+//        } else if (v == status1) {
+//            status = "&status=1";
+//            Req.get(Req.teach + keywd + sex + status);
+//        } else if (v == status2) {
+        status = "&status=2";
+        Req.get(Req.teach + keywd + sex + status);
+//        }
 
+    }
+
+    private void initView() {
+        spinner1 = view.findViewById(R.id.spin1);
+        spinner2 = view.findViewById(R.id.spin2);
+        iniLiter();
+    }
+
+    private void iniLiter() {
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, activity.getResources().getStringArray(R.array.sex));
+        //第三步：为适配器设置下拉列表下拉时的菜单样式。
+        adapter1.setDropDownViewResource(R.layout.powin_layout);
+        //第四步：将适配器添加到下拉列表上
+        spinner1.setAdapter(adapter1);
+        //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
+        spinner1.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                TextView tv = (TextView) arg1;
+                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, activity.getResources().getStringArray(R.array.free));
+        //第三步：为适配器设置下拉列表下拉时的菜单样式。
+        adapter2.setDropDownViewResource(R.layout.powin_layout);
+        //第四步：将适配器添加到下拉列表上
+        spinner2.setAdapter(adapter2);
+        //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
+        spinner2.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                TextView tv = (TextView) arg1;
+                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
     }
 }

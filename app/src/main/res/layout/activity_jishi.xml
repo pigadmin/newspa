@@ -1,185 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="490dp"
+    android:layout_height="550dp"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
-    android:layout_marginTop="90dp"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="204dp"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_width="500dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|center|center_horizontal"
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/keyword"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:background="@mipmap/edit_search"
+        <Spinner
+            android:id="@+id/spin1"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/content_icon_xb"
             android:gravity="center"
-            android:hint="@string/searchjishi_hit"
-            android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="5dp"
-            android:singleLine="true"
-            android:textColor="@color/menu"
-            android:textColorHint="@color/menu" />
+            android:popupBackground="@color/transparent" />
+
+        <Spinner
+            android:id="@+id/spin2"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/content_icon_xb"
+            android:gravity="center"
+            android:popupBackground="@color/transparent" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right|center|center_horizontal"
+            android:background="@mipmap/top_icon_2"
+            android:orientation="horizontal">
 
-            <TextView
+            <EditText
+                android:id="@+id/keyword"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center|center_horizontal"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/search_hit"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gainsboro"
+                android:textSize="15sp" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/jishi_sex"
-                android:textColor="@color/menu"
-                android:textSize="20sp" />
-
-            <RadioGroup
-                android:id="@+id/rBtnGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/jishi_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:text="@string/all"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-
-                <RadioButton
-                    android:id="@+id/jishi_sex1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/jishi_sex1"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-
-                <RadioButton
-                    android:id="@+id/jishi_sex2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/jishi_sex2"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-            </RadioGroup>
-
+                android:padding="10dp"
+                android:src="@mipmap/top_icon_1" />
 
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/jishi_status"
-                android:textColor="@color/menu"
-                android:textSize="20sp" />
-
-            <RadioGroup
-                android:id="@+id/status_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/status_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:text="@string/all"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-
-                <RadioButton
-                    android:id="@+id/status1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/jishi_status1"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-
-                <RadioButton
-                    android:id="@+id/status2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/sex"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/jishi_status2"
-                    android:textColor="@color/menu"
-                    android:textSize="20sp" />
-            </RadioGroup>
-
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/content_k_1"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ListView
             android:id="@+id/left_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/transparent"
+            android:layout_gravity="center"
+            android:layout_weight="4.5"
+            android:divider="@null"
             android:dividerHeight="8dp"
-            android:focusable="false"
-            android:listSelector="@drawable/list_selector"
-            android:paddingTop="8dp"
-            android:scrollbars="none"></ListView>
-    </LinearLayout>
+            android:padding="15dp"
+            android:scrollbars="none" />
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/menu"></View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/content_f" />
 
         <GridView
             android:id="@+id/right_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@mipmap/video_selector"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:numColumns="6"
-            android:scrollbars="none"></GridView>
+            android:padding="15dp"
+            android:scrollbars="none"
+            android:verticalSpacing="7dp" />
     </LinearLayout>
-
-
 </LinearLayout>

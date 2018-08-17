@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/music_name_tvw"
+    android:layout_width="60dp"
+    android:layout_height="40dp"
+    android:layout_gravity="center"
+    android:background="@drawable/pow_text_bg"
+    android:gravity="center"
+    android:text="歌 名"
+    android:textColor="@color/white" />

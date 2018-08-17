@@ -27,7 +27,7 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textColorHint="@color/menu"
+            android:textColorHint="@color/gainsboro"
             android:textSize="15sp" />
 
         <ImageView

@@ -90,4 +90,17 @@
     <string name="jishi_status3">当前：当值</string>
     <string name="jishi_status4">当前：未当值</string>
     <string name="jishi_project">项目：</string>
+
+    <string-array name="sex">
+        <item>全部</item>
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+    <string-array name="free">
+        <item>全部</item>
+        <item>空闲</item>
+        <item>上钟</item>
+    </string-array>
+
 </resources>
