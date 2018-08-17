@@ -10,16 +10,12 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
         <ListView
             android:id="@+id/live_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/transparent"
             android:focusable="false"
-            android:listSelector="@mipmap/youce_k"
-            android:scrollbars="none"></ListView>
+            android:scrollbars="none" />
     </LinearLayout>
-
-
 </RelativeLayout>

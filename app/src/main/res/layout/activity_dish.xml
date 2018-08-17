@@ -22,7 +22,6 @@
             android:layout_weight="1"
             android:divider="@null"
             android:dividerHeight="8dp"
-            android:listSelector="@mipmap/youce_k"
             android:padding="10dp"
             android:scrollbars="none" />
 

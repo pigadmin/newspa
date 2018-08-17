@@ -16,8 +16,7 @@
         android:layout_weight="4.5"
         android:divider="@null"
         android:dividerHeight="8dp"
-        android:listSelector="@mipmap/youce_k"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:scrollbars="none" />
 
