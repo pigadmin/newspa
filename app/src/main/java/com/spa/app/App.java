@@ -128,7 +128,7 @@ public class App extends Application {
             version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 
@@ -137,7 +137,7 @@ public class App extends Application {
     private void getip() {
         String tmp = config.getString("ip", "");
         if (!tmp.equals("")) {
-            headurl = "http://" + tmp + "/wisdom_spa/remote/";
+            headurl = "http://" + tmp + "/wisdom_spa/remote/";;;
             System.out.println("---headurl---\n" + headurl);
         }
     }
