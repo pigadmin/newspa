@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:divider="@null"
             android:dividerHeight="8dp"
-            android:padding="10dp"
+            android:padding="15dp"
             android:scrollbars="none" />
 
         <ImageView
@@ -30,6 +30,12 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/zhangdanchaxun" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:background="@mipmap/content_f" />
 
     <GridView
         android:id="@+id/right_grid"
@@ -41,7 +47,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:numColumns="6"
-        android:padding="10dp"
+        android:padding="15dp"
         android:scrollbars="none"
         android:verticalSpacing="7dp" />
 </LinearLayout>
