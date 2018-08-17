@@ -99,7 +99,8 @@ public class MyService extends Service implements IScrollState, Runnable {
                 toast = new MarqueeToast(getApplicationContext());
                 Text = new TextSurfaceView(getApplicationContext(), this);
                 Text.setOrientation(1);
-                toast.setHeight(40);
+//                toast.setHeight(40);
+                toast.setHeight(70);
                 if (marquees.get(currentmsg).getContent().equals("")
                         && marquees.get(currentmsg).getContent() == null) {
                     Text.setContent("");
@@ -107,7 +108,7 @@ public class MyService extends Service implements IScrollState, Runnable {
                     Text.setContent(marquees.get(currentmsg).getContent());
                 }
                 toast.setView(Text);
-                toast.setGravity(Gravity.TOP | Gravity.LEFT, 1280, 0, 0);
+                toast.setGravity(Gravity.TOP | Gravity.LEFT, 1920, 0, 0);
                 toast.show();
                 currentmsg++;
             }

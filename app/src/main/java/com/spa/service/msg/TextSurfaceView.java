@@ -37,8 +37,8 @@ public class TextSurfaceView extends SurfaceView implements Callback, Runnable {
 
     private int fontAlpha = 255;
 
-    private float fontSize = 22f;
-
+    //    private float fontSize = 22f;
+    private float fontSize = 40f;
     private SurfaceHolder mSurfaceHolder;
 
     private boolean loop = true;
@@ -69,6 +69,7 @@ public class TextSurfaceView extends SurfaceView implements Callback, Runnable {
         this.scroolState = scroolState;
         bounds = new Rect();
     }
+
     Rect bounds;
 
     public TextSurfaceView(Context context, boolean move) {

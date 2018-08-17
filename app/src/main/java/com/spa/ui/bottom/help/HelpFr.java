@@ -86,6 +86,7 @@ public class HelpFr extends BaseFr {
 
     public void onEvent(DataMessage event) {
         try {
+            System.out.println(Req.help);
             if (event.getApi().equals(Req.help)) {
                 AJson<List<Info>> data = App.gson.fromJson(
                         event.getData(), new TypeToken<AJson<List<Info>>>() {

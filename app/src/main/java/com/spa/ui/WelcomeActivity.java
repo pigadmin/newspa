@@ -1,7 +1,13 @@
 package com.spa.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -14,7 +20,6 @@ import com.spa.app.Req;
 import com.spa.bean.AJson;
 import com.spa.event.DataMessage;
 import com.spa.event.ErrorMessage;
-import com.spa.event.NetChange;
 import com.spa.ui.diy.Toas;
 
 public class WelcomeActivity extends BaseActivity {
@@ -24,33 +29,51 @@ public class WelcomeActivity extends BaseActivity {
             super.handleMessage(msg);
         }
     };
+    private App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        app = (App) getApplication();
         find();
-        System.out.println(Req.check);
-        System.out.println(App.mac);
-        if (App.network_type > 0) {
-            check();
-        }
+//        System.out.println(Req.check);
+//        System.out.println(App.mac);
+        reg();
     }
 
-    TextView welcome_tips;
+    private void reg() {
+        // TODO Auto-generated method stub
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netreceiver, intentFilter);
+    }
+
+    private BroadcastReceiver netreceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                ConnectivityManager manager = (ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo ETHERNET = manager
+                        .getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
+                NetworkInfo WIFI = manager
+                        .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (WIFI.isConnected() || ETHERNET.isConnected()) {
+                    welcome_tips.setText("");
+                    check();
+                } else {
+                    welcome_tips.setText(getString(R.string.disnetwork));
+                }
+            } catch (Exception e) {
+//                e.printStackTrace();
+            }
+        }
+    };
+    private TextView welcome_tips;
 
     private void find() {
         welcome_tips = findViewById(R.id.welcome_tips);
-    }
-
-    public void onEvent(NetChange event) {
-        check();
-    }
-
-    private void test() {
-        startActivity(new Intent(this, MainActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-
     }
 
 
@@ -66,6 +89,7 @@ public class WelcomeActivity extends BaseActivity {
             System.out.println(data.getData());
             if (data.getCode().equals("200")) {
 //                        System.out.println(event.getData());
+                app.setSystiem(data.getData());
                 SystemClock.setCurrentTimeMillis(data.getData());
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -76,32 +100,43 @@ public class WelcomeActivity extends BaseActivity {
                 toas.setMsg(data.getErrorInfo());
                 toas.show(WelcomeActivity.this);
                 toas = null;
+                welcome_tips.setText(data.getErrorInfo());
             }
         }
     }
 
+
     public void onEvent(ErrorMessage event) {
-        final ErrorMessage errorMessage = event;
         if (event.getApi().equals(Req.check)) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    welcome_tips.setText(getString(R.string.connect_error));
+                    timer.start();
                 }
             });
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    check();
-                }
-            }, 60 * 1000);
+        }
+    }
+
+    private CountDownTimer timer = new CountDownTimer(60 * 1000, 1000) {
+        @Override
+        public void onTick(long l) {
+            welcome_tips.setText(getString(R.string.connect_error) + "\n" + (l / 1000) + "s后重新连接");
         }
 
-    }
+        @Override
+        public void onFinish() {
+            check();
+        }
+    };
 
     @Override
     protected void onDestroy() {
-//        System.out.println("onDestroy");
+        try {
+            unregisterReceiver(netreceiver);
+            timer.cancel();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 }

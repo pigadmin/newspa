@@ -224,4 +224,14 @@ public class App extends Application {
     public void setKey(String key) {
         Key = key;
     }
+
+    private long systiem = 0;
+
+    public long getSystiem() {
+        return systiem;
+    }
+
+    public void setSystiem(long systiem) {
+        this.systiem = systiem;
+    }
 }

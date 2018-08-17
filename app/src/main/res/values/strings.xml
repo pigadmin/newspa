@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">spa</string>
 
-    <string name="connect_error">连接服务器失败</string>
+    <string name="connect_error">设备不上服务器，请联系工作人员</string>
     <string name="play_error">播放异常</string>
     <string name="live_none">没有此频道</string>
     <string name="exit">再按一次退出应用</string>
@@ -9,7 +9,7 @@
     <string name="gps_network">移动网络已连接</string>
     <string name="wifi_network">WIFI网络已连接</string>
     <string name="eth_network">有线网络已连接</string>
-    <string name="disnetwork">您的网络出了一点小故障</string>
+    <string name="disnetwork">网络出了一点小故障，麻烦您帮我检查一下</string>
     <string name="success">操作成功</string>
     <string name="order_success">下单成功！</string>
     <string name="call_success">呼叫成功！</string>
