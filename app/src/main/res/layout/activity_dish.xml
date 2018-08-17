@@ -6,8 +6,7 @@
     android:layout_marginRight="50dp"
     android:layout_marginTop="70dp"
     android:background="@mipmap/content_k_1"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,12 +23,13 @@
             android:divider="@null"
             android:dividerHeight="8dp"
             android:listSelector="@mipmap/youce_k"
+            android:padding="10dp"
             android:scrollbars="none" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/content_icon_k" />
+            android:src="@mipmap/zhangdanchaxun" />
     </LinearLayout>
 
     <GridView
@@ -37,10 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:gravity="center"
         android:numColumns="6"
+        android:padding="10dp"
         android:scrollbars="none"
         android:verticalSpacing="7dp" />
 </LinearLayout>
