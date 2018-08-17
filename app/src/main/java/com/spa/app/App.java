@@ -128,7 +128,7 @@ public class App extends Application {
             version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();;
         }
     }
 
