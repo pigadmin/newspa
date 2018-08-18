@@ -421,4 +421,14 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.show();
     }
+
+    private void showDialogStyle7() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i < 50; i++) {
+            list.add(i);
+        }
+
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style7, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, list);
+        dialog.show();
+    }
 }
