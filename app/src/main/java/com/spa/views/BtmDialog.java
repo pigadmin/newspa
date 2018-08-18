@@ -3,8 +3,6 @@ package com.spa.views;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.spa.R;
 import com.spa.adaters.TypeChooseAdapter;
@@ -33,7 +31,6 @@ public class BtmDialog extends Dialog {
 
         mGridView = (GridView) findViewById(R.id.gridview_gvw);
         mGridView.setAdapter(new TypeChooseAdapter(context, R.layout.item_show_more_single, integers));
-
     }
 
     protected BtmDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {

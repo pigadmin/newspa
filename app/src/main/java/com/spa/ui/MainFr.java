@@ -424,7 +424,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
     private void showDialogStyle7() {
         List<Integer> list = new ArrayList<>();
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 100; i++) {
             list.add(i);
         }
 
