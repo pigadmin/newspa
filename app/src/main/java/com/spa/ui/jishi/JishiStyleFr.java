@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,8 +34,10 @@ import com.spa.event.DataMessage;
 import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
 import com.spa.ui.adapter.TeachTypeAdapter;
+import com.spa.views.BtmDialog;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -58,6 +62,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         find();
         initView();
         init();
+
         return view;
     }
 
@@ -364,4 +369,30 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             }
         });
     }
+
+    private void showDialogStyle8() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            list.add(i);
+        }
+
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style8, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, list);
+        dialog.show();
+    }
+
+    private void showDialogStyle9() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
+    private void showDialogStyle10() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style10, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
+    private void showDialogStyle11() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style11, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
 }
