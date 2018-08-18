@@ -71,9 +71,9 @@
     <string name="no">编号：</string>
     <string name="dish_time">供应时间：</string>
     <string name="dish_price">价格：</string>
-    <string name="dish_num">数量：</string>
-    <string name="dish_req">要求：</string>
-    <string name="dish_des">详情：</string>
+    <string name="dish_num">数量:</string>
+    <string name="dish_req">要求:</string>
+    <string name="dish_des">详情:</string>
     <string name="order">下单</string>
 
     <string name="all">全部</string>

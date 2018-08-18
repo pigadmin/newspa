@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +34,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+/**
+ * 酒水饮料
+ */
 public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     private View view;
@@ -44,7 +46,6 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         view = inflater.inflate(R.layout.activity_dish, container, false);
         activity = getActivity();
         app = (App) activity.getApplication();
@@ -158,15 +159,15 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     }
 
     private AlertDialog dialog_dish;
-    private ImageView dish_icon;
+//    private ImageView dish_icon;
     private TextView dish_name, dish_no, dish_price;
     private Button order, cancle;
     private ImageButton dish_jia, dish_jian;
     private TextView dish_num;
     private int count;
     private String notice;
-    private EditText dish_req;
-    private TextView dish_des;
+//    private EditText dish_req;
+//    private TextView dish_des;
 
     private void showOrder() {
         dialog_dish = new AlertDialog.Builder(activity).create();
@@ -177,8 +178,8 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             dialog_dish.show();
         }
         dialog_dish.setContentView(R.layout.dialog_dish);
-        dish_icon = dialog_dish.findViewById(R.id.dish_icon);
-        Picasso.with(activity).load(dish.getIcon()).into(dish_icon);
+//        dish_icon = dialog_dish.findViewById(R.id.dish_icon);
+//        Picasso.with(activity).load(dish.getIcon()).into(dish_icon);
         dish_name = dialog_dish.findViewById(R.id.dish_name);
         dish_name.setText(getString(R.string.dish_name) + dish.getName());
         dish_no = dialog_dish.findViewById(R.id.dish_no);
@@ -188,9 +189,9 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
         order = dialog_dish.findViewById(R.id.order);
         cancle = dialog_dish.findViewById(R.id.cancle);
-        dish_req = dialog_dish.findViewById(R.id.dish_req);
-        dish_des = dialog_dish.findViewById(R.id.dish_des);
-        dish_des.setText(dish.getDiscription());
+//        dish_req = dialog_dish.findViewById(R.id.dish_req);
+//        dish_des = dialog_dish.findViewById(R.id.dish_des);
+//        dish_des.setText(dish.getDiscription());
 
         dish_jia = dialog_dish.findViewById(R.id.dish_jia);
         dish_num = dialog_dish.findViewById(R.id.dish_num);
@@ -199,7 +200,6 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 count = Integer.parseInt(dish_num.getText().toString());
                 count++;
                 dish_num.setText(count + "");
@@ -210,7 +210,6 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 count = Integer.parseInt(dish_num.getText().toString());
                 if (count > 1) {
                     count--;
@@ -239,6 +238,4 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             }
         });
     }
-
-
 }
