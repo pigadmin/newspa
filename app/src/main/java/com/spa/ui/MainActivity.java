@@ -15,10 +15,6 @@ import com.spa.ui.diy.Toas;
 
 public class MainActivity extends BaseActivity {
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        //    super.onSaveInstanceState(outState);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +28,14 @@ public class MainActivity extends BaseActivity {
 
 
     private void init() {
+        getuser();
         getlogo();
         getwea();
         checkupdate();
+    }
+
+    private void getuser() {
+        Req.get(Req.user);
     }
 
     private void getlogo() {
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity {
                             }
                         });
                     }
+
                 }
             }
         } catch (Exception e) {
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity {
                 }
             });
         } else {
+            finish();
             System.exit(0);
         }
     }

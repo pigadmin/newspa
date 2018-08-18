@@ -11,10 +11,12 @@ import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.spa.R;
 import com.spa.event.NetChange;
 import com.spa.event.UpdateTime;
@@ -107,7 +109,7 @@ public class App extends Application {
         this.old = old;
     }
 
-    View old;
+    private View old;
 
     private boolean fstart;
     private static String ip = "192.168.2.25:8108";
@@ -137,8 +139,23 @@ public class App extends Application {
     private void getip() {
         String tmp = config.getString("ip", "");
         if (!tmp.equals("")) {
-            headurl = "http://" + tmp + "/wisdom_spa/remote/";;;
+            headurl = "http://" + tmp + "/wisdom_spa/remote/";
+            ;
+            ;
             System.out.println("---headurl---\n" + headurl);
+        }
+    }
+
+    public static <T> T jsonToObject(String json, TypeToken<T> typeToken) {
+        //  new TypeToken<AJson<Object>>() {}.getType()   对象参数
+        // new TypeToken<AJson<List<Object>>>() {}.getType() 集合参数
+
+        if (TextUtils.isEmpty(json) || json.equals("null"))
+            return null;
+        try {
+            return gson.fromJson(json, typeToken.getType());
+        } catch (Exception e) {
+            return null;
         }
     }
 

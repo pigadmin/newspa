@@ -21,6 +21,14 @@ public class Fragments {
 
     }
 
+    public static void Replace(FragmentManager fm, Fragment fragment) {
+        // TODO Auto-generated method stub
+        if (fragment != null) {
+            ft = fm.beginTransaction();
+            ft.replace(fragmentid, fragment).commit();
+        }
+
+    }
     //    public static void replace(FragmentManager fm, Fragment fragment) {
 //        // TODO Auto-generated method stub
 //        if (fragment != null) {

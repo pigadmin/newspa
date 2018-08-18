@@ -21,7 +21,7 @@ import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
-import com.spa.ui.MainActivity;
+import com.spa.ui.MainFr;
 import com.spa.ui.bottom.OrderFr;
 import com.spa.ui.bottom.YouhuiFr;
 import com.spa.ui.bottom.help.HelpFr;
@@ -110,34 +110,56 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
 //            if (!context.getClass().getSimpleName().equals("MainActivity")) {
 //                context.startActivity(new Intent(context, MainActivity.class));
 //            }
-            context.startActivity(new Intent(context, MainActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+//            context.startActivity(new Intent(context, MainActivity.class)
+//                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+
+            Fragments.Replace(((Activity) context).getFragmentManager(), new MainFr());
         } else if (v == bottom_menu2) {//介绍
-            Fragments.To(((Activity) context).getFragmentManager(), new IntroFr());
+            Fragments.Replace(((Activity) context).getFragmentManager(), new IntroFr());
         } else if (v == bottom_menu3) {//优惠
-            Fragments.To(((Activity) context).getFragmentManager(), new YouhuiFr());
+            Fragments.Replace(((Activity) context).getFragmentManager(), new YouhuiFr());
         } else if (v == bottom_menu4) {//技师
-            Fragments.To(((Activity) context).getFragmentManager(), new JishiStyleFr());
+            Fragments.Replace(((Activity) context).getFragmentManager(), new JishiStyleFr());
         } else if (v == bottom_menu5) {//消费
-            Fragments.To(((Activity) context).getFragmentManager(), new OrderFr());
+            Fragments.Replace(((Activity) context).getFragmentManager(), new OrderFr());
         } else if (v == bottom_menu6) {//呼叫
             showCall();
         } else if (v == bottom_menu7) {//留位
             showLiuwei();
         } else if (v == bottom_menu8) {//控制
             showCtrl();
-        }else if (v == bottom_menu9) {//帮助
-            Fragments.To(((Activity) context).getFragmentManager(), new HelpFr());
-        }  else if (v == bottom_menu10) {//返回
+        } else if (v == bottom_menu9) {//帮助
+            Fragments.Replace(((Activity) context).getFragmentManager(), new HelpFr());
+        } else if (v == bottom_menu10) {//返回
             if (((Activity) context).getFragmentManager().getBackStackEntryCount() > 1) {
                 ((Activity) context).getFragmentManager().popBackStack();
             } else {
-                ((Activity) context).finish();
+                exit();
             }
         }
     }
 
-    Handler handler = new Handler();
+    private long exitTime = 0;
+
+    private void exit() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            exitTime = System.currentTimeMillis();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toas toas = new Toas();
+                    toas.setMsg(context.getString(R.string.exit));
+                    toas.show(context);
+                    toas = null;
+                }
+            });
+        } else {
+            ((Activity) context).finish();
+            System.exit(0);
+        }
+    }
+
+    private Handler handler = new Handler();
 
     public void onEvent(final DataMessage event) {
         try {

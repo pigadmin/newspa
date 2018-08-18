@@ -81,12 +81,13 @@ public class WelcomeActivity extends BaseActivity {
         Req.get(Req.check);
     }
 
+
     public void onEvent(DataMessage event) {
         if (event.getApi().equals(Req.check)) {
             final AJson<Long> data = App.gson.fromJson(event.getData(),
                     new TypeToken<AJson<Long>>() {
                     }.getType());
-            System.out.println(data.getData());
+//            System.out.println("@@@@@" + data.getData());
             if (data.getCode().equals("200")) {
 //                        System.out.println(event.getData());
                 app.setSystiem(data.getData());
@@ -95,7 +96,7 @@ public class WelcomeActivity extends BaseActivity {
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
 
             } else {
-                System.out.println("===================================");
+//                System.out.println("===================================");
                 Toas toas = new Toas();
                 toas.setMsg(data.getErrorInfo());
                 toas.show(WelcomeActivity.this);

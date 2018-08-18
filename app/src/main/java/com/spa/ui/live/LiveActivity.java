@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -41,7 +42,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
         setContentView(R.layout.activity_live);
         find();
         init();
-
+        Log.e("time", System.currentTimeMillis() + "");
 
     }
 
@@ -242,6 +243,9 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                 break;
             case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
                 pause();
+                break;
+            case KeyEvent.KEYCODE_BACK:
+                finish();
                 break;
             default:
                 break;

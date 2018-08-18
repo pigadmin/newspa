@@ -14,6 +14,7 @@ import okhttp3.Response;
 public class Req {
     public static String marquee = App.headurl + "getSubTitle?mac=" + App.mac;
     public static String check = App.headurl + "checkAuth";
+    public static String user = App.headurl + "getUser?mac="+ App.mac;
     public static String menu = App.headurl + "tmenu?mac=" + App.mac;
     public static String logo = App.headurl + "getLogo?mac=" + App.mac + "&type=3";
     public static String wea = App.headurl + "getWeather";

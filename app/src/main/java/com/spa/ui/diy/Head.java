@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -18,12 +19,12 @@ import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
 import com.spa.bean.LogoBg;
+import com.spa.bean.User;
 import com.spa.event.BitmapMessage;
 import com.spa.event.DataMessage;
 import com.spa.event.UpdateTime;
 import com.spa.ui.diy.wea.NewWea;
 import com.spa.ui.diy.wea.Wea;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,14 +80,17 @@ public class Head extends LinearLayout {
         init();
     }
 
-    private ImageView logo;
 
     private void init() {
         EventBus.getDefault().post(new UpdateTime(System.currentTimeMillis()));
     }
 
+    private ImageView logo;
+    private TextView name;
+
     private void find() {
         logo = findViewById(R.id.logo);
+        name = findViewById(R.id.name);
     }
 
     public void onEvent(final UpdateTime event) {
@@ -98,7 +102,7 @@ public class Head extends LinearLayout {
         });
     }
 
-    AJson<LogoBg> logobg;
+    private AJson<LogoBg> logobg;
 
     public void onEvent(final DataMessage event) {
         try {
@@ -133,11 +137,35 @@ public class Head extends LinearLayout {
                     e.printStackTrace();
                 }
 
+            } else if (event.getApi().equals(Req.user)) {
+                System.out.println("-------" + event.getData());
+                final AJson<User> data = App.gson.fromJson(event.getData(),
+                        new TypeToken<AJson<User>>() {
+                        }.getType());
+                if (data.getCode().equals("200")) {
+                    if (data.getData() != null) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                name.setText(data.getData().getName());
+                            }
+                        });
+                    }
+                } else {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            name.setText(data.getMsg() + App.mac);
+                        }
+                    });
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void onEvent(final BitmapMessage event) {
         if (event.getApi().equals(bgpath)) {
@@ -148,7 +176,6 @@ public class Head extends LinearLayout {
                     ((Activity) context).getWindow().getDecorView().setBackground(new BitmapDrawable(event.getBitmap()));
                 }
             });
-
         }
     }
 

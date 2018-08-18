@@ -1,8 +1,11 @@
 package com.spa.ui;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -23,6 +27,7 @@ import com.spa.bean.LiveTypeIP;
 import com.spa.bean.Menu;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
+import com.spa.tools.LtoDate;
 import com.spa.tools.WebInstaller;
 import com.spa.ui.dish.DishStyleFr;
 import com.spa.ui.diy.Toas;
@@ -55,25 +60,51 @@ public class MainFr extends BaseFr implements View.OnClickListener {
             EventBus.getDefault().register(this);
             find();
             init();
+            reg();
         }
 
         return view;
     }
 
+    private void reg() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_TIME_TICK);
+        activity.registerReceiver(receiver, filter);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Intent.ACTION_TIME_TICK.equals(intent.getAction())) {
+                app.setSystiem(app.getSystiem() + 60 * 1000);
+                updateTime();
+            }
+        }
+    };
+
+    private void updateTime() {
+        long time = app.getSystiem();
+        main_week.setText(LtoDate.E(time));
+        main_time.setText(LtoDate.Hm(time));
+        main_date.setText(LtoDate.yMd(time));
+    }
+
+
     @Override
     public void onDestroyView() {
-        app.setOld(activity.getWindow().getCurrentFocus());
-        System.out.println(app.getOld());
+//        app.setOld(activity.getWindow().getCurrentFocus());
+//        System.out.println(app.getOld());
+        activity.unregisterReceiver(receiver);
         super.onDestroyView();
     }
 
-    @Override
-    public void onResume() {
-        if (app.getOld() != null) {
-            app.getOld().requestFocus();
-        }
-        super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//        if (app.getOld() != null) {
+//            app.getOld().requestFocus();
+//        }
+//        super.onResume();
+//    }
 
     private void init() {
         getmenu();
@@ -81,7 +112,6 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
 
     private void getmenu() {
-        System.out.println(Req.menu);
         Req.get(Req.menu);
     }
 
@@ -92,12 +122,13 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     public void onEvent(final DataMessage event) {
         try {
 
-            System.out.println(event.getData());
 
             if (event.getApi().equals(Req.menu)) {
+                System.out.println(event.getData());
                 final AJson<List<Menu>> data = App.gson.fromJson(event.getData(),
                         new TypeToken<AJson<List<Menu>>>() {
                         }.getType());
+
                 menu = data.getData();
 //                System.out.println(menu.size());
                 if (menu != null && !menu.isEmpty()) {
@@ -129,6 +160,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("key", ip.getData());
                         activity.startActivity(new Intent(activity, LiveActivity.class).putExtras(bundle));
+                        Log.e("time", System.currentTimeMillis() + "");
                         break;
                     case 3:
                         AJson<LiveTypeApk> apk = App.gson.fromJson(
@@ -236,7 +268,14 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 //        }
 //    }
 
+    private TextView main_week, main_time, main_date;
+
     private void find() {
+        main_week = view.findViewById(R.id.main_week);
+        main_time = view.findViewById(R.id.main_time);
+        main_date = view.findViewById(R.id.main_date);
+        updateTime();
+
         main_menu1 = view.findViewById(R.id.main_menu1);
         main_menu2 = view.findViewById(R.id.main_menu2);
         main_menu3 = view.findViewById(R.id.main_menu3);
@@ -325,6 +364,8 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
     private void ToActivity(int p) {
         try {
+
+            System.out.println(menu);
             if (menu.isEmpty())
                 return;
             if (menu.get(p).getStatus() == 0) {
@@ -347,6 +388,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                     Fragments.To(getFragmentManager(), new IntroFr());
                     break;
                 case 2://电视直播
+                    Log.e("time", System.currentTimeMillis() + "");
                     Req.get(Req.singlelive);
                     break;
                 case 3://酒水饮料
