@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
-            android:text="是否呼叫服务员?"
+            android:text="是否取消呼叫服务员?"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
     </LinearLayout>

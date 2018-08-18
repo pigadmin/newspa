@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.spa.ui.bottom.help.HelpFr;
 import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
+import com.spa.views.BtmDialog;
 
 import java.net.URLEncoder;
 
@@ -348,4 +350,12 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
             super.handleMessage(msg);
         }
     };
+
+    /**
+     * 是否取消呼叫服务员
+     */
+    private void showDialogStyle12() {
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style12, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
 }
