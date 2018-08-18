@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.DishAdapter;
 import com.spa.ui.adapter.DishStyleAdapter;
 import com.spa.ui.diy.Toas;
-import com.squareup.picasso.Picasso;
+import com.spa.views.BtmDialog;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -159,7 +160,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     }
 
     private AlertDialog dialog_dish;
-//    private ImageView dish_icon;
+    //    private ImageView dish_icon;
     private TextView dish_name, dish_no, dish_price;
     private Button order, cancle;
     private ImageButton dish_jia, dish_jian;
@@ -237,5 +238,20 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
                 dialog_dish.dismiss();
             }
         });
+    }
+
+    private void showDialogStyle2() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
+    private void showDialogStyle3() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style3, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
+    private void showDialogStyle4() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style4, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
     }
 }
