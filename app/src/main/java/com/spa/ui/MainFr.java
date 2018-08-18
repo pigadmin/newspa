@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -31,6 +33,7 @@ import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.ui.live.LiveActivity;
 import com.spa.ui.video.VideoFr;
+import com.spa.views.BtmDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -365,5 +368,15 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showDialogStyle5() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style5, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+    }
+
+    private void showDialogStyle6() {
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.show();
     }
 }
