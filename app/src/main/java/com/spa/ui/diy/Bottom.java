@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -349,7 +348,17 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     private void showDialogStyle12() {
         View view = LayoutInflater.from(context).inflate(
                 R.layout.dialog_style12, null);
-        BtmDialog dialog = new BtmDialog(context, view);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style12);
+        dialog.show();
+    }
+
+    /**
+     * 上钟:请刷技师卡
+     */
+    private void showDialogStyle13() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style13, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style13);
         dialog.show();
     }
 }

@@ -383,28 +383,28 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
         gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
 
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style8);
         dialog.show();
     }
 
     private void showDialogStyle9() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style9, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
         dialog.show();
     }
 
     private void showDialogStyle10() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style10, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style10);
         dialog.show();
     }
 
     private void showDialogStyle11() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style11, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style11);
         dialog.show();
     }
 

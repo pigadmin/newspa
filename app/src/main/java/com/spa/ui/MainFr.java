@@ -417,14 +417,14 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     private void showDialogStyle5() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style5, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style5);
         dialog.show();
     }
 
     private void showDialogStyle6() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style6, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6);
         dialog.show();
     }
 
@@ -439,7 +439,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
         gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
 
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style7);
         dialog.show();
     }
 }

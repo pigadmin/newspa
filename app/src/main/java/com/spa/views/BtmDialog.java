@@ -3,7 +3,6 @@ package com.spa.views;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.spa.R;
@@ -13,25 +12,25 @@ import com.spa.R;
  */
 public class BtmDialog extends Dialog {
 
-    public BtmDialog(Context context, View view, int gravity, int width, int height) {
+    public BtmDialog(Context context, int layout, int gravity, int width, int height) {
         super(context, R.style.CustomDialog);
-        setContentView(view);
+        setContentView(layout);
         getWindow().setGravity(gravity);
         getWindow().setLayout(width, height);
     }
 
-    public BtmDialog(Context context, View view) {
+    public BtmDialog(Context context, int layout) {
         super(context, R.style.CustomDialog);
-        initConfigure(view);
+        initConfigure(layout);
     }
 
-    public BtmDialog(Context context, int themeResId, View view) {
+    public BtmDialog(Context context, int themeResId, int layout) {
         super(context, themeResId);
-        initConfigure(view);
+        initConfigure(layout);
     }
 
-    private void initConfigure(View view) {
-        setContentView(view);
+    private void initConfigure(int layout) {
+        setContentView(layout);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     }

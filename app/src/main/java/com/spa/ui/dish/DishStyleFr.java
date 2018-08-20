@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -243,21 +241,21 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     private void showDialogStyle2() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style2, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2);
         dialog.show();
     }
 
     private void showDialogStyle3() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style3, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style3);
         dialog.show();
     }
 
     private void showDialogStyle4() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style4, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style4);
         dialog.show();
     }
 }
