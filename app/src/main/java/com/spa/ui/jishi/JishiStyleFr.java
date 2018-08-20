@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
@@ -36,7 +33,7 @@ import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
 import com.spa.ui.adapter.TeachTypeAdapter;
 import com.spa.views.BtmDialog;
-import com.spa.views.BtmDialogList;
+import com.spa.views.JishiBtmDialogList;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -377,7 +374,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             list.add(i + "");
         }
 
-        BtmDialogList dialog = new BtmDialogList(activity, R.layout.dialog_style8, R.id.gridview_gvw1, list);
+        JishiBtmDialogList dialog = new JishiBtmDialogList(activity, list);
         dialog.show();
     }
 

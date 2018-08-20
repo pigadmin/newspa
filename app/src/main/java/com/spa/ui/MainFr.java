@@ -12,13 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
@@ -435,11 +433,11 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
     private void showDialogStyle7() {
         List<String> list = new ArrayList<>();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 10; i++) {
             list.add(i + "");
         }
 
-        BtmDialogList dialog = new BtmDialogList(activity, R.layout.dialog_style7, R.id.gridview_gvw2, list);
+        BtmDialogList dialog = new BtmDialogList(activity, list);
         dialog.show();
     }
 }

@@ -3,13 +3,9 @@ package com.spa.views;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
-
-import java.util.List;
 
 /**
  * 自定义提示框

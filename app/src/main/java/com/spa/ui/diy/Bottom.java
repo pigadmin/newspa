@@ -13,14 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
+import com.spa.bean.EvaluateBean;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
 import com.spa.ui.MainFr;
@@ -31,7 +30,7 @@ import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.views.BtmDialog;
-import com.spa.views.BtmDialogList;
+import com.spa.views.BtmDialogList2;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -49,6 +48,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         app = (App) context.getApplicationContext();
         this.context = context;
         find();
+        showDialogStyle18();
     }
 
     ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
@@ -418,7 +418,14 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         list.add("100");
         list.add("其他");
 
-        BtmDialogList dialog = new BtmDialogList(context, R.layout.dialog_style18, R.id.gridview_gvw3, list);
+        List<EvaluateBean> list2 = new ArrayList<>();
+        list2.add(new EvaluateBean(R.mipmap.content_icon_6, "非常好"));
+        list2.add(new EvaluateBean(R.mipmap.content_icon_2, "好"));
+        list2.add(new EvaluateBean(R.mipmap.content_icon_3, "一般"));
+        list2.add(new EvaluateBean(R.mipmap.content_icon_4, "差"));
+        list2.add(new EvaluateBean(R.mipmap.content_icon_5, "非常差"));
+
+        BtmDialogList2 dialog = new BtmDialogList2(context, list, list2);
         dialog.show();
     }
 }
