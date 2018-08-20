@@ -14,32 +14,23 @@ import java.util.List;
 /**
  * 自定义提示框
  */
-public class BtmDialog extends Dialog {
+public class BtmDialogList extends Dialog {
 
-    public BtmDialog(Context context, int layout, int gravity, int width, int height) {
+    public GridView mGridView;
+    public TypeChooseAdapter chooseAdapter;
+
+    public BtmDialogList(Context context, int layout, int id, List<String> list) {
         super(context, R.style.CustomDialog);
-        setContentView(layout);
-        getWindow().setGravity(gravity);
-        getWindow().setLayout(width, height);
-    }
-
-    public BtmDialog(Context context, int layout) {
-        super(context, R.style.CustomDialog);
-        initConfigure(layout);
-    }
-
-    public BtmDialog(Context context, int themeResId, int layout) {
-        super(context, themeResId);
-        initConfigure(layout);
-    }
-
-    private void initConfigure(int layout) {
         setContentView(layout);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        mGridView = findViewById(id);
+        chooseAdapter = new TypeChooseAdapter(context, R.layout.item_show_more_single, list);
+        mGridView.setAdapter(chooseAdapter);
     }
 
-    protected BtmDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
+    protected BtmDialogList(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 

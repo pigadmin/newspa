@@ -8,16 +8,17 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
+import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.event.DataMessage;
@@ -30,8 +31,11 @@ import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.views.BtmDialog;
+import com.spa.views.BtmDialogList;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bottom extends LinearLayout implements View.OnClickListener {
     View view;
@@ -182,7 +186,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     }
 
     private AlertDialog dialog_ctrl;
-    private Button up_z, down_z, jie_z, jia_z;
+    private Button up_z, down_z, jia_z;
 
     private void showCtrl() {
         dialog_ctrl = new AlertDialog.Builder(context).create();
@@ -210,15 +214,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
                 showsp();
             }
         });
-        jie_z = dialog_ctrl.findViewById(R.id.jie_z);
-        jie_z.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                dialog_ctrl.dismiss();
-                showsp();
-            }
-        });
         jia_z = dialog_ctrl.findViewById(R.id.jia_z);
         jia_z.setOnClickListener(new OnClickListener() {
 
@@ -357,7 +353,72 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     private void showDialogStyle12() {
         View view = LayoutInflater.from(context).inflate(
                 R.layout.dialog_style12, null);
-        BtmDialog dialog = new BtmDialog(context, view);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style12);
+        dialog.show();
+    }
+
+    /**
+     * 上钟:请刷技师卡
+     */
+    private void showDialogStyle13() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style13, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style13);
+        dialog.show();
+    }
+
+    /**
+     * 正在上钟,请稍等...
+     */
+    private void showDialogStyle14() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style14, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style14);
+        dialog.show();
+    }
+
+    /**
+     * 677号技师上钟成功,本窗口将在3秒后关闭
+     */
+    private void showDialogStyle15() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style15, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style15);
+        dialog.show();
+    }
+
+    /**
+     * 下钟:  请刷技师卡
+     */
+    private void showDialogStyle16() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style16, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style16);
+        dialog.show();
+    }
+
+    /**
+     * 正在下钟,请稍等...
+     */
+    private void showDialogStyle17() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style17, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style17);
+        dialog.show();
+    }
+
+    /**
+     * 正在下钟,请稍等...
+     */
+    private void showDialogStyle18() {
+        List<String> list = new ArrayList<>();
+        list.add("30");
+        list.add("50");
+        list.add("80");
+        list.add("100");
+        list.add("其他");
+
+        BtmDialogList dialog = new BtmDialogList(context, R.layout.dialog_style18, R.id.gridview_gvw3, list);
         dialog.show();
     }
 }

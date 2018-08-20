@@ -39,6 +39,7 @@ import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.ui.live.LiveActivity;
 import com.spa.ui.video.VideoFr;
 import com.spa.views.BtmDialog;
+import com.spa.views.BtmDialogList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -421,29 +422,24 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     private void showDialogStyle5() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style5, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style5);
         dialog.show();
     }
 
     private void showDialogStyle6() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style6, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6);
         dialog.show();
     }
 
     private void showDialogStyle7() {
-        List<Integer> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 1; i < 100; i++) {
-            list.add(i);
+            list.add(i + "");
         }
 
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style7, null);
-        GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
-        gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
-
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialogList dialog = new BtmDialogList(activity, R.layout.dialog_style7, R.id.gridview_gvw2, list);
         dialog.show();
     }
 }

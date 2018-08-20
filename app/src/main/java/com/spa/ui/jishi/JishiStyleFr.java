@@ -36,6 +36,7 @@ import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
 import com.spa.ui.adapter.TeachTypeAdapter;
 import com.spa.views.BtmDialog;
+import com.spa.views.BtmDialogList;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         find();
         initView();
         init();
-
         return view;
     }
 
@@ -372,39 +372,33 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void showDialogStyle8() {
-        List<Integer> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            list.add(i);
+            list.add(i + "");
         }
 
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style8, null);
-
-        GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
-        gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
-
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialogList dialog = new BtmDialogList(activity, R.layout.dialog_style8, R.id.gridview_gvw1, list);
         dialog.show();
     }
 
     private void showDialogStyle9() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style9, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
         dialog.show();
     }
 
     private void showDialogStyle10() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style10, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style10);
         dialog.show();
     }
 
     private void showDialogStyle11() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style11, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style11);
         dialog.show();
     }
 

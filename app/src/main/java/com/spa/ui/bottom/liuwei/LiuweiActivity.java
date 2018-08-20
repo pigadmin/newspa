@@ -19,7 +19,6 @@ public class LiuweiActivity extends BaseActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
@@ -62,14 +61,13 @@ public class LiuweiActivity extends BaseActivity {
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         updateTime.cancel();
         super.onStop();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+
         super.onCreate(savedInstanceState);
         app = (App) getApplication();
 
@@ -79,7 +77,7 @@ public class LiuweiActivity extends BaseActivity {
 
             seconds = 15 * 60;
         } catch (Exception e) {
-            // TODO: handle exception
+
         }
         initview();
         setvalue();
@@ -89,7 +87,6 @@ public class LiuweiActivity extends BaseActivity {
     private Timer updateTime = new Timer();
 
     private void setvalue() {
-        // TODO Auto-generated method stub
         // key.setText("使用手牌"
         // + apc.getKey().substring(0, 3)
         // + "****"
@@ -106,7 +103,6 @@ public class LiuweiActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
         if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
 
             key_temp += keyCode - 7;
@@ -138,7 +134,6 @@ public class LiuweiActivity extends BaseActivity {
     private TextView liuwei_time, key, txtTip;
 
     private void initview() {
-        // TODO Auto-generated method stub
         liuwei_time = (TextView) findViewById(R.id.liuwei_time);
         key = (TextView) findViewById(R.id.key);
         txtTip = (TextView) findViewById(R.id.tip);

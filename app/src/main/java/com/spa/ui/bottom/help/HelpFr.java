@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,9 +111,9 @@ public class HelpFr extends BaseFr {
     private void resetUI() {
         help_title.setText(list.get(0).getName());
         System.out.println(list.get(0).getContent().replace
-                ("background-color: rgb(255, 255, 255);", "background-color: transparent;"));
+                ("background-color: rgb(255, 255, 255);", "background-color: transparent; color:rgb(0,0,0)"));
         help_web.loadDataWithBaseURL(null, list.get(0).getContent().replace
-                        ("background-color: rgb(255, 255, 255);", "background-color: transparent;"),
+                        ("background-color: rgb(255, 255, 255);", "background-color: transparent;").replace("color: rgb(68, 68, 67);", "color: rgb(255,255,255);").replace("color: rgb(0, 0, 0);", "color: rgb(255,255,255);"),
                 "text/html", "utf-8", null);
 
         handler.post(new Runnable() {

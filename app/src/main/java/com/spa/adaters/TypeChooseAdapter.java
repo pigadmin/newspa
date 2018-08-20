@@ -9,16 +9,16 @@ import com.spa.R;
 import java.util.List;
 
 
-public class TypeChooseAdapter extends BAdapter<Integer> {
+public class TypeChooseAdapter extends BAdapter<String> {
 
-    public TypeChooseAdapter(Context context, int layoutId, List<Integer> list) {
+    public TypeChooseAdapter(Context context, int layoutId, List<String> list) {
         super(context, layoutId, list);
     }
 
     @Override
     public void onInitView(View convertView, int position) {
         TextView tv = get(convertView, R.id.text_tvw);
-        int type = getItem(position);
-        tv.setText(type + "");
+        String type = getItem(position);
+        tv.setText(type);
     }
 }

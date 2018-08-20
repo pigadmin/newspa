@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:background="@drawable/roids_bk2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="技师编号:"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="677"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="做钟信息:"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="做钟类型:"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="采耳"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="小费面额:"
+        android:textColor="@color/sbc_snippet_text"
+        android:textSize="18sp" />
+
+    <GridView
+        android:id="@+id/gridview_gvw3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@color/colorAccent"
+        android:numColumns="5"
+        android:padding="10dp"
+        android:verticalSpacing="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="服务评价:"
+        android:textColor="@color/sbc_snippet_text"
+        android:textSize="18sp" />
+
+    <!--<GridView-->
+        <!--android:id="@+id/gridview_gvw4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:horizontalSpacing="10dp"-->
+        <!--android:listSelector="@color/colorAccent"-->
+        <!--android:numColumns="5"-->
+        <!--android:padding="10dp"-->
+        <!--android:verticalSpacing="10dp" />-->
+
+</LinearLayout>

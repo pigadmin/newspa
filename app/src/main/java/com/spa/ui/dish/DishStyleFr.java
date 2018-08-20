@@ -278,7 +278,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
         TextView total = view.findViewById(R.id.total);
         double tmp = dish.getPrice() * Double.parseDouble(dish_num.getText().toString());
         total.setText(tmp + "元");
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2);
         dialog.show();
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
@@ -300,14 +300,14 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     private void showDialogStyle3() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style3, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style3);
         dialog.show();
     }
 
     private void showDialogStyle4() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style4, null);
-        BtmDialog dialog = new BtmDialog(activity, view);
+        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style4);
         dialog.show();
     }
 }

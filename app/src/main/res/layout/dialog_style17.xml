@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="请您刷手牌"
+        android:text="正在下钟,请稍等..."
         android:textColor="@color/sbc_snippet_text"
         android:textSize="20sp" />
 
