@@ -63,7 +63,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         find();
         initView();
         init();
-
         return view;
     }
 

@@ -361,4 +361,14 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style13);
         dialog.show();
     }
+
+    /**
+     * 上钟:请刷技师卡
+     */
+    private void showDialogStyle14() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style14, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style14);
+        dialog.show();
+    }
 }
