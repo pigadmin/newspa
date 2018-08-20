@@ -182,7 +182,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     }
 
     private AlertDialog dialog_ctrl;
-    private Button up_z, down_z, jie_z, jia_z;
+    private Button up_z, down_z, jia_z;
 
     private void showCtrl() {
         dialog_ctrl = new AlertDialog.Builder(context).create();
@@ -210,15 +210,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
                 showsp();
             }
         });
-        jie_z = dialog_ctrl.findViewById(R.id.jie_z);
-        jie_z.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                dialog_ctrl.dismiss();
-                showsp();
-            }
-        });
         jia_z = dialog_ctrl.findViewById(R.id.jia_z);
         jia_z.setOnClickListener(new OnClickListener() {
 

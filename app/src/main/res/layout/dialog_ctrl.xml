@@ -1,90 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="250dp"
+    android:layout_gravity="center"
+    android:background="@drawable/roids_bk2"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="技师功能"
+        android:textColor="@color/grgray"
+        android:textSize="20sp" />
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="200dp"
-        android:background="@mipmap/dialog_bg"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <TextView
+        <Button
+            android:id="@+id/up_z"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_horizontal"
-            android:paddingTop="20dp"
-            android:singleLine="true"
-            android:text="@string/jsmenu_tips"
-            android:textColor="@color/menu"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/up_z"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn"
-                android:text="@string/up_z"
-                android:textColor="@drawable/menu_name2"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/jie_z"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn"
-                android:text="@string/jie_z"
-                android:textColor="@drawable/menu_name2"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:background="@drawable/btn"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="上钟"
+            android:textColor="@drawable/menu_name2"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/jia_z"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn"
-                android:text="@string/jia_z"
-                android:textColor="@drawable/menu_name2"
-                android:textSize="24sp" />
+        <Button
+            android:id="@+id/down_z"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn"
+            android:gravity="center"
+            android:text="下钟"
+            android:textColor="@drawable/menu_name2"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/down_z"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn"
-                android:text="@string/down_z"
-                android:textColor="@drawable/menu_name2"
-                android:textSize="24sp" />
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/jia_z"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn"
+            android:gravity="center"
+            android:text="加钟"
+            android:textColor="@drawable/menu_name2"
+            android:textSize="20sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:text="音         量"
+            android:textColor="@color/zhxfText"
+            android:textSize="20sp" />
+
+        <SeekBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:text="屏幕亮度"
+            android:textColor="@color/zhxfText"
+            android:textSize="20sp" />
+
+        <SeekBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="30" />
+    </LinearLayout>
+</LinearLayout>

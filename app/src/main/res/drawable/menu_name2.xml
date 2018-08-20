@@ -6,6 +6,6 @@
     <!--<item android:color="@color/white" android:state_selected="true" />-->
 
     <!--<item android:color="@color/menu" android:state_pressed="false" />-->
-    <item android:color="@color/sbc_snippet_text" />
+    <item android:color="@color/grgray" />
     <!--<item android:color="@color/menu" android:state_selected="false" />-->
 </selector>
