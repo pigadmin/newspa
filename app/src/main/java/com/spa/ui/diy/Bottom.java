@@ -363,12 +363,42 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     }
 
     /**
-     * 上钟:请刷技师卡
+     * 正在上钟,请稍等...
      */
     private void showDialogStyle14() {
         View view = LayoutInflater.from(context).inflate(
                 R.layout.dialog_style14, null);
         BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style14);
+        dialog.show();
+    }
+
+    /**
+     * 677号技师上钟成功,本窗口将在3秒后关闭
+     */
+    private void showDialogStyle15() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style15, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style15);
+        dialog.show();
+    }
+
+    /**
+     * 下钟:  请刷技师卡
+     */
+    private void showDialogStyle16() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style16, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style16);
+        dialog.show();
+    }
+
+    /**
+     * 正在下钟,请稍等...
+     */
+    private void showDialogStyle17() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style17, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style17);
         dialog.show();
     }
 }
