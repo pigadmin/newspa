@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
+import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.event.DataMessage;
@@ -29,8 +31,11 @@ import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
 import com.spa.views.BtmDialog;
+import com.spa.views.BtmDialogList;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bottom extends LinearLayout implements View.OnClickListener {
     View view;
@@ -399,6 +404,21 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         View view = LayoutInflater.from(context).inflate(
                 R.layout.dialog_style17, null);
         BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style17);
+        dialog.show();
+    }
+
+    /**
+     * 正在下钟,请稍等...
+     */
+    private void showDialogStyle18() {
+        List<String> list = new ArrayList<>();
+        list.add("30");
+        list.add("50");
+        list.add("80");
+        list.add("100");
+        list.add("其他");
+
+        BtmDialogList dialog = new BtmDialogList(context, R.layout.dialog_style18, R.id.gridview_gvw3, list);
         dialog.show();
     }
 }

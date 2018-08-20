@@ -36,6 +36,7 @@ import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
 import com.spa.ui.adapter.TeachTypeAdapter;
 import com.spa.views.BtmDialog;
+import com.spa.views.BtmDialogList;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -371,18 +372,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void showDialogStyle8() {
-        List<Integer> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            list.add(i);
+            list.add(i + "");
         }
 
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style8, null);
-
-        GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
-        gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
-
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style8);
+        BtmDialogList dialog = new BtmDialogList(activity, R.layout.dialog_style8, R.id.gridview_gvw1, list);
         dialog.show();
     }
 
