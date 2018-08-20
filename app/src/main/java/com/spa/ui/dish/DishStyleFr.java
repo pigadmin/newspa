@@ -241,17 +241,23 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     }
 
     private void showDialogStyle2() {
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style2, null);
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 
     private void showDialogStyle3() {
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style3, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style3, null);
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 
     private void showDialogStyle4() {
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style4, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style4, null);
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 }

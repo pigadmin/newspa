@@ -13,12 +13,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
+import com.spa.adaters.TypeChooseAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
@@ -413,12 +415,16 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     }
 
     private void showDialogStyle5() {
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style5, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style5, null);
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 
     private void showDialogStyle6() {
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style6, null);
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 
@@ -428,7 +434,12 @@ public class MainFr extends BaseFr implements View.OnClickListener {
             list.add(i);
         }
 
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style7, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, list);
+        View view = LayoutInflater.from(activity).inflate(
+                R.layout.dialog_style7, null);
+        GridView gridView = (GridView) view.findViewById(R.id.gridview_gvw);
+        gridView.setAdapter(new TypeChooseAdapter(activity, R.layout.item_show_more_single, list));
+
+        BtmDialog dialog = new BtmDialog(activity, view);
         dialog.show();
     }
 }

@@ -2,35 +2,38 @@ package com.spa.views;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.widget.GridView;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
-
-import java.util.List;
 
 /**
  * 自定义提示框
  */
 public class BtmDialog extends Dialog {
 
-    public GridView mGridView;
-
-    public BtmDialog(Context context, int mLayout, int gravity, int width, int height) {
+    public BtmDialog(Context context, View view, int gravity, int width, int height) {
         super(context, R.style.CustomDialog);
-        setContentView(mLayout);
+        setContentView(view);
         getWindow().setGravity(gravity);
         getWindow().setLayout(width, height);
     }
 
-    public BtmDialog(Context context, int mLayout, int gravity, int width, int height, List<Integer> integers) {
+    public BtmDialog(Context context, View view) {
         super(context, R.style.CustomDialog);
-        setContentView(mLayout);
-        getWindow().setGravity(gravity);
-        getWindow().setLayout(width, height);
+        initConfigure(view);
+    }
 
-        mGridView = (GridView) findViewById(R.id.gridview_gvw);
-        mGridView.setAdapter(new TypeChooseAdapter(context, R.layout.item_show_more_single, integers));
+    public BtmDialog(Context context, int themeResId, View view) {
+        super(context, themeResId);
+        initConfigure(view);
+    }
+
+    private void initConfigure(View view) {
+        setContentView(view);
+        getWindow().setGravity(Gravity.CENTER);
+        getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     }
 
     protected BtmDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {

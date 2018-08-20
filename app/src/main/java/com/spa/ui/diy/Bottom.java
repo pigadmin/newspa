@@ -355,7 +355,9 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
      * 是否取消呼叫服务员
      */
     private void showDialogStyle12() {
-        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style12, Gravity.CENTER, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style12, null);
+        BtmDialog dialog = new BtmDialog(context, view);
         dialog.show();
     }
 }
