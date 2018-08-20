@@ -91,6 +91,7 @@ public class Head extends LinearLayout {
     private void find() {
         logo = findViewById(R.id.logo);
         name = findViewById(R.id.name);
+
     }
 
     public void onEvent(final UpdateTime event) {

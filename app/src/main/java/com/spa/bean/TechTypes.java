@@ -1,14 +1,15 @@
 package com.spa.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class TeachType implements Serializable {
+public class TechTypes implements Serializable {
     private int id;
 
     private String name;
 
-    private List<TechTypes> techTypes;
+    private int cid;
+
+    private String icon;
 
     public void setId(int id) {
         this.id = id;
@@ -26,13 +27,20 @@ public class TeachType implements Serializable {
         return this.name;
     }
 
-    public void setTechTypes(List<TechTypes> techTypes) {
-        this.techTypes = techTypes;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
-    public List<TechTypes> getTechTypes() {
-        return this.techTypes;
+    public int getCid() {
+        return this.cid;
     }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
 
 }

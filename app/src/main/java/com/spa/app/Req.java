@@ -34,7 +34,7 @@ public class Req {
     public static String game = App.headurl + "getApp?mac=" + App.mac;
 
     public static void get(final String url) {
-//        System.out.println(url);
+        System.out.println(url);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -44,7 +44,7 @@ public class Req {
                     Response response = App.client.newCall(request).execute();
                     if (response.code() == 200) {
                         json = response.body().string();
-//                        System.out.println(json);
+                        System.out.println(json);
                         EventBus.getDefault().post(new DataMessage(url, json));
                     } else {
                         EventBus.getDefault().post(new ErrorMessage(url, response.code()));

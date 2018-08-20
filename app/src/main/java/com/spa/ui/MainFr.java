@@ -9,13 +9,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -58,16 +56,15 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.fr_main, container, false);
-            activity = getActivity();
-            app = (App) activity.getApplication();
-            EventBus.getDefault().register(this);
-            find();
-            init();
-            reg();
-        }
-
+        System.out.println("main__ccc");
+        view = inflater.inflate(R.layout.fr_main, container, false);
+        activity = getActivity();
+        app = (App) activity.getApplication();
+        EventBus.getDefault().register(this);
+        find();
+        init();
+        reg();
+        app.setShowname(1);
         return view;
     }
 
@@ -99,7 +96,14 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     public void onDestroyView() {
 //        app.setOld(activity.getWindow().getCurrentFocus());
 //        System.out.println(app.getOld());
-        activity.unregisterReceiver(receiver);
+        try {
+            app.setShowname(0);
+            System.out.println("main__oooooooooooooooooooon");
+            activity.unregisterReceiver(receiver);
+            EventBus.getDefault().unregister(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroyView();
     }
 

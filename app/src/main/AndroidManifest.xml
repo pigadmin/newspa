@@ -23,7 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.WelcomeActivity">
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,13 +40,22 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ui.BaseActivity" />
+        <activity
+            android:name=".ui.BaseActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ui.live.LiveActivity" />
-        <activity android:name=".ui.video.PlayerActivity" />
-        <activity android:name=".ui.bottom.liuwei.LiuweiActivity" />
+        <activity
+            android:name=".ui.live.LiveActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.video.PlayerActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.bottom.liuwei.LiuweiActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

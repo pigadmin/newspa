@@ -38,6 +38,15 @@ public class App extends Application {
 
     private Toas toas = new Toas();
 
+    public int getShowname() {
+        return showname;
+    }
+
+    public void setShowname(int showname) {
+        this.showname = showname;
+    }
+
+    private int showname;
 
     @Override
     public void onCreate() {

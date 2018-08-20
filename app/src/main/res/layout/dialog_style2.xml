@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,6 +53,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/namr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -74,6 +76,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -96,6 +99,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -130,7 +134,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn"
             android:gravity="center"
-            android:text="取消:"
+            android:text="取消"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
 

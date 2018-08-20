@@ -25,7 +25,8 @@ public class Fragments {
         // TODO Auto-generated method stub
         if (fragment != null) {
             ft = fm.beginTransaction();
-            ft.replace(fragmentid, fragment).commit();
+            ft.replace(fragmentid, fragment);
+            ft.addToBackStack(null).commit();
         }
 
     }

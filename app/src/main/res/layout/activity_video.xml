@@ -22,7 +22,6 @@
             android:layout_gravity="right|center|center_horizontal"
             android:layout_weight="1"
             android:background="@null"
-            android:gravity="center"
             android:hint="@string/search_hit"
             android:padding="5dp"
             android:singleLine="true"

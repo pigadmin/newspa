@@ -2,29 +2,34 @@ package com.spa.bean;
 
 import java.io.Serializable;
 
-public class DishStyle  implements Serializable{
+public class DishStyle implements Serializable {
     private int id;
 
     private String name;
 
     private String icon;
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
-    public int getId(){
+
+    public int getId() {
         return this.id;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public void setIcon(String icon){
+
+    public void setIcon(String icon) {
         this.icon = icon;
     }
-    public String getIcon(){
+
+    public String getIcon() {
         return this.icon;
     }
 

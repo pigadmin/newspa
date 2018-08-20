@@ -1,15 +1,17 @@
 package com.spa.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spa.R;
 import com.spa.bean.DishStyle;
-import com.spa.bean.Info;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,18 +56,22 @@ public class DishStyleAdapter extends BaseAdapter {
                     R.layout.adapter_intro, null);
             holder.intro_name = convertView
                     .findViewById(R.id.intro_name);
+            holder.icon = convertView
+                    .findViewById(R.id.icon);
+
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.intro_name.setText(list.get(position).getName());
+        Picasso.with(context).load(Uri.parse(list.get(position).getIcon())).into(holder.icon);
         return convertView;
     }
 
 
     public class ViewHolder {
         private TextView intro_name;
-
+        private ImageView icon;
     }
-
 }
