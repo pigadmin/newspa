@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,7 +203,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     static AlertDialog teleplay_dialog;
     GridView teleplay_grid;
-    TeleplayGridAdapter teleplayadapter;
+    TeleplayGridAdapter teleplayadapter;;
 
     public void teledialog() {
         // TODO Auto-generated method stub
