@@ -48,7 +48,6 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         app = (App) context.getApplicationContext();
         this.context = context;
         find();
-        showDialogStyle18();
     }
 
     ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
@@ -408,7 +407,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
     }
 
     /**
-     * 正在下钟,请稍等...
+     * 评价
      */
     private void showDialogStyle18() {
         List<String> list = new ArrayList<>();
@@ -426,6 +425,16 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         list2.add(new EvaluateBean(R.mipmap.content_icon_5, "非常差"));
 
         BtmDialogList2 dialog = new BtmDialogList2(context, list, list2);
+        dialog.show();
+    }
+
+    /**
+     * 请输入小费金额
+     */
+    private void showDialogStyle19() {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_style19, null);
+        BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style19);
         dialog.show();
     }
 }
