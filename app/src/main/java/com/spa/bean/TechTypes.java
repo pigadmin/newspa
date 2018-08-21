@@ -7,8 +7,6 @@ public class TechTypes implements Serializable {
 
     private String name;
 
-    private int cid;
-
     private String icon;
 
     public void setId(int id) {
@@ -27,14 +25,6 @@ public class TechTypes implements Serializable {
         return this.name;
     }
 
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
-
-    public int getCid() {
-        return this.cid;
-    }
-
     public void setIcon(String icon) {
         this.icon = icon;
     }
@@ -43,4 +33,12 @@ public class TechTypes implements Serializable {
         return this.icon;
     }
 
+    @Override
+    public String toString() {
+        return "TechTypes{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
+    }
 }

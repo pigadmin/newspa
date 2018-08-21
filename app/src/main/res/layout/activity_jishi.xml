@@ -73,8 +73,8 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ListView
-            android:id="@+id/left_list"
+        <ExpandableListView
+            android:id="@+id/view_exlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +15,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
+import com.spa.adaters.MyExAdater;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
 import com.spa.bean.JishiData;
 import com.spa.bean.TeachType;
 import com.spa.bean.Tech;
+import com.spa.bean.TechTypes;
 import com.spa.event.DataMessage;
 import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
-import com.spa.ui.adapter.TeachTypeAdapter;
 import com.spa.views.BtmDialog;
 import com.spa.views.JishiBtmDialogList;
 import com.squareup.picasso.Picasso;
@@ -74,13 +76,13 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         Req.get(Req.teachtype);
     }
 
-    private ListView left_list;
+    private ExpandableListView left_list;
     private GridView right_grid;
     EditText keyword;
 //    RadioButton jishi_all, jishi_sex1, jishi_sex2, status1, status2, status_all;
 
     private void find() {
-        left_list = view.findViewById(R.id.left_list);
+        left_list = view.findViewById(R.id.view_exlist);
         left_list.setOnItemClickListener(this);
         right_grid = view.findViewById(R.id.right_grid);
         right_grid.setOnItemClickListener(this);
@@ -113,14 +115,10 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
-
                 handler.removeMessages(search);
                 handler.sendEmptyMessageDelayed(search, 1000);
             }
-
-
         });
-
     }
 
     final int search = 0;
@@ -143,7 +141,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         }
     };
     private List<TeachType> list;
-    private TeachTypeAdapter adapter;
+    private MyExAdater adapter;
     private Tech grid;
 
     public void onEvent(DataMessage event) {
@@ -197,15 +195,25 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private String services;
+    public List<List> itemList;
 
     private void resetList() {
-        adapter = new TeachTypeAdapter(activity, list);
+        itemList = new ArrayList<>();
+        for (TeachType type : list) {
+            ArrayList ar2 = new ArrayList();
+            for (TechTypes types : type.getTechTypes()) {
+                if (types != null) {
+                    ar2.add(types);
+                }
+            }
+            itemList.add(ar2);
+        }
+
+        adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro, R.layout.adapter_intro_1);
         left_list.setAdapter(adapter);
-        left_list.requestFocus();
         services = "&services=" + list.get(0).getId();
         Req.get(Req.teach + services);
     }
-
 
     private JishiAdapter adapter2;
 
@@ -227,8 +235,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             jishi = grid.getData().get(p);
             showJishi();
         }
-
-
     }
 
     private AlertDialog dialog_jishi;

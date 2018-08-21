@@ -8,6 +8,8 @@ public class TeachType implements Serializable {
 
     private String name;
 
+    private String icon;
+
     private List<TechTypes> techTypes;
 
     public void setId(int id) {
@@ -34,5 +36,21 @@ public class TeachType implements Serializable {
         return this.techTypes;
     }
 
+    public String getIcon() {
+        return icon;
+    }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return "TeachType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", techTypes=" + techTypes +
+                '}';
+    }
 }
