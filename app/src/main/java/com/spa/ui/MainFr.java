@@ -31,6 +31,9 @@ import com.spa.tools.LtoDate;
 import com.spa.tools.WebInstaller;
 import com.spa.ui.dish.DishStyleFr;
 import com.spa.ui.diy.Toas;
+import com.spa.ui.diy.wea.NewWea;
+import com.spa.ui.diy.wea.Wea;
+import com.spa.ui.diy.wea.WeatherImage;
 import com.spa.ui.game.GameFr;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
@@ -194,6 +197,27 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 
                 }
 
+            } else if (event.getApi().equals(Req.wea)) {
+                AJson<NewWea> data = App.gson.fromJson(event.getData(),
+                        new TypeToken<AJson<NewWea>>() {
+                        }.getType());
+                System.out.println(data.getData().getInfo().toString());
+                final Wea wea = App.gson.fromJson(data.getData().getInfo().toString(), Wea.class);
+                System.out.println("--" + data.getData().getInfo().toString());
+                if (wea != null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            wea_city.setText(wea.getCity());
+                            wea_tmp.setText(wea.getData().getWendu());
+                            wea_maxtmp.setText(wea.getData().getForecast().get(0).getHigh().substring(2, 5));
+                            wea_mintmp.setText(wea.getData().getForecast().get(0).getLow().substring(2, 5));
+                            wea_icon.setImageResource(WeatherImage.parseIcon(wea.getData().getForecast().get(0).getType()));
+
+
+                        }
+                    });
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,8 +320,21 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         main_menu4.setOnClickListener(this);
         main_menu5.setOnClickListener(this);
         main_menu6.setOnClickListener(this);
+
+        wea_icon = view.findViewById(R.id.wea_icon);
+        wea_tmp = view.findViewById(R.id.wea_tmp);
+        wea_city = view.findViewById(R.id.wea_city);
+        wea_maxtmp = view.findViewById(R.id.wea_maxtmp);
+        wea_mintmp = view.findViewById(R.id.wea_mintmp);
+        getwea();
     }
 
+    private ImageView wea_icon;
+    private TextView wea_tmp, wea_city, wea_maxtmp, wea_mintmp;
+
+    private void getwea() {
+        Req.get(Req.wea);
+    }
 //    private void loadWeb() {
 //        for (int i = 0; i < menu.size(); i++) {
 //            final int p = i;

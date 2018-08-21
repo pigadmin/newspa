@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical">
@@ -8,16 +8,17 @@
 
     <TextView
         android:id="@+id/teleplay_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@mipmap/content_popup_2"
         android:ellipsize="marquee"
         android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:singleLine="true"
-        android:textColor="@drawable/menu_name"
+        android:textColor="@drawable/vod_dsj"
         android:textSize="18sp" />
 
 

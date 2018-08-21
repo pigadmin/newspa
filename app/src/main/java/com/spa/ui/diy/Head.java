@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -23,8 +24,6 @@ import com.spa.bean.User;
 import com.spa.event.BitmapMessage;
 import com.spa.event.DataMessage;
 import com.spa.event.UpdateTime;
-import com.spa.ui.diy.wea.NewWea;
-import com.spa.ui.diy.wea.Wea;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +69,7 @@ public class Head extends LinearLayout {
     private Context context;
     private App app;
 
+
     public Head(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -78,8 +78,14 @@ public class Head extends LinearLayout {
         EventBus.getDefault().register(this);
         find();
         init();
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        currentVolume = audioManager
+                .getStreamVolume(AudioManager.STREAM_MUSIC);
     }
-
+    private AudioManager audioManager;
+    private int maxVolume;
+    private int currentVolume;
 
     private void init() {
         EventBus.getDefault().post(new UpdateTime(System.currentTimeMillis()));
@@ -107,20 +113,22 @@ public class Head extends LinearLayout {
 
     public void onEvent(final DataMessage event) {
         try {
-            if (event.getApi().equals(Req.wea)) {
-                AJson<NewWea> data = App.gson.fromJson(event.getData(),
-                        new TypeToken<AJson<NewWea>>() {
-                        }.getType());
-                final Wea wea = App.gson.fromJson(data.getData().getInfo().toString(), Wea.class);
-                if (wea != null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-
-                        }
-                    });
-                }
-            } else if (event.getApi().equals(Req.logo)) {
+//            if (event.getApi().equals(Req.wea)) {
+//                AJson<NewWea> data = App.gson.fromJson(event.getData(),
+//                        new TypeToken<AJson<NewWea>>() {
+//                        }.getType());
+//                final Wea wea = App.gson.fromJson(data.getData().getInfo().toString(), Wea.class);
+//                if (wea != null) {
+//                    handler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                        }
+//                    });
+//                }
+//            } else
+//
+            if (event.getApi().equals(Req.logo)) {
                 try {
                     logobg = App.gson.fromJson(event.getData(),
                             new TypeToken<AJson<LogoBg>>() {

@@ -8,14 +8,11 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
-//import io.socket.client.Socket;
-//import shengvideo.hotel.bean.web.WebLive;
-//import shengvideo.hotel.bean.web.WebVideo;
-//import shengvideo.hotel.bean.web.WebVideoDetails;
-//import shengvideo.hotel.config.Ini;
-//import shengvideo.hotel.tools.adb;
-//import shengvideo.hotel.ui.main.MainActicity;
-//import shengvideo.hotel.ui.web.WebPlayActivity;
+import com.spa.app.App;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 
 public class SocketService extends Service {
@@ -44,41 +41,43 @@ public class SocketService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        mobile();
+        mobile();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
     }
 
-    private String url = "http://vod.shengvideo.com:8000/tv";
+    private String url = App.socketurl;
     //private String url = "http://192.168.2.6:8000/tv";
-//    Socket socket;
+    Socket socket;
 
-//    private void mobile() {
-//
-//        try {
-//            socket = IO.socket(url);
-//            socket.on("live", new Emitter.Listener() {
-//
-//                public void call(Object... arg0) {
-//                    // TODO Auto-generated method stub
-//                    try {
-//                        String json = arg0[0].toString();
+    private void mobile() {
+
+        try {
+            socket = IO.socket(url);
+//            System.out.println(url + "@@@@@@@@@@@@@@@@@@@@@");
+            socket.on("title", new Emitter.Listener() {
+
+                public void call(Object... arg0) {
+                    // TODO Auto-generated method stub
+                    try {
+                        String json = arg0[0].toString();
+                        System.out.println(json + "@@@@@@@@@@@@@@@@@@@@@");
 //                        WebLive live = Ini.gson.fromJson(json, WebLive.class);
 //                        Bundle bundle = new Bundle();
 //                        bundle.putSerializable("key", live);
 //                        startActivity(new Intent(SocketService.this, WebPlayActivity.class)
 //                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type", 1).putExtras(bundle));
-//                    } catch (Exception e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
-//            socket.on("play", new Emitter.Listener() {
-//
-//                public void call(Object... arg0) {
-//                    // TODO Auto-generated method stub
-//                    try {
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            socket.on("in_play", new Emitter.Listener() {
+
+                public void call(Object... arg0) {
+                    // TODO Auto-generated method stub
+                    try {
 //                        String id = arg0[1].toString();
 //                        String json = arg0[0].toString();
 //                        String name = "";
@@ -103,14 +102,14 @@ public class SocketService extends Service {
 //                                .putExtra("name", name).putExtra("path", path));
 //
 //                        System.out.println(json);
-//
-//                    } catch (Exception e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
+
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 //            socket.on("ml", new Emitter.Listener() {
 //
 //                public void call(Object... arg0) {
@@ -176,50 +175,50 @@ public class SocketService extends Service {
 //
 //                }
 //            });
-//            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-//
-//                public void call(Object... arg0) {
-//                    // TODO Auto-generated method stub
-//                    try {
-//                        System.out.println("连接成功----");
-//                        socket.emit("register", Ini.Mac());
-//                    } catch (Exception e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
-//            socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-//
-//                public void call(Object... arg0) {
-//                    // TODO Auto-generated method stub
-//                    try {
-//                        System.out.println("断开连接----offline");
-//                    } catch (Exception e) {
-//                        // TODO: handle exception
-//                    }
-//                }
-//
-//            });
-//            socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
-//
-//                public void call(Object... arg0) {
-//                    // TODO Auto-generated method stub
-//                    try {
-//                        System.out.println("连接失败----online fail");
-//                    } catch (Exception e) {
-//                        // TODO: handle exception
-//                    }
-//                }
-//
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        socket.connect();
-//    }
+            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+
+                public void call(Object... arg0) {
+                    // TODO Auto-generated method stub
+                    try {
+                        System.out.println("连接成功----");
+                        socket.emit("register", App.mac);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+
+                public void call(Object... arg0) {
+                    // TODO Auto-generated method stub
+                    try {
+                        System.out.println("断开连接----offline");
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+
+            });
+            socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+
+                public void call(Object... arg0) {
+                    // TODO Auto-generated method stub
+                    try {
+                        System.out.println("连接失败----online fail");
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        socket.connect();
+    }
 
 }

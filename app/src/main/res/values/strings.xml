@@ -103,4 +103,7 @@
         <item>上钟</item>
     </string-array>
 
+    <string name="msginsname">计划插播：</string>
+    <string name="insname">即时插播：</string>
+    <string name="weekname">周计划插播：</string>
 </resources>

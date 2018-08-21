@@ -120,16 +120,24 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                                           int after) {
                 handler.removeMessages(search);
                 handler.sendEmptyMessageDelayed(search, 1000);
+
             }
         });
 
         /**
          * 设置分组项的点击监听事件
          */
+
         left_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 Log.d("onGroupClick..", "groupPosition.." + groupPosition);
+                try {
+                    typeCls = "&typeCls=" + list.get(groupPosition).getId();
+                    Req.get(Req.teach + typeCls);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return false;
             }
         });
@@ -137,15 +145,25 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         /**
          * 设置子选项点击监听事件
          */
+
         left_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Log.d("onChildClick..", "groupPosition.." + groupPosition + "..childPosition.." + childPosition);
+                try {
+                    services = "&services=" + list.get(groupPosition).getTechTypes().get(childPosition).getId();
+                    Req.get(Req.teach + typeCls + services);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 return false;
             }
         });
     }
+
+    private String typeCls = "";
+    private String services = "";
 
     final int search = 0;
     String keywd = "";
@@ -155,11 +173,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+
                     if (!keyword.getText().toString().equals("")) {
                         keywd = "&keywd=" + keyword.getText().toString();
                         Req.get(Req.teach + keywd + sex + status);
                     } else {
-                        Req.get(Req.teach + services);
+                        Req.get(Req.teach + typeCls + services);
                     }
 
                     break;
@@ -186,25 +205,13 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                     });
                 }
 
-            } else if (event.getApi().equals(Req.teach + services)) {
+            } else if (event.getApi().equals(Req.teach + typeCls) || event.getApi().equals(Req.teach + typeCls + services)
+                    || event.getApi().equals(Req.teach + keywd + sex + status)) {
                 AJson<Tech> data = App.gson.fromJson(
                         event.getData(), new TypeToken<AJson<Tech>>() {
                         }.getType());
                 grid = data.getData();
-//                if (!grid.getData().isEmpty()) {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        resetUI();
-                    }
-                });
-//                }
-
-            } else if (event.getApi().equals(Req.teach + keywd + sex + status)) {
-                AJson<Tech> data = App.gson.fromJson(
-                        event.getData(), new TypeToken<AJson<Tech>>() {
-                        }.getType());
-                grid = data.getData();
+//                System.out.println(grid.getData().size() + "@@@@@@@@@@@@");
 //                if (!grid.getData().isEmpty()) {
                 handler.post(new Runnable() {
                     @Override
@@ -220,7 +227,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         }
     }
 
-    private String services;
     public List<List> itemList;
 
     private void resetList() {
@@ -237,8 +243,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
         adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro, R.layout.adapter_intro_1);
         left_list.setAdapter(adapter);
-        services = "&services=" + list.get(0).getId();
-        Req.get(Req.teach + services);
+        typeCls = "&typeCls=" + list.get(0).getId();
+        Req.get(Req.teach + typeCls);
     }
 
     private JishiAdapter adapter2;
@@ -255,8 +261,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final int p = position;
         if (parent == left_list) {
-            services = "&services=" + list.get(p).getId();
-            Req.get(Req.teach + services);
+//            services = "&services=" + list.get(p).getId();
+//            Req.get(Req.teach + services);
         } else if (parent == right_grid) {
             jishi = grid.getData().get(p);
             showJishi();
@@ -352,8 +358,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 //            status = "&status=1";
 //            Req.get(Req.teach + keywd + sex + status);
 //        } else if (v == status2) {
-        status = "&status=2";
-        Req.get(Req.teach + keywd + sex + status);
+//        status = "&status=2";
+//        Req.get(Req.teach + keywd + sex + status);
 //        }
 
     }
@@ -377,6 +383,19 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                     TextView tv = (TextView) arg1;
                     tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
                 }
+                switch (arg2) {
+                    case 0:
+                        sex = "";
+                        break;
+                    case 1:
+                        sex = "&sex=1";
+                        break;
+                    case 2:
+                        sex = "&sex=2";
+                        break;
+                }
+
+                Req.get(Req.teach + keywd + sex + status);
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -396,6 +415,19 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                     TextView tv = (TextView) arg1;
                     tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
                 }
+                switch (arg2) {
+                    case 0:
+                        status = "";
+                        break;
+                    case 1:
+                        status = "&status=2";
+                        break;
+                    case 2:
+                        status = "&status=1";
+                        break;
+                }
+
+                Req.get(Req.teach + keywd + sex + status);
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -434,5 +466,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style11);
         dialog.show();
     }
+
 
 }

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <supports-screens
         android:anyDensity="true"
@@ -35,10 +36,8 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".service.MyService"
-            android:enabled="true"
-            android:exported="true" />
+        <service android:name=".service.MyService" />
+        <service android:name=".service.SocketService" />
 
         <activity
             android:name=".ui.BaseActivity"
@@ -56,6 +55,9 @@
         <activity
             android:name=".ui.bottom.liuwei.LiuweiActivity"
             android:launchMode="singleTask" />
+        <activity android:name=".ui.ad.MsginsActivity" />
+        <activity android:name=".ui.ad.NowinsActivity" />
+        <activity android:name=".ui.ad.WeekActivity" />
     </application>
 
 </manifest>

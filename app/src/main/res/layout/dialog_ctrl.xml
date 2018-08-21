@@ -82,12 +82,11 @@
             android:textSize="20sp" />
 
         <SeekBar
+            android:id="@+id/audio"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:max="100"
-            android:progress="30" />
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,11 +106,11 @@
             android:textSize="20sp" />
 
         <SeekBar
+            android:id="@+id/light"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:max="100"
-            android:progress="30" />
+            android:max="255" />
     </LinearLayout>
 </LinearLayout>

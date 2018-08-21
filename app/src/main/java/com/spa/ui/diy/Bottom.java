@@ -5,16 +5,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.spa.R;
 import com.spa.app.App;
@@ -36,7 +41,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bottom extends LinearLayout implements View.OnClickListener {
+public class Bottom extends LinearLayout implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     View view;
 
     App app;
@@ -48,7 +53,13 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         app = (App) context.getApplicationContext();
         this.context = context;
         find();
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
     }
+
+    private AudioManager audioManager;
+    private int maxVolume;
+    private int currentVolume;
 
     ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
 
@@ -186,8 +197,11 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
 
     private AlertDialog dialog_ctrl;
     private Button up_z, down_z, jia_z;
+    private SeekBar audio, light;
 
     private void showCtrl() {
+        currentVolume = audioManager
+                .getStreamVolume(AudioManager.STREAM_MUSIC);
         dialog_ctrl = new AlertDialog.Builder(context).create();
         if (dialog_ctrl.isShowing()) {
             dialog_ctrl.dismiss();
@@ -195,7 +209,16 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
             dialog_ctrl.show();
         }
         dialog_ctrl.setContentView(R.layout.dialog_ctrl);
+        audio = dialog_ctrl.findViewById(R.id.audio);
+        audio.setOnSeekBarChangeListener(this);
+        audio.setMax(maxVolume);
+        audio.setProgress(currentVolume);
+        light = dialog_ctrl.findViewById(R.id.light);
+        light.setProgress(getScreenBrightness());
+        light.setOnSeekBarChangeListener(this);
+
         up_z = dialog_ctrl.findViewById(R.id.up_z);
+
         up_z.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -223,6 +246,16 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
                 showsp();
             }
         });
+    }
+
+    private int getScreenBrightness() {
+        int screenBrightness = 255;
+        try {
+            screenBrightness = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+        } catch (Exception e) {
+
+        }
+        return screenBrightness;
     }
 
     private void showsp() {
@@ -437,4 +470,44 @@ public class Bottom extends LinearLayout implements View.OnClickListener {
         BtmDialog dialog = new BtmDialog(context, R.layout.dialog_style19);
         dialog.show();
     }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        if (seekBar.getId() == R.id.light) {
+            setBrightness(i);
+        }
+        if (seekBar.getId() == R.id.audio) {
+            System.out.println(i);
+            System.out.println("**" + audio.getProgress());
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_SHOW_UI);
+        }
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+    }
+
+    public void setBrightness(int brightness) {
+        try {
+            Settings.System.putInt(context.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, brightness);
+
+            Window localWindow = ((Activity) context).getWindow();
+            WindowManager.LayoutParams localLayoutParams = localWindow.getAttributes();
+            float f = brightness / 255.0F;
+            localLayoutParams.screenBrightness = f;
+            localWindow.setAttributes(localLayoutParams);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

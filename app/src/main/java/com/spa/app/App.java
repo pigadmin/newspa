@@ -18,9 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
+import com.spa.bean.Mings;
 import com.spa.event.NetChange;
 import com.spa.event.UpdateTime;
 import com.spa.service.MyService;
+import com.spa.service.SocketService;
 import com.spa.ui.diy.Toas;
 
 import java.io.BufferedReader;
@@ -32,6 +34,21 @@ import de.greenrobot.event.EventBus;
 import okhttp3.OkHttpClient;
 
 public class App extends Application {
+
+    public static class ScreenType {
+
+        // 横屏
+        public static final int HORIZONTAL = 1;
+        // 竖屏
+        public static final int VERTICAL = 2;
+    }
+
+    public static final String PALY = "PALY";
+    public static final String PAUSE = "PAUSE";
+    public static final String STOP = "STOP";
+    public static final String FORWARD = "FORWARD";
+    public static final String REWIND = "REWIND";
+    public static final String Cancle = "Cancle";
     public static Gson gson;
     private SharedPreferences config;
     public static OkHttpClient client;
@@ -69,7 +86,7 @@ public class App extends Application {
 
 
         startService(new Intent(this, MyService.class));
-
+        startService(new Intent(this, SocketService.class));
     }
 
     public static int network_type = -1;
@@ -121,7 +138,7 @@ public class App extends Application {
     private View old;
 
     private boolean fstart;
-    private static String ip = "192.168.2.25:8108";
+    private static String ip = "192.168.2.25";
     //private static String ip = "192.168.2.89:8108";
     public static String version;
 
@@ -144,13 +161,13 @@ public class App extends Application {
     }
 
     public static String headurl;
+    public static String socketurl;
 
     private void getip() {
         String tmp = config.getString("ip", "");
         if (!tmp.equals("")) {
-            headurl = "http://" + tmp + "/wisdom_spa/remote/";
-            ;
-            ;
+            headurl = "http://" + tmp + ":8108/wisdom_spa/remote/";
+            socketurl = "http://" + tmp + ":8000/tv";
             System.out.println("---headurl---\n" + headurl);
         }
     }
@@ -260,4 +277,57 @@ public class App extends Application {
     public void setSystiem(long systiem) {
         this.systiem = systiem;
     }
+
+    public boolean isWeek() {
+        return week;
+    }
+
+    public void setWeek(boolean week) {
+        this.week = week;
+    }
+
+    public boolean week;
+
+    public boolean isNowins() {
+        return nowins;
+    }
+
+    public void setNowins(boolean nowins) {
+        this.nowins = nowins;
+    }
+
+    public boolean nowins;
+
+
+    public boolean isMing() {
+        return ming;
+    }
+
+    public void setMing(boolean ming) {
+        this.ming = ming;
+    }
+
+    public boolean ming;
+
+    public Mings getMings() {
+        return mings;
+    }
+
+    public void setMings(Mings mings) {
+        this.mings = mings;
+    }
+
+    Mings mings = new Mings();
+
+
+    public boolean isDownloadzip() {
+        return downloadzip;
+    }
+
+    public void setDownloadzip(boolean downloadzip) {
+        this.downloadzip = downloadzip;
+    }
+
+    boolean downloadzip;
+
 }

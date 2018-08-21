@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:background="@drawable/roids_bk2"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal">
-
+    <!--android:background="@drawable/roids_bk2"-->
     <GridView
         android:id="@+id/teleplay_grid"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:background="@mipmap/content_popup_1"
         android:horizontalSpacing="10dp"
-        android:listSelector="@color/colorAccent"
+        android:listSelector="@mipmap/content_popup_3"
         android:numColumns="10"
-        android:padding="10dp"
-        android:verticalSpacing="10dp" />
+        android:paddingBottom="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="30dp"
+        android:scrollbars="none"
+        android:verticalSpacing="14dp" />
+    <!--android:listSelector="@color/colorAccent"-->
 
 </LinearLayout>

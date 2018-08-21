@@ -2,6 +2,8 @@ package com.spa.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -23,14 +25,27 @@ public class MainActivity extends BaseActivity {
 
         Fragments.To(getFragmentManager(), new MainFr());
 
+
+//        find();
         init();
+    }
+
+    ImageView wea_icon;
+    TextView wea_tmp, wea_city, wea_maxtmp, wea_mintmp;
+
+    private void find() {
+        wea_icon = findViewById(R.id.wea_icon);
+        wea_tmp = findViewById(R.id.wea_tmp);
+        wea_city = findViewById(R.id.wea_city);
+        wea_maxtmp = findViewById(R.id.wea_maxtmp);
+        wea_mintmp = findViewById(R.id.wea_mintmp);
     }
 
 
     private void init() {
         getuser();
         getlogo();
-        getwea();
+//        getwea();
         checkupdate();
     }
 
