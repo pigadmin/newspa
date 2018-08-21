@@ -52,6 +52,9 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private Spinner spinner1;
     private Spinner spinner2;
 
+    private String[] SexArray = new String[]{"全部", "男", "女"};
+    private String[] FreeArray = new String[]{"全部", "空闲", "上钟"};
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -339,7 +342,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void iniLiter() {
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, activity.getResources().getStringArray(R.array.sex));
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, SexArray);
         //第三步：为适配器设置下拉列表下拉时的菜单样式。
         adapter1.setDropDownViewResource(R.layout.powin_layout);
         //第四步：将适配器添加到下拉列表上
@@ -347,8 +350,10 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
         spinner1.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                TextView tv = (TextView) arg1;
-                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                if (arg1 != null) {
+                    TextView tv = (TextView) arg1;
+                    tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -356,7 +361,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             }
         });
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, activity.getResources().getStringArray(R.array.free));
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, FreeArray);
         //第三步：为适配器设置下拉列表下拉时的菜单样式。
         adapter2.setDropDownViewResource(R.layout.powin_layout);
         //第四步：将适配器添加到下拉列表上
@@ -364,8 +369,10 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
         spinner2.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                TextView tv = (TextView) arg1;
-                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                if (arg1 != null) {
+                    TextView tv = (TextView) arg1;
+                    tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
