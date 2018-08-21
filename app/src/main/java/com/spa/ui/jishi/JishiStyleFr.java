@@ -122,6 +122,29 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 handler.sendEmptyMessageDelayed(search, 1000);
             }
         });
+
+        /**
+         * 设置分组项的点击监听事件
+         */
+        left_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Log.d("onGroupClick..", "groupPosition.." + groupPosition);
+                return false;
+            }
+        });
+
+        /**
+         * 设置子选项点击监听事件
+         */
+        left_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.d("onChildClick..", "groupPosition.." + groupPosition + "..childPosition.." + childPosition);
+
+                return false;
+            }
+        });
     }
 
     final int search = 0;
