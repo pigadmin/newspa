@@ -3,10 +3,12 @@ package com.spa.ui.game;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.gson.JsonSyntaxException;
@@ -19,13 +21,14 @@ import com.spa.bean.Game;
 import com.spa.event.DataMessage;
 import com.spa.tools.WebInstaller;
 import com.spa.ui.BaseFr;
+import com.spa.ui.adapter.Game2dapter;
 import com.spa.ui.adapter.GameAdapter;
 
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-public class GameFr extends BaseFr implements AdapterView.OnItemClickListener {
+public class GameFr extends BaseFr implements Game2dapter.OnItemClickListener {
 
     private View view;
     private Activity activity;
@@ -56,15 +59,22 @@ public class GameFr extends BaseFr implements AdapterView.OnItemClickListener {
     }
 
     private GridView game;
+    RecyclerView mainrecyle;
+    StaggeredGridLayoutManager layoutManager;
 
     private void find() {
-        game = view.findViewById(R.id.game);
-        game.setOnItemClickListener(this);
+//        game = view.findViewById(R.id.game);
+//        game.setOnItemClickListener(this);
+        mainrecyle = view.findViewById(R.id.mainrecyle);
+        layoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL);
+        mainrecyle.setLayoutManager(layoutManager);
+
 
     }
 
     private List<Game> games;
     private GameAdapter adapter;
+    Game2dapter adapter2;
 
     public void onEvent(DataMessage event) {
         try {
@@ -77,9 +87,11 @@ public class GameFr extends BaseFr implements AdapterView.OnItemClickListener {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            adapter = new GameAdapter(activity, games);
-                            game.setAdapter(adapter);
-                            game.requestFocus();
+//                            adapter = new GameAdapter(activity, games);
+//                            game.setAdapter(adapter);
+                            adapter2 = new Game2dapter(activity, games);
+                            adapter2.setOnItemClickListener(GameFr.this);
+                            mainrecyle.setAdapter(adapter2);
                         }
                     });
                 }
@@ -93,8 +105,20 @@ public class GameFr extends BaseFr implements AdapterView.OnItemClickListener {
     Handler handler = new Handler();
 
 
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        if (App.isInstall(activity, games.get(position).getPackage_name())) {
+//            App.startApk(activity, games.get(position).getPackage_name(), "");
+//        } else {
+//            new WebInstaller(activity, games.get(position).getPath())
+//                    .downloadAndInstall(activity
+//                            .getString(R.string.Downloading_game));
+//        }
+//
+//    }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(View view, int position) {
         if (App.isInstall(activity, games.get(position).getPackage_name())) {
             App.startApk(activity, games.get(position).getPackage_name(), "");
         } else {
@@ -102,6 +126,5 @@ public class GameFr extends BaseFr implements AdapterView.OnItemClickListener {
                     .downloadAndInstall(activity
                             .getString(R.string.Downloading_game));
         }
-
     }
 }
