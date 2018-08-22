@@ -61,4 +61,16 @@ public class Video implements Serializable{
         return this.data;
     }
 
+    @Override
+    public String toString() {
+        return "Video{" +
+                "pageNo=" + pageNo +
+                ", pageSize=" + pageSize +
+                ", totalPage=" + totalPage +
+                ", totalRows=" + totalRows +
+                ", hasPrePage=" + hasPrePage +
+                ", hasNextPage=" + hasNextPage +
+                ", data=" + data +
+                '}';
+    }
 }

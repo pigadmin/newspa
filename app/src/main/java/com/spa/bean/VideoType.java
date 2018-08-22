@@ -36,4 +36,13 @@ public class VideoType implements Serializable {
         return this.sources;
     }
 
+    @Override
+    public String toString() {
+        return "VideoType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", sources='" + sources + '\'' +
+                '}';
+    }
 }

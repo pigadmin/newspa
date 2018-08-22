@@ -8,16 +8,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
+import com.spa.adaters.MusicTypeAdapter;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
@@ -36,9 +40,17 @@ import de.greenrobot.event.EventBus;
 
 public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
+    private final String TAG = "VideoFr";
+
     private View view;
     private Activity activity;
     private App app;
+
+    private ListView mListView;//音乐listview
+    private MusicTypeAdapter typeAdapter;
+
+    private LinearLayout layout;
+    private ImageView mImageSrc;//音乐图片
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +79,9 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private EditText video_keyword;
 
     private void find() {
+        mImageSrc = view.findViewById(R.id.music_src);
+        layout = view.findViewById(R.id.llt);
+        mListView = view.findViewById(R.id.listview_lvw);
         left_list = view.findViewById(R.id.left_list);
         left_list.setOnItemClickListener(this);
         right_grid = view.findViewById(R.id.right_grid);
@@ -89,6 +104,13 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                                           int after) {
                 handler.removeMessages(search);
                 handler.sendEmptyMessageDelayed(search, 1000);
+            }
+        });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
     }
@@ -178,15 +200,31 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private VideoAdapter adapter2;
 
     private void resetUI() {
-        adapter2 = new VideoAdapter(activity, grid.getData());
-        right_grid.setAdapter(adapter2);
+        if (isState) {
+            typeAdapter = new MusicTypeAdapter(activity, R.layout.item_music_layout, grid.getData());
+            mListView.setAdapter(typeAdapter);
+            typeAdapter.notifyDataSetChanged();
+            right_grid.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+            layout.setVisibility(View.VISIBLE);
+        } else {
+            adapter2 = new VideoAdapter(activity, grid.getData());
+            right_grid.setAdapter(adapter2);
+            adapter2.notifyDataSetChanged();
+            mListView.setVisibility(View.GONE);
+            right_grid.setVisibility(View.VISIBLE);
+            layout.setVisibility(View.GONE);
+        }
     }
 
     VideoData videoData;
 
+    boolean isState = false;
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final int p = position;
+        isState = list.get(p).getId() == 26 ? true : false;
         if (parent == left_list) {
             type = "&type=" + list.get(p).getId();
             Req.get(Req.video + type);
@@ -203,7 +241,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     static AlertDialog teleplay_dialog;
     GridView teleplay_grid;
-    TeleplayGridAdapter teleplayadapter;;
+    TeleplayGridAdapter teleplayadapter;
 
     public void teledialog() {
         // TODO Auto-generated method stub

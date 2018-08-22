@@ -125,4 +125,8 @@ public class VideoData implements Serializable {
         return this.details;
     }
 
+    public VideoData(String name, String act) {
+        this.name = name;
+        this.act = act;
+    }
 }
