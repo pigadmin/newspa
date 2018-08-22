@@ -67,6 +67,8 @@ public class MainFr extends BaseFr implements View.OnClickListener {
         init();
         reg();
         app.setShowname(1);
+
+        activity.sendBroadcast(new Intent(App.SHOWNAME));
         return view;
     }
 
@@ -100,6 +102,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
 //        app.setOld(activity.getWindow().getCurrentFocus());
 //        System.out.println(app.getOld());
         try {
+            activity.sendBroadcast(new Intent(App.HIDENAME));
             app.setShowname(0);
             System.out.println("main__oooooooooooooooooooon");
             activity.unregisterReceiver(receiver);

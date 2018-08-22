@@ -44,6 +44,8 @@ public class App extends Application {
         public static final int VERTICAL = 2;
     }
 
+    public static final String SHOWNAME = "SHOWNAME";
+    public static final String HIDENAME = "HIDENAME";
     public static final String PALY = "PALY";
     public static final String PAUSE = "PAUSE";
     public static final String STOP = "STOP";

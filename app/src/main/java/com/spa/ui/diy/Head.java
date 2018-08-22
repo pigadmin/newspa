@@ -1,7 +1,10 @@
 package com.spa.ui.diy;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
@@ -42,6 +45,8 @@ public class Head extends LinearLayout {
             switch (msg.what) {
                 case bg:
                     try {
+                        if (logobg.getData() == null)
+                            return;
                         if (!logobg.getData().getBacks().isEmpty()) {
                             if (bgbitmap.size() < logobg.getData().getBacks().size()) {
                                 bgpath = logobg.getData().getBacks().get(currentbg).getPath();
@@ -62,9 +67,13 @@ public class Head extends LinearLayout {
                     }
 
                     break;
+
             }
         }
     };
+
+
+
     private View view;
     private Context context;
     private App app;
@@ -82,7 +91,25 @@ public class Head extends LinearLayout {
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         currentVolume = audioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(App.SHOWNAME);
+        filter.addAction(App.HIDENAME);
+        context.registerReceiver(receiver, filter);
+
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(App.HIDENAME)) {
+                name.setVisibility(View.GONE);
+            } else if (intent.getAction().equals(App.SHOWNAME)) {
+                name.setVisibility(View.VISIBLE);
+            }
+
+        }
+    };
 
 
     private AudioManager audioManager;
