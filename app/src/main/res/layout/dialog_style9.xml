@@ -36,6 +36,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/jishi_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -58,6 +59,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -80,6 +82,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/jishi_project"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -110,14 +113,15 @@
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
 
-        <TextView
+        <Button
+            android:id="@+id/cancle"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/btn"
             android:gravity="center"
-            android:text="取消:"
+            android:text="取消"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
     </LinearLayout>

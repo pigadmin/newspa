@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
 import com.spa.bean.Mings;
+import com.spa.bean.User;
 import com.spa.event.NetChange;
 import com.spa.event.UpdateTime;
 import com.spa.service.MyService;
@@ -329,5 +330,15 @@ public class App extends Application {
     }
 
     boolean downloadzip;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
 
 }

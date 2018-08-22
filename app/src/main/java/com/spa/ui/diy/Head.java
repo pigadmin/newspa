@@ -83,6 +83,8 @@ public class Head extends LinearLayout {
         currentVolume = audioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
     }
+
+
     private AudioManager audioManager;
     private int maxVolume;
     private int currentVolume;
@@ -153,6 +155,7 @@ public class Head extends LinearLayout {
                         }.getType());
                 if (data.getCode().equals("200")) {
                     if (data.getData() != null) {
+                        app.setUser(data.getData());
                         handler.post(new Runnable() {
                             @Override
                             public void run() {

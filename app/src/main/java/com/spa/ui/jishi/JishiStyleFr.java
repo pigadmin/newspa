@@ -20,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -265,7 +266,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 //            Req.get(Req.teach + services);
         } else if (parent == right_grid) {
             jishi = grid.getData().get(p);
-            showJishi();
+//            showJishi();
+            showDialogStyle8();
         }
     }
 
@@ -436,21 +438,66 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         });
     }
 
-    private void showDialogStyle8() {
-        List<String> list = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            list.add(i + "");
-        }
+    private String project = "";
 
-        JishiBtmDialogList dialog = new JishiBtmDialogList(activity, list);
+    private void showDialogStyle8() {
+//        List<String> list = new ArrayList<>();
+//        for (int i = 1; i < 10; i++) {
+//            list.add(i + "");
+//        }
+        project = "";
+
+        final JishiBtmDialogList dialog = new JishiBtmDialogList(activity, jishi);
         dialog.show();
+
+        ok = dialog.findViewById(R.id.ok);
+
+        ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                if (!project.equals("")) {
+                    dialog.dismiss();
+                    showDialogStyle9();
+                } else {
+                    Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        GridView mGridView = dialog.findViewById(R.id.gridview_gvw1);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                project = jishi.getServices().split(" ")[i];
+            }
+        });
+
     }
+
+
+    private TextView user_name;
 
     private void showDialogStyle9() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.dialog_style9, null);
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
+        final BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
         dialog.show();
+        jishi_no = dialog.findViewById(R.id.jishi_no);
+        jishi_no.setText(jishi.getNumbering());
+        user_name = dialog.findViewById(R.id.user_name);
+        user_name.setText(app.getUser().getName());
+        jishi_project = dialog.findViewById(R.id.jishi_project);
+        jishi_project.setText(project);
+        cancle = dialog.findViewById(R.id.cancle);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void showDialogStyle10() {
