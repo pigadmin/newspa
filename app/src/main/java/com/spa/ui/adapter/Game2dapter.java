@@ -82,7 +82,11 @@ public class Game2dapter extends RecyclerView.Adapter<Game2dapter.ViewHolder> im
                 lp.setFullSpan(true);
                 holder.menu_linearlayout.setLayoutParams(lp);
             } else if (position == 2) {
-                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(615,  RecyclerView.LayoutParams.MATCH_PARENT);
+                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(600,  RecyclerView.LayoutParams.MATCH_PARENT);
+                lp.setMargins(5, 5, 5, 5);
+                holder.menu_linearlayout.setLayoutParams(lp);
+            }else if (position == 3|| position == 4) {
+                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(300,  RecyclerView.LayoutParams.MATCH_PARENT);
                 lp.setMargins(5, 5, 5, 5);
                 holder.menu_linearlayout.setLayoutParams(lp);
             } else {
