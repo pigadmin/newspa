@@ -3,12 +3,13 @@ package com.spa.ui.video;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -33,8 +37,13 @@ import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.TeleplayGridAdapter;
 import com.spa.ui.adapter.VideoAdapter;
 import com.spa.ui.adapter.VideoTypeAdapter;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import de.greenrobot.event.EventBus;
 
@@ -68,6 +77,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        stopMusic();
+        player.release();
     }
 
     private void init() {
@@ -77,10 +88,15 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private ListView left_list;
     private GridView right_grid;
     private EditText video_keyword;
+    private TextView music_size;
 
     private void find() {
+        setMediaListene();
         mImageSrc = view.findViewById(R.id.music_src);
         layout = view.findViewById(R.id.llt);
+        music_size = view.findViewById(R.id.music_size);
+
+
         mListView = view.findViewById(R.id.listview_lvw);
         left_list = view.findViewById(R.id.left_list);
         left_list.setOnItemClickListener(this);
@@ -110,10 +126,114 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                musicposition = position;
+                changemusicinfo();
             }
         });
+        last = view.findViewById(R.id.last);
+        last.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (--musicposition > 0) {
+                        playerSong();
+                    } else {
+                        musicposition = 0;
+                        playerSong();
+                    }
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        playpause = view.findViewById(R.id.playpause);
+        playpause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseMusic();
+            }
+        });
+        next = view.findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (++musicposition < grid.getData().size()) {
+                        playerSong();
+                    } else {
+                        musicposition = grid.getData().size() - 1;
+                        playerSong();
+                    }
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        sj_play = view.findViewById(R.id.sj_play);
+        sj_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playmodel = 1;
+                Toast.makeText(activity, "切换至随机播放模式", Toast.LENGTH_LONG).show();
+            }
+        });
+        sx_play = view.findViewById(R.id.sx_play);
+        sx_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playmodel = 0;
+                Toast.makeText(activity, "切换至顺序播放模式", Toast.LENGTH_LONG).show();
+            }
+        });
+        xh_play = view.findViewById(R.id.xh_play);
+        xh_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playmodel = 3;
+                Toast.makeText(activity, "切换至循坏播放模式", Toast.LENGTH_LONG).show();
+            }
+        });
+        audio = view.findViewById(R.id.audio);
+        audio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                player.seekTo(seekBar.getProgress());
+            }
+        });
+        startTime = view.findViewById(R.id.startTime);
+        endTime = view.findViewById(R.id.endTime);
     }
+
+    private ImageView last, playpause, next;
+    private ImageView sj_play, sx_play, xh_play;
+    private SeekBar audio;
+    private TextView startTime, endTime;
+
+    private int musicposition = 0;
+
+    private void changemusicinfo() {
+        try {
+            Picasso.with(activity).load(Uri.parse(grid.getData().get(musicposition).getIcon())).into(mImageSrc);
+            playerSong();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     final int search = 0;
     String keywd;
@@ -127,10 +247,19 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                     Req.get(Req.video + keywd);
 
                     break;
+                case UPDATESEEK:
+                    audio.setProgress(player.getCurrentPosition());
+                    startTime.setText(getTimeStr(player.getCurrentPosition()));
+                    handler.sendEmptyMessageDelayed(UPDATESEEK, 1000);
+                    break;
             }
         }
     };
 
+    // 获取歌曲时间
+    private String getTimeStr(int time) {
+        return new SimpleDateFormat("mm:ss").format(new Date(time));
+    }
 
     private List<VideoType> list;
     private VideoTypeAdapter adapter;
@@ -201,12 +330,15 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     private void resetUI() {
         if (isState) {
+            musicposition = 0;
             typeAdapter = new MusicTypeAdapter(activity, R.layout.item_music_layout, grid.getData());
             mListView.setAdapter(typeAdapter);
             typeAdapter.notifyDataSetChanged();
             right_grid.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
             layout.setVisibility(View.VISIBLE);
+            music_size.setText("播放列表(" + grid.getData().size() + ")");
+            changemusicinfo();
         } else {
             adapter2 = new VideoAdapter(activity, grid.getData());
             right_grid.setAdapter(adapter2);
@@ -214,6 +346,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             mListView.setVisibility(View.GONE);
             right_grid.setVisibility(View.VISIBLE);
             layout.setVisibility(View.GONE);
+            stopMusic();
         }
     }
 
@@ -224,7 +357,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final int p = position;
-        isState = list.get(p).getId() == 26 ? true : false;
+//        isState = list.get(p).getId() == 26 ? true : false;
+        isState = list.get(p).getName().equals("音乐") ? true : false;
         if (parent == left_list) {
             type = "&type=" + list.get(p).getId();
             Req.get(Req.video + type);
@@ -278,5 +412,96 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 //            AppTool.toast(context, getString(R.string.res_error), 0, Gravity.CENTER, 0, 0);
             e.printStackTrace();
         }
+    }
+
+    private MediaPlayer player;
+    private final int UPDATESEEK = 1;
+
+    private void setMediaListene() {
+        player = new MediaPlayer();
+        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+                audio.setMax(mp.getDuration());
+                endTime.setText(getTimeStr(mp.getDuration()));
+                handler.sendEmptyMessage(UPDATESEEK);
+            }
+        });
+
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                try {
+                    if (playmodel == 0) {//顺序
+
+                        if (++musicposition < grid.getData().size()) {
+                            try {
+                                playerSong();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            musicposition = 0;
+                            playerSong();
+                        }
+                        System.out.println("顺序" + musicposition);
+                    } else if (playmodel == 1) {//随机
+
+                        musicposition = getRandom();
+                        playerSong();
+                        System.out.println("随机" + musicposition);
+                    } else {//循坏
+                        playerSong();
+                        System.out.println("循坏 " + musicposition);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    public int getRandom() {
+        if (grid.getData().size() == 1) {
+            return 0;
+        } else {
+            Random random = new Random();
+            int s = random.nextInt(grid.getData().size() - 1) % (grid.getData().size() - 1 - 0 + 1) + 0;
+            return s;
+        }
+    }
+
+    int playmodel = 0;
+    // 暂停播放
+
+    private void pauseMusic() {
+        if (player.isPlaying()) {
+            player.pause();
+        } else {
+            player.start();
+        }
+    }
+
+
+    // 播放哪一首歌
+    private void playerSong() throws IllegalStateException,
+            IOException {
+        player.stop();
+        player.reset();
+        try {
+            System.out.println(grid.getData().get(musicposition).getDetails().get(0).getFilePath());
+            player.setDataSource(activity,
+                    Uri.parse(grid.getData().get(musicposition).getDetails().get(0).getFilePath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        player.prepareAsync();
+    }    // 停止播放
+
+    private void stopMusic() {
+        player.stop();
     }
 }
