@@ -69,7 +69,6 @@ public class Game2dapter extends RecyclerView.Adapter<Game2dapter.ViewHolder> im
         return vh;
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         try {
@@ -77,16 +76,16 @@ public class Game2dapter extends RecyclerView.Adapter<Game2dapter.ViewHolder> im
             holder.itemView.setTag(position);
             Picasso.with(context).load(menus.get(position).getIcon()).into(holder.game_bg);
             if (position == 0 || position == 1) {
-                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(387,  RecyclerView.LayoutParams.MATCH_PARENT);
+                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(387, RecyclerView.LayoutParams.MATCH_PARENT);
                 lp.setMargins(5, 5, 5, 5);
                 lp.setFullSpan(true);
                 holder.menu_linearlayout.setLayoutParams(lp);
             } else if (position == 2) {
-                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(600,  RecyclerView.LayoutParams.MATCH_PARENT);
+                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(600, RecyclerView.LayoutParams.MATCH_PARENT);
                 lp.setMargins(5, 5, 5, 5);
                 holder.menu_linearlayout.setLayoutParams(lp);
-            }else if (position == 3|| position == 4) {
-                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(300,  RecyclerView.LayoutParams.MATCH_PARENT);
+            } else if (position == 3 || position == 4) {
+                StaggeredGridLayoutManager.LayoutParams lp = new StaggeredGridLayoutManager.LayoutParams(300, RecyclerView.LayoutParams.MATCH_PARENT);
                 lp.setMargins(5, 5, 5, 5);
                 holder.menu_linearlayout.setLayoutParams(lp);
             } else {
@@ -94,13 +93,10 @@ public class Game2dapter extends RecyclerView.Adapter<Game2dapter.ViewHolder> im
                 lp.setMargins(5, 5, 5, 5);
                 holder.menu_linearlayout.setLayoutParams(lp);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public int getItemCount() {
