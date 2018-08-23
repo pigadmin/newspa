@@ -128,7 +128,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="65kg"
+                        android:text="65"
+                        android:textColor="@color/sbc_snippet_text"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="kg"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -173,19 +180,11 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="当前:"
-                        android:textColor="@color/sbc_snippet_text"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/jishi_status2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="当值"
+                        android:layout_marginLeft="30dp"
+                        android:text="状态"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
                 </LinearLayout>

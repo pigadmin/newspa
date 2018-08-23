@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/roids_bk2"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="请刷手牌"
-        android:textColor="@color/sbc_snippet_text"
-        android:textSize="20sp" />
-
-    <View
-        style="@style/view_header_text"
-        android:layout_marginTop="20dp" />
-
-    <EditText
-        android:id="@+id/key"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@null"
+        android:background="@drawable/roids_bk2"
         android:gravity="center"
-        android:hint="手牌号码显示区"
-        android:textColorHint="@color/result_minor_text"
-        android:textSize="20sp" />
+        android:orientation="vertical">
 
-    <View style="@style/view_header_text" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="请刷手牌"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/cancle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@drawable/select_btn_bg_style4"
-        android:gravity="center"
-        android:text="取消"
-        android:textColor="@color/sbc_snippet_text"
-        android:textSize="20sp" />
+        <View style="@style/view_header_text" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/key"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="手牌号码显示区"
+            android:padding="10dp"
+            android:textColorHint="@color/result_minor_text"
+            android:textSize="18sp" />
+
+        <View style="@style/view_header_text" />
+
+        <Button
+            android:id="@+id/cancle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/select_btn_bg_style4"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="取消"
+            android:textColor="@color/sbc_snippet_text"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:src="@mipmap/bottom_3" />
+</RelativeLayout>
