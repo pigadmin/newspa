@@ -6,7 +6,7 @@
     <VideoView
         android:id="@+id/live_player"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></VideoView>
+        android:layout_height="wrap_content"/>
 
     <RelativeLayout
         android:id="@+id/live_tips"
@@ -119,10 +119,10 @@
 
         <TextView
             android:id="@+id/live_no_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/top_you"
+            android:background="@mipmap/zuo_k_1"
             android:gravity="center"
             android:maxEms="4"
             android:singleLine="true"
