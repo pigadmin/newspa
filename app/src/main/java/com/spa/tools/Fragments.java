@@ -30,6 +30,18 @@ public class Fragments {
         }
 
     }
+
+    private static int voidid = R.id.voidid;
+
+    public static void Vod(FragmentManager fm, Fragment fragment) {
+        // TODO Auto-generated method stub
+        if (fragment != null) {
+            ft = fm.beginTransaction();
+            ft.replace(voidid, fragment).commit();
+        }
+
+    }
+
     //    public static void replace(FragmentManager fm, Fragment fragment) {
 //        // TODO Auto-generated method stub
 //        if (fragment != null) {

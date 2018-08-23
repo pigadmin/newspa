@@ -141,6 +141,7 @@ public class App extends Application {
     private View old;
 
     private boolean fstart;
+    //    private static String ip = "192.168.2.14";
     private static String ip = "192.168.2.25";
     //private static String ip = "192.168.2.89:8108";
     public static String version;
@@ -169,6 +170,7 @@ public class App extends Application {
     private void getip() {
         String tmp = config.getString("ip", "");
         if (!tmp.equals("")) {
+//            headurl = "http://" + tmp + ":8080/wisdom_spa/remote/";
             headurl = "http://" + tmp + ":8108/wisdom_spa/remote/";
             socketurl = "http://" + tmp + ":8000/tv";
             System.out.println("---headurl---\n" + headurl);

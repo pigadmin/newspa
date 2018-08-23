@@ -356,20 +356,25 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final int p = position;
+        try {
+            final int p = position;
 //        isState = list.get(p).getId() == 26 ? true : false;
-        isState = list.get(p).getName().equals("音乐") ? true : false;
-        if (parent == left_list) {
-            type = "&type=" + list.get(p).getId();
-            Req.get(Req.video + type);
 
-        } else if (parent == right_grid) {
-            videoData = grid.getData().get(p);
-            if (videoData.getDetails().size() > 1) {
-                teledialog();
-            } else {
-                play(0);
+            if (parent == left_list) {
+                isState = list.get(p).getName().equals("音乐") ? true : false;
+                type = "&type=" + list.get(p).getId();
+                Req.get(Req.video + type);
+
+            } else if (parent == right_grid) {
+                videoData = grid.getData().get(p);
+                if (videoData.getDetails().size() > 1) {
+                    teledialog();
+                } else {
+                    play(0);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -489,16 +494,18 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     // 播放哪一首歌
     private void playerSong() throws IllegalStateException,
             IOException {
-        player.stop();
-        player.reset();
+
         try {
+            player.stop();
+            player.reset();
             System.out.println(grid.getData().get(musicposition).getDetails().get(0).getFilePath());
             player.setDataSource(activity,
                     Uri.parse(grid.getData().get(musicposition).getDetails().get(0).getFilePath()));
+            player.prepareAsync();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        player.prepareAsync();
+
     }    // 停止播放
 
     private void stopMusic() {
