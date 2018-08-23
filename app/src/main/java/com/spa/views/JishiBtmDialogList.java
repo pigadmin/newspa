@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +22,7 @@ import java.util.List;
  */
 public class JishiBtmDialogList extends Dialog {
 
-    public GridView mGridView;
+    public MyGridView mGridView;
     public TypeChooseAdapter chooseAdapter;
     private ImageView jishi_icon;
     private TextView jishi_no, jishi_sex, jishi_city, jishi_kg, jishi_height, jishi_status1, jishi_status2, jishi_project;
@@ -36,7 +35,6 @@ public class JishiBtmDialogList extends Dialog {
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         mGridView = findViewById(R.id.gridview_gvw1);
-
 
         jishi_icon = findViewById(R.id.jishi_icon);
         Picasso.with(context).load(jishi.getPic()).into(jishi_icon);
