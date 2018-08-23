@@ -270,51 +270,31 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     private String notic;
 
     private void showDialogStyle2() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style2, null);
-        TextView namr = view.findViewById(R.id.namr);
-        namr.setText(dish.getName());
-        TextView num = view.findViewById(R.id.num);
-        num.setText(dish_num.getText().toString());
-        TextView total = view.findViewById(R.id.total);
-        double tmp = dish.getPrice() * Double.parseDouble(dish_num.getText().toString());
-        total.setText(tmp + "元");
         final BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2);
         dialog.show();
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
-                System.out.println("---------1");
-                return false;
-            }
-        });
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                System.out.println("---------2");
-                return false;
-            }
-        });
-        cancle = dialog.findViewById(R.id.cancle);
-        cancle.setOnClickListener(new View.OnClickListener() {
+        TextView namr = dialog.findViewById(R.id.namr);
+        TextView num = dialog.findViewById(R.id.num);
+        TextView total = dialog.findViewById(R.id.total);
+        TextView cancle = dialog.findViewById(R.id.cancle);
+        namr.setText(dish.getName());
+        num.setText(dish_num.getText().toString());
+        double tmp = dish.getPrice() * Double.parseDouble(dish_num.getText().toString());
+        total.setText(tmp + "元");
 
+        cancle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(View v) {
                 dialog.dismiss();
             }
         });
     }
 
     private void showDialogStyle3() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style3, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style3);
         dialog.show();
     }
 
     private void showDialogStyle4() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style4, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style4);
         dialog.show();
     }

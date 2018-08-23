@@ -481,8 +481,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private TextView user_name;
 
     private void showDialogStyle9() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style9, null);
         final BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
         dialog.show();
         jishi_no = dialog.findViewById(R.id.jishi_no);
@@ -501,18 +499,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void showDialogStyle10() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style10, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style10);
         dialog.show();
     }
 
     private void showDialogStyle11() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style11, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style11);
         dialog.show();
     }
-
-
 }

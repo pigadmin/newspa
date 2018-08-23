@@ -459,15 +459,11 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     }
 
     private void showDialogStyle5() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style5, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style5);
         dialog.show();
     }
 
     private void showDialogStyle6() {
-        View view = LayoutInflater.from(activity).inflate(
-                R.layout.dialog_style6, null);
         BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style6);
         dialog.show();
     }
