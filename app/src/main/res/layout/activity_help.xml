@@ -6,23 +6,22 @@
     android:layout_marginLeft="185dp"
     android:layout_marginRight="185dp"
     android:layout_marginTop="90dp"
-    android:background="@mipmap/content_k_1"
-    android:orientation="vertical"
-    android:padding="30dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/help_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <WebView
         android:id="@+id/help_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/content_k_1"
         android:scrollbars="none" />
 
 </LinearLayout>

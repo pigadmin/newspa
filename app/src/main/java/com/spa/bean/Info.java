@@ -64,4 +64,15 @@ public class Info implements Serializable {
         return this.details;
     }
 
+    @Override
+    public String toString() {
+        return "Info{" +
+                "id=" + id +
+                ", type=" + type +
+                ", path='" + path + '\'' +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", details='" + details + '\'' +
+                '}';
+    }
 }

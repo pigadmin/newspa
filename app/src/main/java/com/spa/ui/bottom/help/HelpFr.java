@@ -33,6 +33,8 @@ import de.greenrobot.event.EventBus;
 
 public class HelpFr extends BaseFr {
 
+    private final static String TAG = "HelpFr";
+
     private View view;
     private Activity activity;
     private App app;
@@ -40,7 +42,6 @@ public class HelpFr extends BaseFr {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         view = inflater.inflate(R.layout.activity_help, container, false);
         activity = getActivity();
         app = (App) activity.getApplication();
@@ -76,11 +77,9 @@ public class HelpFr extends BaseFr {
         });
     }
 
-
     private void init() {
         Req.get(Req.help);
     }
-
 
     private List<Info> list;
     private Handler handler = new Handler();
@@ -139,6 +138,4 @@ public class HelpFr extends BaseFr {
             }
         });
     }
-
-
 }
