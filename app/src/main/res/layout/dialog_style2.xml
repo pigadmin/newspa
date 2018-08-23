@@ -127,7 +127,8 @@
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
 
-        <TextView
+        <Button
+            android:id="@+id/cancle"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"

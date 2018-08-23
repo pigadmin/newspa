@@ -343,4 +343,13 @@ public class App extends Application {
 
     private User user;
 
+    public boolean isCall() {
+        return call;
+    }
+
+    public void setCall(boolean call) {
+        this.call = call;
+    }
+
+    private boolean call;
 }

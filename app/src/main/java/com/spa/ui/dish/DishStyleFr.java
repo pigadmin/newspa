@@ -188,13 +188,14 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 //    private TextView dish_des;
 
     private void showOrder() {
-        if (dialog_dish != null) {
-            System.out.println("---------show");
-            dialog_dish.dismiss();
-        }
+
         dialog_dish = new AlertDialog.Builder(activity).create();
         dialog_dish.setView(new EditText(activity));
-        dialog_dish.show();
+        if (dialog_dish.isShowing()) {
+            dialog_dish.dismiss();
+        } else {
+            dialog_dish.show();
+        }
 
         dialog_dish.setContentView(R.layout.dialog_dish);
         dish_icon = dialog_dish.findViewById(R.id.dish_icon);
@@ -278,7 +279,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
         TextView total = view.findViewById(R.id.total);
         double tmp = dish.getPrice() * Double.parseDouble(dish_num.getText().toString());
         total.setText(tmp + "元");
-        BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2);
+        final BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style2);
         dialog.show();
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
@@ -294,7 +295,14 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
                 return false;
             }
         });
+        cancle = dialog.findViewById(R.id.cancle);
+        cancle.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void showDialogStyle3() {

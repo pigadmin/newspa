@@ -32,6 +32,7 @@ public class Req {
     public static String teachtype = App.headurl + "teach/type?mac=" + App.mac;
     public static String teach = App.headurl + "teach?mac=" + App.mac + "&pageNo=1&pageSize=9999";
     public static String game = App.headurl + "getApp?mac=" + App.mac;
+    public static String updateNotice = App.headurl + "updateNotice?mac=" + App.mac;
 
     public static void get(final String url) {
         System.out.println(url);

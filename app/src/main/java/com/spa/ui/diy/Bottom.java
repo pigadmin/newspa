@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.spa.R;
 import com.spa.app.App;
@@ -90,8 +91,10 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
     private AlertDialog dialog_call;
     private Button ok;
     private Button cancle;
+    private TextView call_context;
 
     private void showCall() {
+
 
         dialog_call = new AlertDialog.Builder(context).create();
         if (dialog_call.isShowing()) {
@@ -102,11 +105,22 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         dialog_call.setContentView(R.layout.dialog_call);
         ok = dialog_call.findViewById(R.id.ok);
         cancle = dialog_call.findViewById(R.id.cancle);
+        call_context = dialog_call.findViewById(R.id.call_context);
+        if (app.isCall()) {
+            call_context.setText("是否取消呼叫?");
+        } else {
+            call_context.setText("是否呼叫服务员?");
+        }
         ok.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Req.get(Req.notice + "&notifyNews=" + URLEncoder.encode("呼叫"));
+                if (app.isCall()) {
+                    Req.get(Req.updateNotice);
+                } else {
+                    Req.get(Req.notice + "&notifyNews=" + URLEncoder.encode("呼叫"));
+                }
+                app.setCall(!app.isCall());
                 dialog_call.dismiss();
             }
         });
@@ -479,7 +493,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         if (seekBar.getId() == R.id.audio) {
             System.out.println(i);
             System.out.println("**" + audio.getProgress());
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_SHOW_UI);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
         }
 
     }
