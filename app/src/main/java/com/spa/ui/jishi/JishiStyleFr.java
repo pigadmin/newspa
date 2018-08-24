@@ -2,14 +2,12 @@ package com.spa.ui.jishi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +141,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         left_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Log.d("onGroupClick..", "groupPosition.." + groupPosition);
                 try {
                     typeCls = "&typeCls=" + list.get(groupPosition).getId();
                     Req.get(Req.teach + typeCls);
@@ -151,7 +148,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                     e.printStackTrace();
                 }
                 adapter.notifyDataSetChanged();
-
                 return false;
             }
         });
@@ -159,17 +155,16 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         /**
          * 设置子选项点击监听事件
          */
-
         left_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Log.d("onChildClick..", "groupPosition.." + groupPosition + "..childPosition.." + childPosition);
                 try {
                     services = "&services=" + list.get(groupPosition).getTechTypes().get(childPosition).getId();
                     Req.get(Req.teach + typeCls + services);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                adapter.setSelectedItem(groupPosition, childPosition);
                 adapter.notifyDataSetChanged();
                 return false;
             }

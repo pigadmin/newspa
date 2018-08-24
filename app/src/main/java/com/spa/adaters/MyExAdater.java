@@ -1,7 +1,7 @@
 package com.spa.adaters;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.spa.R;
 import com.spa.bean.TeachType;
 import com.spa.bean.TechTypes;
-import com.spa.tools.Logger;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,6 +28,11 @@ public class MyExAdater extends BaseExpandableListAdapter {
     public int itemLayout;
     public ExpandableListView left_list;
 
+    SparseBooleanArray selected;
+
+    int old = -1;
+    int parentPosition = -1;
+
     public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list) {
         this.userBeans = userBeans;
         this.itemList = itemList;
@@ -36,6 +40,7 @@ public class MyExAdater extends BaseExpandableListAdapter {
         this.userLayout = userLayout;
         this.itemLayout = itemLayout;
         this.left_list = left_list;
+        selected = new SparseBooleanArray();
     }
 
     @Override
@@ -80,23 +85,22 @@ public class MyExAdater extends BaseExpandableListAdapter {
         Picasso.with(context).load(itemBean.getIcon()).into(holder.icon);
         holder.intro_name.setText(itemBean.getName());
 
-//        Logger.d(TAG, "groupPosition.." + groupPosition);
-//        Logger.d(TAG, "childPosition.." + childPosition);
-//        Logger.d(TAG, "isLastChild.." + isLastChild);
-//
-//        if (left_list.isItemChecked(childPosition)) {
-//            if (isLastChild) {
-//                // 条目展开，设置向下的箭头
-//                convertView.setBackgroundColor(Color.BLACK);
-//            } else {
-//                // 条目未展开，设置向上的箭头
-//                convertView.setBackgroundColor(Color.RED);
-//            }
-//        } else {
-//            convertView.setBackgroundColor(Color.BLUE);
-//        }
-
+        //重点代码
+        if (selected.get(childPosition) && this.parentPosition == groupPosition) {
+            convertView.setBackgroundResource(R.mipmap.youce_k_1);
+        } else {
+            convertView.setBackgroundResource(R.color.transparent);
+        }
         return convertView;
+    }
+
+    public void setSelectedItem(int groupPosition, int selected) {
+        this.parentPosition = groupPosition;
+        if (old != -1) {
+            this.selected.put(old, false);
+        }
+        this.selected.put(selected, true);
+        old = selected;
     }
 
     @Override
@@ -133,7 +137,6 @@ public class MyExAdater extends BaseExpandableListAdapter {
         } else {
             holder = (ViewHolderGroup) convertView.getTag();
         }
-
         TeachType userBean = (TeachType) getGroup(groupPosition);
         Picasso.with(context).load(userBean.getIcon()).into(holder.icon);
         holder.intro_name.setText(userBean.getName());
