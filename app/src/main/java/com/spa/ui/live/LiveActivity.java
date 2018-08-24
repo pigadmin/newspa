@@ -26,12 +26,15 @@ import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
 import com.spa.ui.adapter.LiveListAdapter;
 import com.spa.ui.diy.Toas;
+import com.spa.views.BtmDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+
+    private static final String TAG = "LiveActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +86,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             e.printStackTrace();
         }
     }
-
-    private String testurl = "http://192.168.31.250:8105/wisdom_hotel/upload/1.ts";
 
     private void play() {
         try {
@@ -233,7 +234,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
         return super.onKeyDown(keyCode, event);
     }
 
-
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
         mediaPlayer.setLooping(true);
@@ -241,10 +241,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
 
     @Override
     public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-        Toas toas = new Toas();
-        toas.setMsg(getString(R.string.play_error));
-        toas.show(LiveActivity.this);
-        toas = null;
+        showDialogStyle0();
         return true;
     }
 
@@ -348,16 +345,34 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                     } else {
                         show();
                     }
-
                 } else {
                     show();
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return super.onTouchEvent(event);
+    }
+
+    private void showDialogStyle0() {
+        final BtmDialog dialog = new BtmDialog(LiveActivity.this, R.layout.custom_alertdiaog);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        TextView confirm = dialog.findViewById(R.id.confirm);
+        TextView mTitle = dialog.findViewById(R.id.title);
+        TextView mEssage = dialog.findViewById(R.id.message);
+        mTitle.setText("温馨提示");
+        mEssage.setText("播放异常");
+        cancel.setVisibility(View.GONE);
+        confirm.setBackgroundResource(R.drawable.selector_back3_shape);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

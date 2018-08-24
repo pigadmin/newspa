@@ -17,30 +17,27 @@ import com.spa.app.App;
 import com.spa.bean.VideoDetails;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
-import com.spa.ui.diy.Toas;
+import com.spa.views.BtmDialog;
 
 public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
+
+    private static final String TAG = "PlayerActivity";
+
     App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_player);
-
         app = (App) getApplication();
-
         find();
-
         init();
     }
 
     VideoDetails videoDetails;
 
     private void init() {
-        // TODO Auto-generated method stub
         try {
             videoDetails = (VideoDetails) getIntent().getExtras().getSerializable("key");
             video_title.setText(videoDetails.getName());
@@ -49,32 +46,25 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
             if (vodtime / 1000 <= 0) {
                 video_player.setVideoPath(videoDetails.getFilePath());
-
 //                Req.get(Req.vrecord+"&vid="+videoDetails.getId());
             } else {
                 crt(vodtime);
             }
 
-
         } catch (Exception e) {
-            // TODO: handle exception
         }
-
     }
-
 
     VideoView video_player;
     TextView video_title;
     private SharedPreferences tvchanle;
 
     private void find() {
-        // TODO Auto-generated method stub
         video_player = (VideoView) findViewById(R.id.video_player);
         FULL.star(video_player);
 
         MediaController controller = new MediaController(this);
         video_player.setMediaController(controller);
-
 
         video_title = (TextView) findViewById(R.id.video_title);
 
@@ -87,39 +77,27 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        // TODO Auto-generated method stub
         finish();
     }
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        // TODO Auto-generated method stub
-        Toas toas = new Toas();
-        toas.setMsg(getString(R.string.play_error));
-        toas.show(PlayerActivity.this);
-        toas = null;
+        showDialogStyle0();
         return true;
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        // TODO Auto-generated method stub
         mp.start();
     }
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         setdown();
         super.onPause();
     }
 
     private void setdown() {
-        // TODO Auto-generated method stub
-        System.out.println("getDuration:" + video_player.getDuration());
-
-        System.out.println("getCurrentPosition:" + video_player.getCurrentPosition());
-
         if (video_player.getCurrentPosition() > 0
                 && video_player.getCurrentPosition() < video_player.getDuration()) {
             tvchanle.edit()
@@ -134,8 +112,6 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
     int vodtime = 0;
 
     public void crt(final int vodtime) {
-        // TODO Auto-generated method stub
-
         vod_time_dialog = new AlertDialog.Builder(this).create();
         // update_dialog.setCancelable(false);
         if (vod_time_dialog != null && vod_time_dialog.isShowing()) {
@@ -156,7 +132,6 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 video_player.setVideoPath(videoDetails.getFilePath());
                 video_player.seekTo(vodtime);
 //                Req.get(Req.vrecord+"&vid="+videoDetails.getId());
@@ -169,7 +144,6 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 vod_time_dialog.cancel();
                 if (!video_player.isPlaying()) {
                     video_player.setVideoPath(videoDetails.getFilePath());
@@ -182,7 +156,6 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
             @Override
             public void onCancel(DialogInterface dialog) {
-                // TODO Auto-generated method stub
                 if (!video_player.isPlaying()) {
                     video_player.setVideoPath(videoDetails.getFilePath());
                 }
@@ -191,8 +164,6 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
     }
 
     private String getTimeStr(int d) {
-        // TODO Auto-generated method stub
-
         int hour = 0;
         int minute = 0;
         int second = 0;
@@ -218,4 +189,24 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
         }
     }
 
+    private void showDialogStyle0() {
+        final BtmDialog dialog = new BtmDialog(PlayerActivity.this, R.layout.custom_alertdiaog);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        TextView confirm = dialog.findViewById(R.id.confirm);
+        TextView mTitle = dialog.findViewById(R.id.title);
+        TextView mEssage = dialog.findViewById(R.id.message);
+        mTitle.setText("温馨提示");
+        mEssage.setText("播放异常");
+        cancel.setVisibility(View.GONE);
+        confirm.setBackgroundResource(R.drawable.selector_back3_shape);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 }
