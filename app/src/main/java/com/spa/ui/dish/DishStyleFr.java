@@ -279,7 +279,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
         namr.setText(dish.getName());
         num.setText(dish_num.getText().toString());
         double tmp = dish.getPrice() * Double.parseDouble(dish_num.getText().toString());
-        total.setText(tmp + "元");
+        total.setText(tmp + "");
 
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
