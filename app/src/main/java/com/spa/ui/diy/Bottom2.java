@@ -161,11 +161,11 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         } else if (v == bottom_menu9) {//帮助
             Fragments.Vod(((Activity) context).getFragmentManager(), new HelpFr());
         } else if (v == bottom_menu10) {//返回
-            System.out.println(hidgr+"@@@@@@@@");
+            System.out.println(hidgr + "");
             if (((Activity) context).getFragmentManager().getBackStackEntryCount() > hidgr) {
                 ((Activity) context).getFragmentManager().popBackStack();
             } else {
-                Fragments.Vod(((Activity) context).getFragmentManager(), new TestFr());
+//                Fragments.Vod(((Activity) context).getFragmentManager(), new TestFr());
                 exit();
             }
 
@@ -182,7 +182,7 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
                 @Override
                 public void run() {
                     Toas toas = new Toas();
-                    toas.setMsg(context.getString(R.string.exitplay));
+                    toas.setMsg(context.getString(R.string.exit));
                     toas.show(context);
                     toas = null;
                 }

@@ -36,12 +36,12 @@ public class LiuweiActivity extends BaseActivity {
                     if (seconds / 60 < 1) {
                         // txtTip.setText(seconds2Str(seconds));
                         liuwei_time.setText(seconds2Str(seconds));
-                        key.setText("秒后自动进入待机状态");
+                        key.setText("秒后自动进入解锁");
                         txtTip.setText("解锁请刷手牌");
                     } else {
                         // txtTip.setText(seconds2Str(seconds));
                         liuwei_time.setText(seconds2Str(seconds));
-                        key.setText("分钟后自动进入待机状态");
+                        key.setText("分钟后自动解锁");
                         txtTip.setText("解锁请刷手牌");
                     }
                     if (seconds > 0) {

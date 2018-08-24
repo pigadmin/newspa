@@ -37,11 +37,20 @@ public class Fragments {
         // TODO Auto-generated method stub
         if (fragment != null) {
             ft = fm.beginTransaction();
-            ft.replace(voidid, fragment).commit();
+            ft.replace(voidid, fragment);
+            ft.addToBackStack(null).commit();
         }
 
     }
 
+    public static void Add(FragmentManager fm, Fragment fragment) {
+        // TODO Auto-generated method stub
+        if (fragment != null) {
+            ft = fm.beginTransaction();
+            ft.replace(voidid, fragment).commit();
+        }
+
+    }
     //    public static void replace(FragmentManager fm, Fragment fragment) {
 //        // TODO Auto-generated method stub
 //        if (fragment != null) {

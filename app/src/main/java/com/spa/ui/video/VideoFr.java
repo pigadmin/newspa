@@ -241,17 +241,21 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    keywd = "&keywd=" + video_keyword.getText().toString();
-                    Req.get(Req.video + keywd);
+            try {
+                switch (msg.what) {
+                    case 0:
+                        keywd = "&keywd=" + video_keyword.getText().toString();
+                        Req.get(Req.video + keywd);
 
-                    break;
-                case UPDATESEEK:
-                    audio.setProgress(player.getCurrentPosition());
-                    startTime.setText(getTimeStr(player.getCurrentPosition()));
-                    handler.sendEmptyMessageDelayed(UPDATESEEK, 1000);
-                    break;
+                        break;
+                    case UPDATESEEK:
+                        audio.setProgress(player.getCurrentPosition());
+                        startTime.setText(getTimeStr(player.getCurrentPosition()));
+                        handler.sendEmptyMessageDelayed(UPDATESEEK, 1000);
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     };
@@ -428,9 +432,15 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.start();
-                audio.setMax(mp.getDuration());
-                endTime.setText(getTimeStr(mp.getDuration()));
-                handler.sendEmptyMessage(UPDATESEEK);
+                try {
+                    if (isState) {
+                        audio.setMax(mp.getDuration());
+                        endTime.setText(getTimeStr(mp.getDuration()));
+                        handler.sendEmptyMessage(UPDATESEEK);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
