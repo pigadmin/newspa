@@ -117,8 +117,16 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             public void onClick(View v) {
                 if (app.isCall()) {
                     Req.get(Req.updateNotice);
+                    Toas toas = new Toas();
+                    toas.setMsg(context.getString(R.string.cancle_call));
+                    toas.show(context);
+                    toas = null;
                 } else {
                     Req.get(Req.notice + "&notifyNews=" + URLEncoder.encode("呼叫"));
+                    Toas toas = new Toas();
+                    toas.setMsg(context.getString(R.string.call_success));
+                    toas.show(context);
+                    toas = null;
                 }
                 app.setCall(!app.isCall());
                 dialog_call.dismiss();

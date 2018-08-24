@@ -4,11 +4,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
+import com.google.gson.JsonSyntaxException;
 import com.spa.app.App;
+import com.spa.ui.ad.NowinsActivity;
+import com.spa.ui.ad.bean.Command;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -78,37 +82,48 @@ public class SocketService extends Service {
                 public void call(Object... arg0) {
                     // TODO Auto-generated method stub
                     try {
-//                        String id = arg0[1].toString();
-//                        String json = arg0[0].toString();
-//                        String name = "";
-//                        String path = "";
-//                        WebVideo video = Ini.gson.fromJson(json, WebVideo.class);
-//                        if (!id.equals("0")) {
-//                            System.out.println("电视剧");
-//                            for (WebVideoDetails details : video.getDetails()) {
-//                                if (details.getId() == Integer.parseInt(id)) {
-//                                    name = details.getName();
-//                                    path = details.getFilePath();
-//                                }
-//                            }
-//                        } else {
-//                            System.out.println("电影");
-//                            name = video.getName();
-//                            path = video.getDetails().get(0).getFilePath();
-//                        }
-//
-//                        startActivity(new Intent(SocketService.this, WebPlayActivity.class)
-//                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type", 2)
-//                                .putExtra("name", name).putExtra("path", path));
-//
-//                        System.out.println(json);
+                        String json = arg0[0].toString();
+                        System.out.println(json + "@@@@@@@@@@@@@@@@@@@@@");
 
+                        Command cmmond = App.gson.fromJson(
+                                json, Command.class);
+
+//            app.setCmmond(cmmond);
+                        switch (cmmond.getCommand()) {
+                            case 1:
+                                NowinsActivity.exit();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("key", cmmond);
+                                Intent intent = new Intent(getApplicationContext(),
+                                        NowinsActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                break;
+                            case 2:
+                                sendBroadcast(new Intent(App.FORWARD));
+                                break;
+                            case 3:
+                                sendBroadcast(new Intent(App.REWIND));
+                                break;
+                            case 4:
+                                sendBroadcast(new Intent(App.Cancle));
+                                break;
+                            case 5:
+                                sendBroadcast(new Intent(App.PAUSE));
+                                break;
+                            case 6:
+                                sendBroadcast(new Intent(App.STOP));
+                                break;
+                            case 7:
+                                sendBroadcast(new Intent(App.PAUSE));
+                                break;
+                        }
                     } catch (Exception e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-
                 }
+
             });
 //            socket.on("ml", new Emitter.Listener() {
 //
@@ -175,7 +190,9 @@ public class SocketService extends Service {
 //
 //                }
 //            });
-            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener()
+
+            {
 
                 public void call(Object... arg0) {
                     // TODO Auto-generated method stub
@@ -189,7 +206,9 @@ public class SocketService extends Service {
 
                 }
             });
-            socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+            socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener()
+
+            {
 
                 public void call(Object... arg0) {
                     // TODO Auto-generated method stub
@@ -201,7 +220,9 @@ public class SocketService extends Service {
                 }
 
             });
-            socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+            socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener()
+
+            {
 
                 public void call(Object... arg0) {
                     // TODO Auto-generated method stub

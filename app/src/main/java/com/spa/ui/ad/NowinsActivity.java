@@ -22,11 +22,11 @@ import android.widget.VideoView;
 
 import com.spa.R;
 import com.spa.app.App;
-import com.spa.bean.Command;
-import com.spa.bean.Play;
-import com.spa.bean.Sources;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
+import com.spa.ui.ad.bean.Command;
+import com.spa.ui.ad.bean.Play;
+import com.spa.ui.ad.bean.Sources;
 import com.squareup.picasso.Picasso;
 
 import java.util.Timer;
@@ -49,16 +49,13 @@ public class NowinsActivity extends BaseActivity implements MediaPlayer.OnPrepar
                                 break;
                             case 2:
                                 if (msgvideo != null) {
-                                    msgvideo.seekTo((int) (msgvideo
-                                            .getCurrentPosition() + msgvideo
-                                            .getDuration() * 0.05));
+                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() + 5000));
                                 }
 
                                 break;
                             case 3:
                                 if (msgvideo != null)
-                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() + msgvideo
-                                            .getDuration() * 0.05));
+                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() + +5000));
                                 break;
                             case 4:
                                 break;
@@ -77,14 +74,11 @@ public class NowinsActivity extends BaseActivity implements MediaPlayer.OnPrepar
                                 break;
                             case 2:
                                 if (msgvideo != null)
-                                    msgvideo.seekTo((int) (msgvideo
-                                            .getCurrentPosition() - msgvideo
-                                            .getDuration() * 0.05));
+                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() - 5000));
                                 break;
                             case 3:
                                 if (msgvideo != null)
-                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() - msgvideo
-                                            .getDuration() * 0.05));
+                                    msgvideo.seekTo((int) (msgvideo.getCurrentPosition() - 5000));
                                 break;
                             case 4:
                                 break;
@@ -136,6 +130,12 @@ public class NowinsActivity extends BaseActivity implements MediaPlayer.OnPrepar
         }
 
         super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 
     Timer timer;

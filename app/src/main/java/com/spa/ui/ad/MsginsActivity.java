@@ -17,11 +17,11 @@ import android.widget.VideoView;
 
 import com.spa.R;
 import com.spa.app.App;
-import com.spa.bean.Mings;
-import com.spa.bean.MsgSgLives;
-import com.spa.bean.Sources;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
+import com.spa.ui.ad.bean.Mings;
+import com.spa.ui.ad.bean.MsgSgLives;
+import com.spa.ui.ad.bean.Sources;
 import com.squareup.picasso.Picasso;
 
 public class MsginsActivity extends BaseActivity implements MediaPlayer.OnPreparedListener,
