@@ -77,6 +77,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
     private void find() {
         left_list = view.findViewById(R.id.left_list);
+        left_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         left_list.setOnItemClickListener(this);
         right_grid = view.findViewById(R.id.right_grid);
         right_grid.setOnItemClickListener(this);
@@ -145,7 +146,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     private String styleId = "";
 
     private void resetList() {
-        adapter = new DishStyleAdapter(activity, list);
+        adapter = new DishStyleAdapter(activity, list, left_list);
         left_list.setAdapter(adapter);
         styleId = "&styleId=" + list.get(0).getId();
         Req.get(Req.dish + styleId);
@@ -167,6 +168,9 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             if (parent == left_list) {
                 styleId = "&styleId=" + list.get(p).getId();
                 Req.get(Req.dish + styleId);
+
+                adapter.notifyDataSetChanged();
+
             } else if (parent == right_grid) {
                 dish = grid.get(p);
                 showOrder();

@@ -1,34 +1,41 @@
 package com.spa.adaters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spa.R;
 import com.spa.bean.TeachType;
 import com.spa.bean.TechTypes;
+import com.spa.tools.Logger;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MyExAdater extends BaseExpandableListAdapter {
 
+    private final static String TAG = "MyExAdater";
+
     public List<TeachType> userBeans;
     public List<List> itemList;
     public Context context;
     public int userLayout;
     public int itemLayout;
+    public ExpandableListView left_list;
 
-    public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout) {
+    public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list) {
         this.userBeans = userBeans;
         this.itemList = itemList;
         this.context = context;
         this.userLayout = userLayout;
         this.itemLayout = itemLayout;
+        this.left_list = left_list;
     }
 
     @Override
@@ -56,20 +63,40 @@ public class MyExAdater extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        View view;
+        ViewHolderChild holder = null;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(itemLayout, parent, false);
+            holder = new ViewHolderChild();
+            convertView = LayoutInflater.from(context).inflate(itemLayout, parent, false);
+            holder.intro_name = convertView
+                    .findViewById(R.id.intro_name);
+            holder.icon = convertView
+                    .findViewById(R.id.icon);
+            convertView.setTag(holder);
         } else {
-            view = convertView;
+            holder = (ViewHolderChild) convertView.getTag();
         }
+
         TechTypes itemBean = (TechTypes) getChild(groupPosition, childPosition);
+        Picasso.with(context).load(itemBean.getIcon()).into(holder.icon);
+        holder.intro_name.setText(itemBean.getName());
 
-        ImageView imageView = view.findViewById(R.id.icon);
-        TextView textView = view.findViewById(R.id.intro_name);
+//        Logger.d(TAG, "groupPosition.." + groupPosition);
+//        Logger.d(TAG, "childPosition.." + childPosition);
+//        Logger.d(TAG, "isLastChild.." + isLastChild);
+//
+//        if (left_list.isItemChecked(childPosition)) {
+//            if (isLastChild) {
+//                // 条目展开，设置向下的箭头
+//                convertView.setBackgroundColor(Color.BLACK);
+//            } else {
+//                // 条目未展开，设置向上的箭头
+//                convertView.setBackgroundColor(Color.RED);
+//            }
+//        } else {
+//            convertView.setBackgroundColor(Color.BLUE);
+//        }
 
-        Picasso.with(context).load(itemBean.getIcon()).into(imageView);
-        textView.setText(itemBean.getName());
-        return view;
+        return convertView;
     }
 
     @Override
@@ -94,20 +121,31 @@ public class MyExAdater extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        View view;
+        ViewHolderGroup holder = null;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(userLayout, parent, false);
+            holder = new ViewHolderGroup();
+            convertView = LayoutInflater.from(context).inflate(userLayout, parent, false);
+            holder.intro_name = convertView
+                    .findViewById(R.id.intro_name);
+            holder.icon = convertView
+                    .findViewById(R.id.icon);
+            convertView.setTag(holder);
         } else {
-            view = convertView;
+            holder = (ViewHolderGroup) convertView.getTag();
         }
+
         TeachType userBean = (TeachType) getGroup(groupPosition);
+        Picasso.with(context).load(userBean.getIcon()).into(holder.icon);
+        holder.intro_name.setText(userBean.getName());
 
-        ImageView imageView = view.findViewById(R.id.icon);
-        TextView textView = view.findViewById(R.id.intro_name);
-
-        Picasso.with(context).load(userBean.getIcon()).into(imageView);
-        textView.setText(userBean.getName());
-        return view;
+        if (isExpanded) {
+            // 条目展开，设置向下的箭头
+            convertView.setBackgroundResource(R.mipmap.youce_k_2);
+        } else {
+            // 条目未展开，设置向上的箭头
+            convertView.setBackgroundResource(R.mipmap.youce_k_1);
+        }
+        return convertView;
     }
 
     @Override
@@ -123,6 +161,16 @@ public class MyExAdater extends BaseExpandableListAdapter {
     @Override
     public boolean areAllItemsEnabled() {
         return false;
+    }
+
+    public class ViewHolderGroup {
+        private TextView intro_name;
+        private ImageView icon;
+    }
+
+    public class ViewHolderChild {
+        private TextView intro_name;
+        private ImageView icon;
     }
 }
 

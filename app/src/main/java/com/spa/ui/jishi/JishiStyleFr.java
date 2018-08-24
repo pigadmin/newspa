@@ -2,6 +2,7 @@ package com.spa.ui.jishi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,6 +97,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
     private void find() {
         left_list = view.findViewById(R.id.view_exlist);
+        left_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         left_list.setOnItemClickListener(this);
         right_grid = view.findViewById(R.id.right_grid);
         right_grid.setOnItemClickListener(this);
@@ -147,6 +150,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                adapter.notifyDataSetChanged();
+
                 return false;
             }
         });
@@ -165,7 +170,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                adapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -250,7 +255,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             itemList.add(ar2);
         }
 
-        adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro, R.layout.adapter_intro_1);
+        adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro, R.layout.adapter_intro_1, left_list);
         left_list.setAdapter(adapter);
         typeCls = "&typeCls=" + list.get(0).getId();
         Req.get(Req.teach + typeCls);
