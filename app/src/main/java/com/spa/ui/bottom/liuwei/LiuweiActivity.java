@@ -93,7 +93,7 @@ public class LiuweiActivity extends BaseActivity {
         // + apc.getKey().substring(apc.getKey().length() - 3,
         // apc.getKey().length()) + "立即解锁");
 
-        key.setText("15分钟后自动进入待机状态");
+        key.setText("15分钟后自动解锁");
         handler.sendEmptyMessage(1);
         handler.sendEmptyMessageDelayed(2, seconds * 1000);
 
