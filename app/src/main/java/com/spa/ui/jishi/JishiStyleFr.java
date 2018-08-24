@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,10 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
     private String[] SexArray = new String[]{"全部", "男", "女"};
     private String[] FreeArray = new String[]{"全部", "空闲", "上钟"};
+
+    public StringBuilder mBuilder;
+
+    public String mResult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -441,41 +446,45 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         });
     }
 
-    private String project = "";
 
     private void showDialogStyle8() {
-//        List<String> list = new ArrayList<>();
-//        for (int i = 1; i < 10; i++) {
-//            list.add(i + "");
-//        }
-        project = "";
 
+        mBuilder = new StringBuilder();
         final JishiBtmDialogList dialog = new JishiBtmDialogList(activity, jishi);
         dialog.show();
-
         ok = dialog.findViewById(R.id.ok);
-
         ok.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
-
-                if (!project.equals("")) {
+                if (!TextUtils.isEmpty(mBuilder.toString())) {
                     dialog.dismiss();
                     showDialogStyle9();
                 } else {
                     Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
-        GridView mGridView = dialog.findViewById(R.id.gridview_gvw1);
+        final List<String> tmp = new ArrayList<>();
+        String str = jishi.getServices().replace(" ", "、");
+        String[] s = str.split("、");
+        for (int i = 0; i < s.length; i++) {
+            tmp.add(s[i] + "、");
+        }
+        final GridView mGridView = dialog.findViewById(R.id.gridview_gvw1);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                project = jishi.getServices().split(" ")[i];
-                dialog.chooseAdapter.notifyDataSetChanged();
+            public void onItemClick(AdapterView<?> adapterView, View view, int postion, long l) {
+                if (jishi != null) {
+                    if (!TextUtils.isEmpty(jishi.getServices().trim())) {
+                        if (mGridView.isItemChecked(postion)) {
+                            mBuilder.append(tmp.get(postion));
+                        }
+                        String result = mBuilder.toString();
+                        mResult = result.substring(0, result.length() - 1);
+                        dialog.chooseAdapter.notifyDataSetChanged();
+                    }
+                }
             }
         });
     }
@@ -490,7 +499,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         user_name = dialog.findViewById(R.id.user_name);
         user_name.setText(app.getUser().getName());
         jishi_project = dialog.findViewById(R.id.jishi_project);
-        jishi_project.setText(project);
+        jishi_project.setText(mResult);
         cancle = dialog.findViewById(R.id.cancle);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
