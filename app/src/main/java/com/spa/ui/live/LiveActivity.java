@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -17,16 +16,15 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.spa.R;
 import com.spa.bean.LiveIP;
-import com.spa.ui.adapter.LiveListAdapter;
 import com.spa.bean.LiveTypeIP;
 import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
+import com.spa.ui.adapter.LiveListAdapter;
 import com.spa.ui.diy.Toas;
 
 import java.util.ArrayList;
@@ -35,27 +33,18 @@ import java.util.List;
 
 public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
         find();
         init();
-        Log.e("time", System.currentTimeMillis() + "");
-
     }
 
-
-    RelativeLayout live_tips;
-    TextView live_no_s, live_no_name;
     TextView live_no_b;
     VideoView live_player;
 
     private void find() {
-        live_tips = findViewById(R.id.live_tips);
-        live_no_s = findViewById(R.id.live_no_s);
-        live_no_name = findViewById(R.id.live_no_name);
         live_no_b = findViewById(R.id.live_no_b);
         live_player = findViewById(R.id.live_player);
         FULL.star(live_player);
@@ -91,17 +80,13 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             showinfo();
 
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
-
     }
-
 
     private String testurl = "http://192.168.31.250:8105/wisdom_hotel/upload/1.ts";
 
     private void play() {
-        // TODO Auto-generated method stub
         try {
             if (live_player.isPlaying()) {
                 live_player.stopPlayback();
@@ -112,7 +97,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
 //                live_player.setVideoPath(testurl);
             }
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }
@@ -125,7 +109,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
 
     //
     private void show() {
-        // TODO Auto-generated method stub
         try {
             view = getLayoutInflater().inflate(R.layout.pop_live, null);
             popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
@@ -136,7 +119,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO Auto-generated method stub
                     popupWindow.dismiss();
                 }
             });
@@ -183,7 +165,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                     }
                     break;
                 case HideLiveInfo:
-                    live_tips.setVisibility(View.GONE);
                     live_no_b.setText("");
                     break;
                 case SwitchNo:
@@ -202,7 +183,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                         }
 
                     } catch (Exception e) {
-                        // TODO: handle exception
                         cutno = "";
                     }
                     break;
@@ -214,9 +194,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-
-
         if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
             cutno += keyCode - 7;
             live_no_b.setText(cutno);
@@ -276,21 +253,17 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
     }
 
     private void savechanle() {
-        // TODO Auto-generated method stub
         try {
             live_share.edit().putInt("no", historyno).commit();
             if (live_player.isPlaying()) {
                 live_player.stopPlayback();
             }
         } catch (Exception e) {
-            // TODO: handle exception
         }
-
     }
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         savechanle();
         super.onStop();
     }
@@ -299,20 +272,14 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
         handler.post(new Runnable() {
             @Override
             public void run() {
-                live_tips.setVisibility(View.VISIBLE);
-                live_no_s.setText(historyno + 1 + "");
-                live_no_name.setText(livelist.get(historyno).getName());
-
                 live_no_b.setText(historyno + 1 + "");
                 handler.removeMessages(HideLiveInfo);
                 handler.sendEmptyMessageDelayed(HideLiveInfo, 5 * 1000);
             }
         });
-
     }
 
     private void upchanle() {
-        // TODO Auto-generated method stub
         try {
             if (historyno < livelist.size() - 1) {
                 historyno += 1;
@@ -323,13 +290,11 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             showinfo();
 
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }
 
     private void downchanle() {
-        // TODO Auto-generated method stub
         try {
             if (historyno > 0) {
                 historyno -= 1;
@@ -339,27 +304,23 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             play();
             showinfo();
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }
 
     private void upvol() {
-        // TODO Auto-generated method stub
         audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
                 audioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND
                         | AudioManager.FLAG_SHOW_UI);
     }
 
     private void downvol() {
-        // TODO Auto-generated method stub
         audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
                 audioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND
                         | AudioManager.FLAG_SHOW_UI);
     }
 
     private void pause() {
-        // TODO Auto-generated method stub
         try {
             if (live_player.isPlaying()) {
                 live_player.pause();
@@ -367,8 +328,6 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                 live_player.start();
             }
         } catch (Exception e) {
-            // TODO: handle exception
-
         }
     }
 
