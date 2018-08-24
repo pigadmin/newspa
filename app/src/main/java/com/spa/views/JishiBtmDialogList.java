@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自定义提示框
+ * 技师详情
  */
 public class JishiBtmDialogList extends Dialog {
 
@@ -35,6 +35,7 @@ public class JishiBtmDialogList extends Dialog {
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         mGridView = findViewById(R.id.gridview_gvw1);
+        mGridView.setChoiceMode(mGridView.CHOICE_MODE_MULTIPLE);
 
         jishi_icon = findViewById(R.id.jishi_icon);
         Picasso.with(context).load(jishi.getPic()).into(jishi_icon);
@@ -96,10 +97,8 @@ public class JishiBtmDialogList extends Dialog {
             tmp.add(s[i]);
         }
 
-        chooseAdapter = new TypeChooseAdapter(context, R.layout.item_show_more_single, tmp);
+        chooseAdapter = new TypeChooseAdapter(context, R.layout.item_show_more_single, tmp, mGridView);
         mGridView.setAdapter(chooseAdapter);
-
-
     }
 
     protected JishiBtmDialogList(Context context, boolean cancelable, OnCancelListener cancelListener) {

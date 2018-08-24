@@ -44,6 +44,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+/**
+ * 技师服务
+ */
 public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private View view;
@@ -472,11 +475,10 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 project = jishi.getServices().split(" ")[i];
+                dialog.chooseAdapter.notifyDataSetChanged();
             }
         });
-
     }
-
 
     private TextView user_name;
 

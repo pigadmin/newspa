@@ -7,7 +7,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.spa.R;
-import com.spa.adaters.TypeChooseAdapter;
+import com.spa.adaters.TypeChooseAdapter3;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class BtmDialogList extends Dialog {
 
     public GridView mGridView;
-    public TypeChooseAdapter chooseAdapter;
+    public TypeChooseAdapter3 chooseAdapter;
 
     public BtmDialogList(Context context, List<String> list) {
         super(context, R.style.CustomDialog);
@@ -26,7 +26,7 @@ public class BtmDialogList extends Dialog {
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         mGridView = findViewById(R.id.gridview_gvw2);
-        chooseAdapter = new TypeChooseAdapter(context, R.layout.item_show_more_single, list);
+        chooseAdapter = new TypeChooseAdapter3(context, R.layout.item_show_more_single, list);
         mGridView.setAdapter(chooseAdapter);
     }
 
