@@ -35,6 +35,7 @@ import com.spa.ui.bottom.help.HelpFr;
 import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
+import com.spa.ui.live.TestFr;
 import com.spa.views.BtmDialog;
 import com.spa.views.BtmDialogList2;
 
@@ -56,7 +57,11 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         find();
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
+        hidgr = ((Activity) context).getFragmentManager().getBackStackEntryCount();
     }
+
+    int hidgr = 0;
 
     private AudioManager audioManager;
     private int maxVolume;
@@ -156,7 +161,14 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         } else if (v == bottom_menu9) {//帮助
             Fragments.Vod(((Activity) context).getFragmentManager(), new HelpFr());
         } else if (v == bottom_menu10) {//返回
-            ((Activity) context).finish();
+            System.out.println(hidgr+"@@@@@@@@");
+            if (((Activity) context).getFragmentManager().getBackStackEntryCount() > hidgr) {
+                ((Activity) context).getFragmentManager().popBackStack();
+            } else {
+                Fragments.Vod(((Activity) context).getFragmentManager(), new TestFr());
+                exit();
+            }
+
         }
     }
 
@@ -164,12 +176,13 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
 
     private void exit() {
         if (System.currentTimeMillis() - exitTime > 2000) {
+
             exitTime = System.currentTimeMillis();
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     Toas toas = new Toas();
-                    toas.setMsg(context.getString(R.string.exit));
+                    toas.setMsg(context.getString(R.string.exitplay));
                     toas.show(context);
                     toas = null;
                 }

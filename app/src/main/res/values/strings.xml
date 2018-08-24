@@ -5,6 +5,7 @@
     <string name="play_error">播放异常</string>
     <string name="live_none">没有此频道</string>
     <string name="exit">再按一次退出应用</string>
+    <string name="exitplay">再按一次退出播放</string>
     <string name="useless">此功能尚未开通</string>
     <string name="gps_network">移动网络已连接</string>
     <string name="wifi_network">WIFI网络已连接</string>

@@ -138,6 +138,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
             });
             handler.removeMessages(HideLiveList);
             handler.sendEmptyMessageDelayed(HideLiveList, 10 * 1000);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

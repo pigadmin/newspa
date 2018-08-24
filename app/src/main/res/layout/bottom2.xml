@@ -10,8 +10,7 @@
     <ImageView
         android:id="@+id/bottom_menu1"
         style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_zhuye_menu"
-        android:visibility="gone" />
+        android:src="@drawable/select_zhuye_menu" />
 
     <ImageView
         android:id="@+id/bottom_menu2"
