@@ -115,7 +115,7 @@
                         android:choiceMode="singleChoice"
                         android:divider="@null"
                         android:gravity="center"
-                        android:listSelector="@color/red"
+                        android:listSelector="@color/transparent"
                         android:scrollbars="none" />
                 </LinearLayout>
 
