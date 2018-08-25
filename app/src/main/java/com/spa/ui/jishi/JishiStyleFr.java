@@ -34,6 +34,8 @@ import com.spa.bean.TeachType;
 import com.spa.bean.Tech;
 import com.spa.bean.TechTypes;
 import com.spa.event.DataMessage;
+import com.spa.tools.Logger;
+import com.spa.tools.StringUtils;
 import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.JishiAdapter;
 import com.spa.views.BtmDialog;
@@ -50,6 +52,8 @@ import de.greenrobot.event.EventBus;
  */
 public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    private final static String TAG = "JishiStyleFr";
+
     private View view;
     private Activity activity;
     private App app;
@@ -59,10 +63,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
     private String[] SexArray = new String[]{"全部", "男", "女"};
     private String[] FreeArray = new String[]{"全部", "空闲", "上钟"};
-
-    public StringBuilder mBuilder;
-
-    public String mResult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -447,21 +447,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void showDialogStyle8() {
-        mBuilder = new StringBuilder();
         final JishiBtmDialogList dialog = new JishiBtmDialogList(activity, jishi);
         dialog.show();
-        ok = dialog.findViewById(R.id.ok);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                if (!TextUtils.isEmpty(mBuilder.toString())) {
-                    dialog.dismiss();
-                    showDialogStyle9();
-                } else {
-                    Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         final List<String> tmp = new ArrayList<>();
         String str = jishi.getServices().replace(" ", "、");
@@ -469,19 +456,37 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         for (int i = 0; i < s.length; i++) {
             tmp.add(s[i] + "、");
         }
+
+        final List<String> resultList = new ArrayList<>();
         final GridView mGridView = dialog.findViewById(R.id.gridview_gvw1);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int postion, long l) {
                 if (jishi != null) {
                     if (!TextUtils.isEmpty(jishi.getServices().trim())) {
+                        Logger.d(TAG, "选中的..." + mGridView.isItemChecked(postion) + "选中的值..." + tmp.get(postion));
                         if (mGridView.isItemChecked(postion)) {
-                            mBuilder.append(tmp.get(postion));
+                            resultList.add(tmp.get(postion));
+                        } else {
+                            resultList.remove(postion);
                         }
-                        String result = mBuilder.toString();
-                        mResult = result.substring(0, result.length() - 1);
                         dialog.chooseAdapter.notifyDataSetChanged();
                     }
+                }
+            }
+        });
+        ok = dialog.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                String result = StringUtils.ListToString(resultList);
+                Logger.d(TAG, "str.." + result);
+                if (!TextUtils.isEmpty(result)) {
+                    result = result.substring(0, result.length() - 1);
+                    showDialogStyle9(result);
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -489,7 +494,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
     private TextView user_name;
 
-    private void showDialogStyle9() {
+    private void showDialogStyle9(String result) {
         final BtmDialog dialog = new BtmDialog(activity, R.layout.dialog_style9);
         dialog.show();
         jishi_no = dialog.findViewById(R.id.jishi_no);
@@ -497,7 +502,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         user_name = dialog.findViewById(R.id.user_name);
         user_name.setText(app.getUser().getName());
         jishi_project = dialog.findViewById(R.id.jishi_project);
-        jishi_project.setText(mResult);
+        jishi_project.setText(result);
         cancle = dialog.findViewById(R.id.cancle);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
