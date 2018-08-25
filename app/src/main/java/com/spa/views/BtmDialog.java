@@ -33,6 +33,7 @@ public class BtmDialog extends Dialog {
         setContentView(layout);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        setCancelable(false);
     }
 
     protected BtmDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {

@@ -49,6 +49,8 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
     private Activity activity;
     private App app;
 
+    private long finshTime = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -173,7 +175,13 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
             } else if (parent == right_grid) {
                 dish = grid.get(p);
+
+                long beginTime = System.currentTimeMillis();
+                if (beginTime - finshTime < 1000) {
+                    return;
+                }
                 showOrder();
+                finshTime = beginTime;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,8 +200,8 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 //    private TextView dish_des;
 
     private void showOrder() {
-
         dialog_dish = new AlertDialog.Builder(activity).create();
+        dialog_dish.setCancelable(false);
         dialog_dish.setView(new EditText(activity));
         if (dialog_dish.isShowing()) {
             dialog_dish.dismiss();

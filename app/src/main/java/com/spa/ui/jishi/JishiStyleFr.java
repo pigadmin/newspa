@@ -64,6 +64,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private String[] SexArray = new String[]{"全部", "男", "女"};
     private String[] FreeArray = new String[]{"全部", "空闲", "上钟"};
 
+    private long finshTime = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -275,7 +277,13 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         } else if (parent == right_grid) {
             jishi = grid.getData().get(p);
 //            showJishi();
+
+            long beginTime = System.currentTimeMillis();
+            if (beginTime - finshTime < 1000) {
+                return;
+            }
             showDialogStyle8();
+            finshTime = beginTime;
         }
     }
 

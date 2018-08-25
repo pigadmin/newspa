@@ -33,6 +33,7 @@ public class JishiBtmDialogList extends Dialog {
         setContentView(R.layout.dialog_style8);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        setCancelable(false);
 
         mGridView = findViewById(R.id.gridview_gvw1);
         mGridView.setChoiceMode(mGridView.CHOICE_MODE_MULTIPLE);
