@@ -193,14 +193,13 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
                 @Override
                 public void run() {
                     Toas toas = new Toas();
-                    toas.setMsg(context.getString(R.string.exit));
+                    toas.setMsg(context.getString(R.string.exitplay));
                     toas.show(context);
                     toas = null;
                 }
             });
         } else {
             ((Activity) context).finish();
-            System.exit(0);
         }
     }
 

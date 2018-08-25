@@ -131,6 +131,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 musicposition = position;
                 changemusicinfo();
+                playerSong();
             }
         });
         last = view.findViewById(R.id.last);
@@ -146,7 +147,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                     }
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -171,7 +172,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                     }
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -214,7 +215,11 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                player.seekTo(seekBar.getProgress());
+                try {
+                    player.seekTo(seekBar.getProgress());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         startTime = view.findViewById(R.id.startTime);
@@ -231,7 +236,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private void changemusicinfo() {
         try {
             Picasso.with(activity).load(Uri.parse(grid.getData().get(musicposition).getIcon())).into(mImageSrc);
-            playerSong();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -437,6 +442,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 mp.start();
                 try {
                     if (isState) {
+                        mListView.setSelection(musicposition);
                         audio.setMax(mp.getDuration());
                         endTime.setText(getTimeStr(mp.getDuration()));
                         handler.sendEmptyMessage(UPDATESEEK);
@@ -474,12 +480,17 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                         System.out.println("循坏 " + musicposition);
                     }
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-
+        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                return true;
+            }
+        });
     }
 
     public int getRandom() {
@@ -505,8 +516,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
 
     // 播放哪一首歌
-    private void playerSong() throws IllegalStateException,
-            IOException {
+    private void playerSong() {
 
         try {
             player.stop();

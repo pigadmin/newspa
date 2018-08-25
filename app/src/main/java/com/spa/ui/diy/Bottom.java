@@ -193,7 +193,6 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             });
         } else {
             ((Activity) context).finish();
-            System.exit(0);
         }
     }
 
