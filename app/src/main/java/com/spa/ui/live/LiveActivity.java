@@ -31,7 +31,9 @@ import com.spa.views.BtmDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 电视直播播放界面
+ */
 public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
     private static final String TAG = "LiveActivity";

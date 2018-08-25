@@ -43,6 +43,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 小型底部标题栏
+ */
 public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     View view;
 

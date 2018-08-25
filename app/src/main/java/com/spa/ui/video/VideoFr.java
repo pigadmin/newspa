@@ -47,6 +47,9 @@ import java.util.Random;
 
 import de.greenrobot.event.EventBus;
 
+/**
+ * 点播资源Fragment
+ */
 public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     private final String TAG = "VideoFr";

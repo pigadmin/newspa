@@ -29,6 +29,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+/**
+ * 服务介绍
+ */
 public class IntroFr extends BaseFr implements AdapterView.OnItemClickListener {
 
     private View view;

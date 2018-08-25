@@ -19,6 +19,9 @@ import com.spa.tools.FULL;
 import com.spa.ui.BaseActivity;
 import com.spa.views.BtmDialog;
 
+/**
+ * 点播资源播放界面
+ */
 public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 
