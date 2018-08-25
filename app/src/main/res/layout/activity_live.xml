@@ -10,16 +10,15 @@
 
     <TextView
         android:id="@+id/live_no_b"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentRight="true"
-        android:background="@color/myblack"
         android:gravity="center"
         android:maxEms="4"
         android:singleLine="true"
         android:text="05"
         android:textColor="@color/white"
-        android:textSize="45sp" />
+        android:textSize="50sp" />
 
     <FrameLayout
         android:id="@+id/voidid"
