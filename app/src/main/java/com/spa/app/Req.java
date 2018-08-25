@@ -12,6 +12,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Req {
+    public static String welcomead = App.headurl + "getWelComeAd?mac=" + App.mac;
     public static String clendar = App.headurl + "getCalendar?mac=" + App.mac;
     public static String marquee = App.headurl + "getSubTitle?mac=" + App.mac;
     public static String check = App.headurl + "checkAuth";

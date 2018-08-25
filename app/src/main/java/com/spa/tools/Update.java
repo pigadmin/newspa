@@ -2,6 +2,8 @@ package com.spa.tools;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 
 import com.spa.R;
@@ -32,14 +34,14 @@ public class Update {
     public Update(Context context, String apkurl) {
         this.context = context;
 
-        File dir = context.getDir("spa", Context.MODE_PRIVATE
+        File dir = context.getDir("mjspa", Context.MODE_PRIVATE
                 | Context.MODE_WORLD_READABLE | Context.MODE_WORLD_WRITEABLE);
         dir.mkdirs();
         this.packageName = context.getPackageName();
         this.apkurl = apkurl;
         this.savePath = dir.getAbsolutePath() + "/";
         handler = new Handler();
-        filename = "spa.apk";
+        filename = "mjspa.apk";
     }
 
     private ProgressDialog pBar;
@@ -66,7 +68,8 @@ public class Update {
                     public void run() {
                         pBar.cancel();
                         getFilePermission(savePath + filename);
-                        install(savePath + filename);
+//                        install(savePath + filename);
+                        install2(savePath + filename);
                     }
                 });
             }
@@ -130,6 +133,14 @@ public class Update {
 
     }
 
+    private void install2(String fullfilepath) {
+        getFilePermission(fullfilepath);
+        android.content.Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse("file://" + fullfilepath),
+                "application/vnd.android.package-archive");
+        context.startActivity(intent);
+    }
 
     private void getFilePermission(String file) {
         ShellExecute ex = new ShellExecute();

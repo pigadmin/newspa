@@ -168,6 +168,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                     break;
                 case HideLiveInfo:
                     live_no_b.setText("");
+                    live_no_b.setVisibility(View.GONE);
                     break;
                 case SwitchNo:
                     try {
@@ -198,6 +199,7 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
             cutno += keyCode - 7;
+
             live_no_b.setText(cutno);
 
             handler.removeMessages(SwitchNo);
@@ -270,6 +272,9 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
         handler.post(new Runnable() {
             @Override
             public void run() {
+                if (live_no_b.getVisibility() == View.GONE) {
+                    live_no_b.setVisibility(View.VISIBLE);
+                }
                 live_no_b.setText(historyno + 1 + "");
                 handler.removeMessages(HideLiveInfo);
                 handler.sendEmptyMessageDelayed(HideLiveInfo, 5 * 1000);

@@ -234,7 +234,9 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             @Override
             public void onClick(View v) {
                 count = Integer.parseInt(dish_num.getText().toString());
-                count++;
+                if(count<98){
+                    count++;
+                }
                 dish_num.setText(count + "");
             }
         });
@@ -246,9 +248,10 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
                 count = Integer.parseInt(dish_num.getText().toString());
                 if (count > 1) {
                     count--;
-                } else {
-                    count = 99;
                 }
+//                else {
+//                    count = 99;
+//                }
                 dish_num.setText(count + "");
 
             }

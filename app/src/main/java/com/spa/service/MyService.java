@@ -332,6 +332,12 @@ public class MyService extends Service implements IScrollState, Runnable {
                 toast.setGravity(Gravity.TOP | Gravity.LEFT, 1920, 0, 0);
                 toast.show();
                 currentmsg++;
+            }else {
+                System.out.println("跑马灯没了");
+                if (toast != null) {
+                    toast.hid();
+                    toast = null;
+                }
             }
         } catch (Exception e) {
             // TODO: handle exception
