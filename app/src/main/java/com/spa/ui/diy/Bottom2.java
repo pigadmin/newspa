@@ -170,11 +170,10 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
             Fragments.Vod(((Activity) context).getFragmentManager(), new HelpFr());
         } else if (v == bottom_menu10) {//返回
             int tmp = ((Activity) context).getFragmentManager().getBackStackEntryCount();
-            System.out.println(hidgr + "----"+tmp);
-            if (tmp >= hidgr) {
+            if (tmp > hidgr) {
                 ((Activity) context).getFragmentManager().popBackStack();
             } else {
-//                Fragments.Vod(((Activity) context).getFragmentManager(), new TestFr());
+                Fragments.Add(((Activity) context).getFragmentManager(), new TestFr());
                 exit();
             }
 
