@@ -331,7 +331,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private String type;
 
     private void resetList() {
-        adapter = new VideoTypeAdapter(activity, list);
+        adapter = new VideoTypeAdapter(activity, list,left_list);
         left_list.setAdapter(adapter);
 
         type = "&type=" + list.get(0).getId();
@@ -358,7 +358,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             mListView.setVisibility(View.GONE);
             right_grid.setVisibility(View.VISIBLE);
             layout.setVisibility(View.GONE);
-            stopMusic();
+//            stopMusic();
         }
     }
 
@@ -376,6 +376,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 isState = list.get(p).getName().equals("音乐") ? true : false;
                 type = "&type=" + list.get(p).getId();
                 Req.get(Req.video + type);
+
+                adapter.notifyDataSetChanged();
 
             } else if (parent == right_grid) {
                 videoData = grid.getData().get(p);
@@ -395,7 +397,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     TeleplayGridAdapter teleplayadapter;
 
     public void teledialog() {
-        // TODO Auto-generated method stub
         teleplay_dialog = new AlertDialog.Builder(activity).create();
         if (teleplay_dialog.isShowing()) {
             teleplay_dialog.dismiss();

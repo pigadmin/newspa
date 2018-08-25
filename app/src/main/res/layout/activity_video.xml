@@ -52,6 +52,7 @@
             android:layout_gravity="center"
             android:layout_weight="4.5"
             android:divider="@null"
+            android:choiceMode="singleChoice"
             android:dividerHeight="8dp"
             android:padding="15dp"
             android:scrollbars="none" />
