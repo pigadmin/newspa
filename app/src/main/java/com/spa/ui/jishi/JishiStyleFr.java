@@ -147,6 +147,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                adapter.setSelecte(true);
                 adapter.notifyDataSetChanged();
                 return false;
             }
@@ -229,7 +230,6 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                     }
                 });
 //                }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -446,9 +446,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         });
     }
 
-
     private void showDialogStyle8() {
-
         mBuilder = new StringBuilder();
         final JishiBtmDialogList dialog = new JishiBtmDialogList(activity, jishi);
         dialog.show();

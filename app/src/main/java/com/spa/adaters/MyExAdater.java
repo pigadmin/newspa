@@ -27,11 +27,10 @@ public class MyExAdater extends BaseExpandableListAdapter {
     public int userLayout;
     public int itemLayout;
     public ExpandableListView left_list;
-
-    SparseBooleanArray selected;
-
-    int old = -1;
-    int parentPosition = -1;
+    public SparseBooleanArray selected;
+    public int old = -1;
+    public int parentPosition = -1;
+    public boolean isState;
 
     public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list) {
         this.userBeans = userBeans;
@@ -85,6 +84,11 @@ public class MyExAdater extends BaseExpandableListAdapter {
         Picasso.with(context).load(itemBean.getIcon()).into(holder.icon);
         holder.intro_name.setText(itemBean.getName());
 
+        if (isState) {
+            selected.clear();
+            isState = false;
+        }
+
         //重点代码
         if (selected.get(childPosition) && this.parentPosition == groupPosition) {
             convertView.setBackgroundResource(R.mipmap.youce_k_1);
@@ -94,6 +98,12 @@ public class MyExAdater extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    /**
+     * 刷新子级状态
+     *
+     * @param groupPosition
+     * @param selected
+     */
     public void setSelectedItem(int groupPosition, int selected) {
         this.parentPosition = groupPosition;
         if (old != -1) {
@@ -101,6 +111,15 @@ public class MyExAdater extends BaseExpandableListAdapter {
         }
         this.selected.put(selected, true);
         old = selected;
+    }
+
+    /**
+     * 点击父级Item,更新子级状态
+     *
+     * @param isState
+     */
+    public void setSelecte(boolean isState) {
+        this.isState = isState;
     }
 
     @Override
