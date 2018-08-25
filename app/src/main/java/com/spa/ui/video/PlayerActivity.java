@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.MediaController;
@@ -16,7 +18,9 @@ import com.spa.R;
 import com.spa.app.App;
 import com.spa.bean.VideoDetails;
 import com.spa.tools.FULL;
+import com.spa.tools.Logger;
 import com.spa.ui.BaseActivity;
+import com.spa.ui.diy.Bottom2;
 import com.spa.views.BtmDialog;
 
 /**
@@ -28,6 +32,9 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
     private static final String TAG = "PlayerActivity";
 
     App app;
+
+    public Bottom2 mBottom2;
+    public boolean isState = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,8 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
     private SharedPreferences tvchanle;
 
     private void find() {
+        mBottom2 = (Bottom2) findViewById(R.id.My_bottm2);
+
         video_player = (VideoView) findViewById(R.id.video_player);
         FULL.star(video_player);
 
@@ -211,5 +220,26 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
         });
         dialog.setCancelable(false);
         dialog.show();
+    }
+
+    GestureDetector detector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            Logger.d(TAG, "isState.." + isState);
+            if (isState) {
+                mBottom2.setVisibility(View.GONE);
+                isState = false;
+            } else {
+                mBottom2.setVisibility(View.VISIBLE);
+                isState = true;
+            }
+            return super.onSingleTapConfirmed(e);
+        }
+    }) {
+    };
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return detector.onTouchEvent(event);
     }
 }

@@ -31,10 +31,12 @@
         android:layout_marginTop="50dp" />
 
     <com.spa.ui.diy.Bottom2
+        android:id="@+id/My_bottm2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center|bottom"
+        android:layout_marginBottom="100dp"
         android:layout_marginLeft="200dp"
         android:layout_marginRight="200dp"
         android:gravity="center|bottom"
