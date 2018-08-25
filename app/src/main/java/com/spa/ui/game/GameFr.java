@@ -28,6 +28,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+/**
+ * 游戏应用
+ */
 public class GameFr extends BaseFr implements Game2dapter.OnItemClickListener {
 
     private View view;
