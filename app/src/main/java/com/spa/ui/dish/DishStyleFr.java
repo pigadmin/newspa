@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
@@ -300,6 +301,21 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@food" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
+                    System.out.println("------------"+Req.notice + notice);
+                    dialog.dismiss();
+                    Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
+                    Req.get(Req.notice + notice);
+                }
+                return false;
             }
         });
     }

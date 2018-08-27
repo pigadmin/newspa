@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.spa.R;
 import com.spa.bean.VideoData;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 
@@ -23,5 +24,14 @@ public class MusicTypeAdapter extends BAdapter<VideoData> {
         VideoData type = getAllData().get(position);
         musicName.setText((position + 1) + ". " + type.getName());
         songName.setText(type.getAct());
+
     }
+
+//    int cposition;
+//
+//    public void sel(int cposition) {
+//        System.out.println("cccc" + cposition);
+//        this.cposition = cposition;
+//        notifyDataSetChanged();
+//    }
 }

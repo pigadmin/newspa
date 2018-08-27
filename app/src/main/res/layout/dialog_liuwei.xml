@@ -34,6 +34,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
             android:background="@null"
             android:gravity="center"
             android:hint="手牌号码显示区"

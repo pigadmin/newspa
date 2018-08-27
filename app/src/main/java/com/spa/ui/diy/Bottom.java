@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spa.R;
 import com.spa.app.App;
@@ -224,6 +225,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         currentVolume = audioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
         dialog_ctrl = new AlertDialog.Builder(context).create();
+        dialog_ctrl.setCancelable(false);
         if (dialog_ctrl.isShowing()) {
             dialog_ctrl.dismiss();
         } else {
@@ -245,7 +247,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(1);
             }
         });
         down_z = dialog_ctrl.findViewById(R.id.down_z);
@@ -254,7 +256,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(2);
             }
         });
 
@@ -264,7 +266,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(3);
             }
         });
     }
@@ -279,8 +281,9 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         return screenBrightness;
     }
 
-    private void showsp() {
+    private void showsp(final int cut) {
         dialog_liuwei = new AlertDialog.Builder(context).create();
+        dialog_liuwei.setCancelable(false);
         if (dialog_liuwei.isShowing()) {
             dialog_liuwei.dismiss();
         } else {
@@ -289,19 +292,35 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         dialog_liuwei.setContentView(R.layout.dialog_liuwei);
         cancle = dialog_liuwei.findViewById(R.id.cancle);
         key = (EditText) dialog_liuwei.findViewById(R.id.key);
+
         dialog_liuwei.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@" + keyCode);
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
                         key_temp += keyCode - 7;
-                        handler2.removeMessages(2);
-                        handler2.sendEmptyMessageDelayed(2, 100);
+                        handler2.removeMessages(0);
+                        handler2.sendEmptyMessageDelayed(0, 100);
+                    } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        switch (cut) {
+                            case 1:
+                                Toast.makeText(context, "上钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case 2:
+                                Toast.makeText(context, "下钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case 3:
+                                Toast.makeText(context, "加钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                        dialog_liuwei.dismiss();
                     }
                 }
                 return false;
             }
         });
+
         cancle.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -317,6 +336,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
 
     private void showLiuwei() {
         dialog_liuwei = new AlertDialog.Builder(context).create();
+        dialog_liuwei.setCancelable(false);
         if (dialog_liuwei.isShowing()) {
             dialog_liuwei.dismiss();
         } else {
@@ -328,11 +348,14 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         dialog_liuwei.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@" + keyCode);
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
                         key_temp += keyCode - 7;
                         handler2.removeMessages(0);
                         handler2.sendEmptyMessageDelayed(0, 100);
+                    } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        handler2.sendEmptyMessage(1);
                     }
                 }
                 return false;
@@ -355,6 +378,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             switch (msg.what) {
                 case 0:
                     try {
+                        System.out.println(key_temp + "-----");
                         app.setKey(key_temp.substring(1, 8).trim());
                         handler2.sendEmptyMessageDelayed(1, 500);
 

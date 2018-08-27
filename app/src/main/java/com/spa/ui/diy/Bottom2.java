@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spa.R;
 import com.spa.app.App;
@@ -252,7 +253,7 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(1);
             }
         });
         down_z = dialog_ctrl.findViewById(R.id.down_z);
@@ -261,7 +262,7 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(2);
             }
         });
 
@@ -271,7 +272,7 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
-                showsp();
+                showsp(3);
             }
         });
     }
@@ -286,7 +287,7 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         return screenBrightness;
     }
 
-    private void showsp() {
+    private void showsp(final int cut) {
         dialog_liuwei = new AlertDialog.Builder(context).create();
         if (dialog_liuwei.isShowing()) {
             dialog_liuwei.dismiss();
@@ -299,11 +300,25 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         dialog_liuwei.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@" + keyCode);
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
                         key_temp += keyCode - 7;
-                        handler2.removeMessages(2);
-                        handler2.sendEmptyMessageDelayed(2, 100);
+                        handler2.removeMessages(0);
+                        handler2.sendEmptyMessageDelayed(0, 100);
+                    } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        switch (cut) {
+                            case 1:
+                                Toast.makeText(context, "上钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case 2:
+                                Toast.makeText(context, "下钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case 3:
+                                Toast.makeText(context, "加钟成功", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                        dialog_liuwei.dismiss();
                     }
                 }
                 return false;
@@ -335,11 +350,14 @@ public class Bottom2 extends LinearLayout implements View.OnClickListener, SeekB
         dialog_liuwei.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@" + keyCode);
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
                         key_temp += keyCode - 7;
                         handler2.removeMessages(0);
                         handler2.sendEmptyMessageDelayed(0, 100);
+                    } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        handler2.sendEmptyMessage(1);
                     }
                 }
                 return false;

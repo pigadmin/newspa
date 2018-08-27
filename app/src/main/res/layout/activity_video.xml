@@ -115,7 +115,7 @@
                         android:choiceMode="singleChoice"
                         android:divider="@null"
                         android:gravity="center"
-                        android:listSelector="@color/transparent"
+                        android:listSelector="@color/red"
                         android:scrollbars="none" />
                 </LinearLayout>
 
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="01:14"
+                    android:text="00:00"
                     android:textColor="@color/white" />
 
                 <SeekBar
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="02:50"
+                    android:text="00:00"
                     android:textColor="@color/white" />
 
                 <ImageView

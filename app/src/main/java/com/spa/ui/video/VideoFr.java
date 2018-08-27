@@ -126,6 +126,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             }
         });
 
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -243,8 +244,10 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     }
 
 
-    final int search = 0;
-    String keywd;
+    private final int search = 0;
+    private String keywd;
+    private final int UPDATESEEK = 1;
+    private final int UPDATESEL = 2;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -260,6 +263,10 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                         audio.setProgress(player.getCurrentPosition());
                         startTime.setText(getTimeStr(player.getCurrentPosition()));
                         handler.sendEmptyMessageDelayed(UPDATESEEK, 1000);
+                        break;
+                    case UPDATESEL:
+//                        typeAdapter.sel(musicposition);
+                        mListView.setSelection(musicposition);
                         break;
                 }
             } catch (Exception e) {
@@ -331,7 +338,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private String type;
 
     private void resetList() {
-        adapter = new VideoTypeAdapter(activity, list,left_list);
+        adapter = new VideoTypeAdapter(activity, list, left_list);
         left_list.setAdapter(adapter);
 
         type = "&type=" + list.get(0).getId();
@@ -345,6 +352,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             musicposition = 0;
             typeAdapter = new MusicTypeAdapter(activity, R.layout.item_music_layout, grid.getData());
             mListView.setAdapter(typeAdapter);
+
             typeAdapter.notifyDataSetChanged();
             right_grid.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
@@ -433,7 +441,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     }
 
     private MediaPlayer player;
-    private final int UPDATESEEK = 1;
+
 
     private void setMediaListene() {
         player = new MediaPlayer();
@@ -443,7 +451,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 mp.start();
                 try {
                     if (isState) {
-                        mListView.setSelection(musicposition);
+                        System.out.println("@@@@@@当前" + musicposition);
+                        handler.sendEmptyMessage(UPDATESEL);
                         audio.setMax(mp.getDuration());
                         endTime.setText(getTimeStr(mp.getDuration()));
                         handler.sendEmptyMessage(UPDATESEEK);

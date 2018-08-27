@@ -2,12 +2,14 @@ package com.spa.ui.jishi;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -516,6 +518,19 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             @Override
             public void onClick(View arg0) {
                 dialog.dismiss();
+            }
+        });
+
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                System.out.println("@@@@@jishi" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    System.out.println("------------");
+                    dialog.dismiss();
+                    Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
+                }
+                return false;
             }
         });
     }

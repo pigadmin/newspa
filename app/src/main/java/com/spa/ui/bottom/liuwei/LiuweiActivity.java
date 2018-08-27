@@ -110,6 +110,8 @@ public class LiuweiActivity extends BaseActivity {
 
             handler.removeMessages(0);
             handler.sendEmptyMessageDelayed(0, 100);
+        } else if (keyCode >= KeyEvent.KEYCODE_ENTER) {
+            handler.sendEmptyMessage(2);
         }
         return true;
     }
