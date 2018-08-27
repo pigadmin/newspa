@@ -51,8 +51,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="4.5"
-            android:divider="@null"
             android:choiceMode="singleChoice"
+            android:divider="@null"
             android:dividerHeight="8dp"
             android:padding="15dp"
             android:scrollbars="none" />
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
-                    android:src="@mipmap/content_icon_s" />
+                    android:src="@drawable/select_content_icon1" />
 
                 <ImageView
                     android:id="@+id/playpause"
@@ -150,7 +150,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:src="@mipmap/content_icon_b" />
+                    android:src="@drawable/select_content_icon2" />
 
                 <ImageView
                     android:id="@+id/next"
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="30dp"
-                    android:src="@mipmap/content_icon_x" />
+                    android:src="@drawable/select_content_icon3" />
 
                 <TextView
                     android:id="@+id/startTime"
