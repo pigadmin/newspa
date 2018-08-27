@@ -97,6 +97,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
 
 
         dialog_call = new AlertDialog.Builder(context).create();
+        dialog_call.setCancelable(false);
         if (dialog_call.isShowing()) {
             dialog_call.dismiss();
         } else {
@@ -281,6 +282,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
 
     private void showsp() {
         dialog_liuwei = new AlertDialog.Builder(context).create();
+        dialog_liuwei.setCancelable(false);
         if (dialog_liuwei.isShowing()) {
             dialog_liuwei.dismiss();
         } else {
@@ -317,6 +319,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
 
     private void showLiuwei() {
         dialog_liuwei = new AlertDialog.Builder(context).create();
+        dialog_liuwei.setCancelable(false);
         if (dialog_liuwei.isShowing()) {
             dialog_liuwei.dismiss();
         } else {
