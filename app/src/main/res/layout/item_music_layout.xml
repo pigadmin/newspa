@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="1.时间都去哪了"
-        android:textColor="@drawable/item_selector"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:text="王铮亮"
-        android:textColor="@drawable/item_selector"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
 </LinearLayout>

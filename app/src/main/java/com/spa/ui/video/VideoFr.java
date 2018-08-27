@@ -52,7 +52,7 @@ import de.greenrobot.event.EventBus;
  */
 public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
-    private final String TAG = "VideoFr";
+    private final static String TAG = "VideoFr";
 
     private View view;
     private Activity activity;
@@ -133,6 +133,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 musicposition = position;
                 changemusicinfo();
                 playerSong();
+
+                setPostion(position);
             }
         });
         last = view.findViewById(R.id.last);
@@ -146,6 +148,9 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                         musicposition = 0;
                         playerSong();
                     }
+
+                    setPostion(musicposition);
+
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
@@ -171,6 +176,9 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                         musicposition = grid.getData().size() - 1;
                         playerSong();
                     }
+
+                    setPostion(musicposition);
+
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
@@ -227,6 +235,12 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         endTime = view.findViewById(R.id.endTime);
     }
 
+    private void setPostion(int position) {
+        typeAdapter.setCurrentItem(position);
+        typeAdapter.notifyDataSetChanged();
+    }
+
+
     private ImageView last, playpause, next;
     private ImageView sj_play, sx_play, xh_play;
     private SeekBar audio;
@@ -242,7 +256,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             e.printStackTrace();
         }
     }
-
 
     private final int search = 0;
     private String keywd;
@@ -366,7 +379,6 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             mListView.setVisibility(View.GONE);
             right_grid.setVisibility(View.VISIBLE);
             layout.setVisibility(View.GONE);
-//            stopMusic();
         }
     }
 
@@ -493,6 +505,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                setPostion(musicposition);
             }
         });
 
