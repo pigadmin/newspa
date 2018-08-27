@@ -162,10 +162,10 @@ public class MyExAdater extends BaseExpandableListAdapter {
 
         if (isExpanded) {
             // 条目展开，设置向下的箭头
-            convertView.setBackgroundResource(R.mipmap.youce_k_2);
+            convertView.setBackgroundResource(R.mipmap.polygon_4_79);
         } else {
             // 条目未展开，设置向上的箭头
-            convertView.setBackgroundResource(R.mipmap.youce_k_1);
+            convertView.setBackgroundResource(R.mipmap.polygon_3_29);
         }
         return convertView;
     }
