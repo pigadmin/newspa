@@ -125,6 +125,7 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
 
     public void crt(final int vodtime) {
         vod_time_dialog = new AlertDialog.Builder(this).create();
+        vod_time_dialog.setCancelable(false);
         // update_dialog.setCancelable(false);
         if (vod_time_dialog != null && vod_time_dialog.isShowing()) {
             vod_time_dialog.dismiss();
