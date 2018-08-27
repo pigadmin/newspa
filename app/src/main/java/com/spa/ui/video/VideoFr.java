@@ -82,6 +82,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         EventBus.getDefault().unregister(this);
         stopMusic();
         player.release();
+        isState = false;
     }
 
     private void init() {
@@ -92,6 +93,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private GridView right_grid;
     private EditText video_keyword;
     private TextView music_size;
+
+    private boolean firstPlay = true;
 
     private void find() {
         setMediaListene();
@@ -162,7 +165,13 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         playpause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pauseMusic();
+                if (firstPlay) {
+                    firstPlay = false;
+                    playpause.setImageResource(R.drawable.select_content_icon2);
+                    playerSong();
+                } else {
+                    pauseMusic();
+                }
             }
         });
         next = view.findViewById(R.id.next);
@@ -541,10 +550,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
         }
     }
 
-
     // 播放哪一首歌
     private void playerSong() {
-
         try {
             player.stop();
             player.reset();
