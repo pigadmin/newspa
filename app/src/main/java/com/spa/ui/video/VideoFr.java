@@ -33,13 +33,13 @@ import com.spa.bean.Video;
 import com.spa.bean.VideoData;
 import com.spa.bean.VideoType;
 import com.spa.event.DataMessage;
+import com.spa.tools.Logger;
 import com.spa.ui.BaseFr;
 import com.spa.ui.adapter.TeleplayGridAdapter;
 import com.spa.ui.adapter.VideoAdapter;
 import com.spa.ui.adapter.VideoTypeAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -467,8 +467,8 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 try {
-                    if (playmodel == 0) {//顺序
-
+                    if (playmodel == 0) {
+                        //顺序
                         if (++musicposition < grid.getData().size()) {
                             try {
                                 playerSong();
@@ -479,22 +479,23 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                             musicposition = 0;
                             playerSong();
                         }
-                        System.out.println("顺序" + musicposition);
-                    } else if (playmodel == 1) {//随机
-
+                        Logger.d(TAG, "顺序" + musicposition);
+                    } else if (playmodel == 1) {
+                        //随机
                         musicposition = getRandom();
                         playerSong();
-                        System.out.println("随机" + musicposition);
-                    } else {//循坏
+                        Logger.d(TAG, "随机" + musicposition);
+                    } else {
+                        //循坏
                         playerSong();
-                        System.out.println("循坏 " + musicposition);
+                        Logger.d(TAG, "循坏" + musicposition);
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
         player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
@@ -519,8 +520,10 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private void pauseMusic() {
         if (player.isPlaying()) {
             player.pause();
+            playpause.setImageResource(R.drawable.select_content_icon4);
         } else {
             player.start();
+            playpause.setImageResource(R.drawable.select_content_icon2);
         }
     }
 

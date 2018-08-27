@@ -115,7 +115,6 @@
                         android:choiceMode="singleChoice"
                         android:divider="@null"
                         android:gravity="center"
-                        android:listSelector="@color/red"
                         android:scrollbars="none" />
                 </LinearLayout>
 
@@ -150,7 +149,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/select_content_icon2" />
+                    android:src="@drawable/select_content_icon4" />
 
                 <ImageView
                     android:id="@+id/next"
