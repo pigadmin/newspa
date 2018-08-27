@@ -105,7 +105,7 @@ public class MainFr extends BaseFr implements View.OnClickListener {
             activity.sendBroadcast(new Intent(App.HIDENAME));
             app.setShowname(0);
             System.out.println("main__oooooooooooooooooooon");
-            activity.unregisterReceiver(receiver);
+//            activity.unregisterReceiver(receiver);
             EventBus.getDefault().unregister(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,9 +213,9 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                         @Override
                         public void run() {
                             wea_city.setText(wea.getCity());
-                            wea_tmp.setText(wea.getData().getWendu());
-                            wea_maxtmp.setText(wea.getData().getForecast().get(0).getHigh().substring(2, 5));
-                            wea_mintmp.setText(wea.getData().getForecast().get(0).getLow().substring(2, 5));
+                            wea_tmp.setText(wea.getData().getWendu()+"℃");
+                            wea_maxtmp.setText(wea.getData().getForecast().get(0).getHigh().substring(2, 5)+"℃");
+                            wea_mintmp.setText(wea.getData().getForecast().get(0).getLow().substring(2, 5)+"℃");
                             wea_icon.setImageResource(WeatherImage.parseIcon(wea.getData().getForecast().get(0).getType()));
 
 

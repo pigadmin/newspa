@@ -148,14 +148,12 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                     if (--musicposition > 0) {
                         playerSong();
                     } else {
-                        musicposition = 0;
+                        musicposition = grid.getData().size() - 1;
                         playerSong();
                     }
 
                     setPostion(musicposition);
 
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -182,14 +180,12 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
                     if (++musicposition < grid.getData().size()) {
                         playerSong();
                     } else {
-                        musicposition = grid.getData().size() - 1;
+                        musicposition = 0;
                         playerSong();
                     }
 
                     setPostion(musicposition);
 
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -200,7 +196,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void onClick(View view) {
                 playmodel = 1;
-                Toast.makeText(activity, "切换至随机播放模式", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "切换至随机播放模式", Toast.LENGTH_SHORT).show();
             }
         });
         sx_play = view.findViewById(R.id.sx_play);
@@ -208,7 +204,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void onClick(View view) {
                 playmodel = 0;
-                Toast.makeText(activity, "切换至顺序播放模式", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "切换至顺序播放模式", Toast.LENGTH_SHORT).show();
             }
         });
         xh_play = view.findViewById(R.id.xh_play);
@@ -216,7 +212,7 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
             @Override
             public void onClick(View view) {
                 playmodel = 3;
-                Toast.makeText(activity, "切换至循坏播放模式", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "切换至单曲循环模式", Toast.LENGTH_SHORT).show();
             }
         });
         audio = view.findViewById(R.id.audio);
@@ -360,34 +356,50 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     private String type;
 
     private void resetList() {
-        adapter = new VideoTypeAdapter(activity, list, left_list);
-        left_list.setAdapter(adapter);
+        try {
+            adapter = new VideoTypeAdapter(activity, list, left_list);
+            left_list.setAdapter(adapter);
 
-        type = "&type=" + list.get(0).getId();
-        Req.get(Req.video + type);
+            type = "&type=" + list.get(0).getId();
+            Req.get(Req.video + type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private VideoAdapter adapter2;
 
     private void resetUI() {
-        if (isState) {
-            musicposition = 0;
-            typeAdapter = new MusicTypeAdapter(activity, R.layout.item_music_layout, grid.getData());
-            mListView.setAdapter(typeAdapter);
+        try {
+            if (isState) {
+                musicposition = 0;
+                typeAdapter = new MusicTypeAdapter(activity, R.layout.item_music_layout, grid.getData());
+                mListView.setAdapter(typeAdapter);
 
-            typeAdapter.notifyDataSetChanged();
-            right_grid.setVisibility(View.GONE);
-            mListView.setVisibility(View.VISIBLE);
-            layout.setVisibility(View.VISIBLE);
-            music_size.setText("播放列表(" + grid.getData().size() + ")");
-            changemusicinfo();
-        } else {
-            adapter2 = new VideoAdapter(activity, grid.getData());
-            right_grid.setAdapter(adapter2);
-            adapter2.notifyDataSetChanged();
-            mListView.setVisibility(View.GONE);
-            right_grid.setVisibility(View.VISIBLE);
-            layout.setVisibility(View.GONE);
+                typeAdapter.notifyDataSetChanged();
+                right_grid.setVisibility(View.GONE);
+                mListView.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.VISIBLE);
+                music_size.setText("播放列表(" + grid.getData().size() + ")");
+                changemusicinfo();
+            } else {
+                adapter2 = new VideoAdapter(activity, grid.getData());
+                right_grid.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
+                mListView.setVisibility(View.GONE);
+                right_grid.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.GONE);
+                stopMusic();
+                firstPlay = true;
+                playpause.setImageResource(R.drawable.select_content_icon4);
+                handler.removeMessages(UPDATESEEK);
+                audio.setProgress(0);
+                audio.setMax(100);
+                startTime.setText(getTimeStr(0));
+                endTime.setText(getTimeStr(0));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -426,24 +438,28 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     TeleplayGridAdapter teleplayadapter;
 
     public void teledialog() {
-        teleplay_dialog = new AlertDialog.Builder(activity).create();
-        if (teleplay_dialog.isShowing()) {
-            teleplay_dialog.dismiss();
-        } else {
-            teleplay_dialog.show();
-        }
-
-        teleplay_dialog.setContentView(R.layout.dialog_teleplay);
-
-        teleplay_grid = teleplay_dialog.findViewById(R.id.teleplay_grid);
-        teleplayadapter = new TeleplayGridAdapter(getActivity(), videoData.getDetails());
-        teleplay_grid.setAdapter(teleplayadapter);
-        teleplay_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                play(i);
+        try {
+            teleplay_dialog = new AlertDialog.Builder(activity).create();
+            if (teleplay_dialog.isShowing()) {
+                teleplay_dialog.dismiss();
+            } else {
+                teleplay_dialog.show();
             }
-        });
+
+            teleplay_dialog.setContentView(R.layout.dialog_teleplay);
+
+            teleplay_grid = teleplay_dialog.findViewById(R.id.teleplay_grid);
+            teleplayadapter = new TeleplayGridAdapter(getActivity(), videoData.getDetails());
+            teleplay_grid.setAdapter(teleplayadapter);
+            teleplay_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    play(i);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void play(int position) {
@@ -465,88 +481,101 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
 
 
     private void setMediaListene() {
-        player = new MediaPlayer();
-        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.start();
-                try {
-                    if (isState) {
-                        System.out.println("@@@@@@当前" + musicposition);
-                        handler.sendEmptyMessage(UPDATESEL);
-                        audio.setMax(mp.getDuration());
-                        endTime.setText(getTimeStr(mp.getDuration()));
-                        handler.sendEmptyMessage(UPDATESEEK);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                try {
-                    if (playmodel == 0) {
-                        //顺序
-                        if (++musicposition < grid.getData().size()) {
-                            try {
-                                playerSong();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            musicposition = 0;
-                            playerSong();
+        try {
+            player = new MediaPlayer();
+            player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.start();
+                    try {
+                        if (isState) {
+                            System.out.println("@@@@@@当前" + musicposition);
+                            handler.sendEmptyMessage(UPDATESEL);
+                            audio.setMax(mp.getDuration());
+                            endTime.setText(getTimeStr(mp.getDuration()));
+                            handler.sendEmptyMessage(UPDATESEEK);
                         }
-                        Logger.d(TAG, "顺序" + musicposition);
-                    } else if (playmodel == 1) {
-                        //随机
-                        musicposition = getRandom();
-                        playerSong();
-                        Logger.d(TAG, "随机" + musicposition);
-                    } else {
-                        //循坏
-                        playerSong();
-                        Logger.d(TAG, "循坏" + musicposition);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            });
 
-                setPostion(musicposition);
-            }
-        });
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    try {
+                        if (playmodel == 0) {
+                            //顺序
+                            if (++musicposition < grid.getData().size()) {
+                                try {
+                                    playerSong();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                musicposition = 0;
+                                playerSong();
+                            }
+                            Logger.d(TAG, "顺序" + musicposition);
+                        } else if (playmodel == 1) {
+                            //随机
+                            musicposition = getRandom();
+                            playerSong();
+                            Logger.d(TAG, "随机" + musicposition);
+                        } else {
+                            //循坏
+                            playerSong();
+                            Logger.d(TAG, "循坏" + musicposition);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                return true;
-            }
-        });
+                    setPostion(musicposition);
+                }
+            });
+
+            player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                    return true;
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getRandom() {
-        if (grid.getData().size() == 1) {
-            return 0;
-        } else {
-            Random random = new Random();
-            int s = random.nextInt(grid.getData().size() - 1) % (grid.getData().size() - 1 - 0 + 1) + 0;
-            return s;
+        try {
+            if (grid.getData().size() == 1) {
+                return 0;
+            } else {
+                Random random = new Random();
+                int s = random.nextInt(grid.getData().size() - 1) % (grid.getData().size() - 1 - 0 + 1) + 0;
+                return s;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return 0;
     }
 
     int playmodel = 0;
     // 暂停播放
 
     private void pauseMusic() {
-        if (player.isPlaying()) {
-            player.pause();
-            playpause.setImageResource(R.drawable.select_content_icon4);
-        } else {
-            player.start();
-            playpause.setImageResource(R.drawable.select_content_icon2);
+        try {
+            if (player.isPlaying()) {
+                player.pause();
+                playpause.setImageResource(R.drawable.select_content_icon4);
+            } else {
+                player.start();
+                playpause.setImageResource(R.drawable.select_content_icon2);
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
     }
 
@@ -566,6 +595,12 @@ public class VideoFr extends BaseFr implements AdapterView.OnItemClickListener {
     }    // 停止播放
 
     private void stopMusic() {
-        player.stop();
+        try {
+            player.stop();
+            player.reset();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

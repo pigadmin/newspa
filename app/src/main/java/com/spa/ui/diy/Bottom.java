@@ -226,7 +226,6 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         currentVolume = audioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
         dialog_ctrl = new AlertDialog.Builder(context).create();
-        dialog_ctrl.setCancelable(false);
         if (dialog_ctrl.isShowing()) {
             dialog_ctrl.dismiss();
         } else {

@@ -16,6 +16,7 @@
     <string name="call_success">呼叫成功！</string>
     <string name="cancle_call">取消呼叫！</string>
     <string name="search_hit">在这里输入你想要搜索的内容</string>
+    <string name="search_jishi">在这里输入技师编号</string>
     <string name="searchjishi_hit">搜索技师</string>
     <string name="main_menu1">服务介绍</string>
     <string name="main_menu2">电视直播</string>
