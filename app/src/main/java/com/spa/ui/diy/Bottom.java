@@ -98,6 +98,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
 
 
         dialog_call = new AlertDialog.Builder(context).create();
+        dialog_call.setCancelable(false);
         if (dialog_call.isShowing()) {
             dialog_call.dismiss();
         } else {
