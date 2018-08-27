@@ -204,7 +204,10 @@
                     android:id="@+id/gridview_gvw1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
                     android:background="@color/white"
+                    android:gravity="center"
                     android:horizontalSpacing="10dp"
                     android:listSelector="@color/colorAccent"
                     android:numColumns="4"
@@ -217,6 +220,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal">
 
             <Button
