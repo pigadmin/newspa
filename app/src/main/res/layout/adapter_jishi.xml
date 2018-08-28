@@ -15,6 +15,7 @@
         android:id="@+id/game_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black55"
         android:layout_alignParentBottom="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"

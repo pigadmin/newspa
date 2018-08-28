@@ -139,9 +139,24 @@ public class LiveActivity extends BaseActivity implements MediaPlayer.OnErrorLis
                     showinfo();
                 }
             });
+            live_list.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        try {
+                            if (popupWindow.isShowing()) {
+                                handler.removeMessages(HideLiveList);
+                                handler.sendEmptyMessageDelayed(HideLiveList, 10 * 1000);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
             handler.removeMessages(HideLiveList);
             handler.sendEmptyMessageDelayed(HideLiveList, 10 * 1000);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

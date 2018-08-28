@@ -20,6 +20,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:padding="5dp"
         android:singleLine="true"
+        android:background="@color/black55"
         android:textColor="@drawable/menu_name"
         android:textSize="18sp" />
 

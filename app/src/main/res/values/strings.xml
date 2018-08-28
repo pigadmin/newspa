@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">麦吉</string>
+    <string name="app_name">麦吉SPA</string>
 
     <string name="connect_error">设备不上服务器，请联系工作人员</string>
     <string name="play_error">播放异常</string>
