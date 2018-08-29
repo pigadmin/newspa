@@ -10,15 +10,18 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
         android:scaleType="fitXY" />
 
-    <com.spa.views.AutoScrollTextView
+    <TextView
         android:id="@+id/intro_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="7dp"
+        android:ellipsize="marquee"
         android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
         android:textColor="@drawable/menu_name"
         android:textSize="20sp" />

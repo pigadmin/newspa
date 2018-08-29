@@ -151,6 +151,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 adapter.setSelecte(true);
                 adapter.notifyDataSetChanged();
                 return false;
@@ -200,7 +201,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         }
     };
     private List<TeachType> list;
-    private MyExAdater adapter;
+    public MyExAdater adapter;
     private Tech grid;
 
     public void onEvent(DataMessage event) {
@@ -254,7 +255,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             itemList.add(ar2);
         }
 
-        adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro, R.layout.adapter_intro_1, left_list);
+        adapter = new MyExAdater(list, itemList, activity, R.layout.adapter_intro_1, R.layout.adapter_intro_2, left_list, activity);
         left_list.setAdapter(adapter);
         typeCls = "&typeCls=" + list.get(0).getId();
         Req.get(Req.teach + typeCls);

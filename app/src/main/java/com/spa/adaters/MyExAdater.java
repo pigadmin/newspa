@@ -1,5 +1,6 @@
 package com.spa.adaters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.spa.R;
 import com.spa.bean.TeachType;
 import com.spa.bean.TechTypes;
+import com.spa.tools.Logger;
+import com.spa.views.AutoScrollTextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,14 +34,18 @@ public class MyExAdater extends BaseExpandableListAdapter {
     public int old = -1;
     public int parentPosition = -1;
     public boolean isState;
+    public Activity activity;
 
-    public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list) {
+    public AutoScrollTextView intro_name_Group;
+
+    public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list, Activity activity) {
         this.userBeans = userBeans;
         this.itemList = itemList;
         this.context = context;
         this.userLayout = userLayout;
         this.itemLayout = itemLayout;
         this.left_list = left_list;
+        this.activity = activity;
         selected = new SparseBooleanArray();
     }
 
@@ -71,9 +78,9 @@ public class MyExAdater extends BaseExpandableListAdapter {
         if (convertView == null) {
             holder = new ViewHolderChild();
             convertView = LayoutInflater.from(context).inflate(itemLayout, parent, false);
-            holder.intro_name = convertView
+            holder.intro_name_Child = convertView
                     .findViewById(R.id.intro_name);
-            holder.icon = convertView
+            holder.icon_Child = convertView
                     .findViewById(R.id.icon);
             convertView.setTag(holder);
         } else {
@@ -81,8 +88,8 @@ public class MyExAdater extends BaseExpandableListAdapter {
         }
 
         TechTypes itemBean = (TechTypes) getChild(groupPosition, childPosition);
-        Picasso.with(context).load(itemBean.getIcon()).into(holder.icon);
-        holder.intro_name.setText(itemBean.getName());
+        Picasso.with(context).load(itemBean.getIcon()).into(holder.icon_Child);
+        holder.intro_name_Child.setText(itemBean.getName());
 
         if (isState) {
             selected.clear();
@@ -95,6 +102,7 @@ public class MyExAdater extends BaseExpandableListAdapter {
         } else {
             convertView.setBackgroundResource(R.color.transparent);
         }
+
         return convertView;
     }
 
@@ -148,17 +156,29 @@ public class MyExAdater extends BaseExpandableListAdapter {
         if (convertView == null) {
             holder = new ViewHolderGroup();
             convertView = LayoutInflater.from(context).inflate(userLayout, parent, false);
-            holder.intro_name = convertView
+            holder.intro_name_Group = convertView
                     .findViewById(R.id.intro_name);
-            holder.icon = convertView
+            holder.icon_Group = convertView
                     .findViewById(R.id.icon);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolderGroup) convertView.getTag();
         }
         TeachType userBean = (TeachType) getGroup(groupPosition);
-        Picasso.with(context).load(userBean.getIcon()).into(holder.icon);
-        holder.intro_name.setText(userBean.getName());
+        Picasso.with(context).load(userBean.getIcon()).into(holder.icon_Group);
+
+        holder.intro_name_Group.setText(userBean.getName());
+        holder.intro_name_Group.init(activity.getWindowManager(), 300);
+        if (holder.intro_name_Group.getText().toString().trim().length() > 4) {
+            holder.intro_name_Group.startScroll();
+        } else {
+            holder.intro_name_Group.stopScroll();
+        }
+
+        intro_name_Group = holder.intro_name_Group;
+
+//        Logger.d(TAG, "." + holder.intro_name_Group.getText().toString());
+//        Logger.d(TAG, ".." + holder.intro_name_Group.isStarting);
 
         if (isExpanded) {
             // 条目展开，设置向下的箭头
@@ -167,6 +187,7 @@ public class MyExAdater extends BaseExpandableListAdapter {
             // 条目未展开，设置向上的箭头
             convertView.setBackgroundResource(R.mipmap.polygon_3_29);
         }
+
         return convertView;
     }
 
@@ -186,13 +207,12 @@ public class MyExAdater extends BaseExpandableListAdapter {
     }
 
     public class ViewHolderGroup {
-        private TextView intro_name;
-        private ImageView icon;
+        public AutoScrollTextView intro_name_Group;
+        private ImageView icon_Group;
     }
 
     public class ViewHolderChild {
-        private TextView intro_name;
-        private ImageView icon;
+        private TextView intro_name_Child;
+        private ImageView icon_Child;
     }
 }
-

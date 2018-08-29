@@ -2,6 +2,7 @@ package com.spa.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 
-public class AutoScrollTextView extends TextView implements View.OnClickListener {
+public class AutoScrollTextView extends TextView {
 
     public final static String TAG = AutoScrollTextView.class.getSimpleName();
 
@@ -41,21 +42,20 @@ public class AutoScrollTextView extends TextView implements View.OnClickListener
         initView();
     }
 
-
     private void initView() {
-        setOnClickListener(this);
+//        setOnClickListener(this);
     }
 
-
-    public void init(WindowManager windowManager) {
+    public void init(WindowManager windowManager, int times) {
         paint = getPaint();
         text = getText().toString();
         textLength = paint.measureText(text);
+        paint.setColor(Color.WHITE);
         viewWidth = getWidth();
         if (viewWidth == 0) {
             if (windowManager != null) {
                 Display display = windowManager.getDefaultDisplay();
-                viewWidth = display.getWidth();
+                viewWidth = display.getWidth() / times;
             }
         }
         step = textLength;
@@ -126,12 +126,17 @@ public class AutoScrollTextView extends TextView implements View.OnClickListener
         }
     }
 
+    /**
+     * 开始滚动
+     */
     public void startScroll() {
         isStarting = true;
         invalidate();
     }
 
-
+    /**
+     * 停止滚动
+     */
     public void stopScroll() {
         isStarting = false;
         invalidate();
@@ -143,17 +148,18 @@ public class AutoScrollTextView extends TextView implements View.OnClickListener
         if (!isStarting) {
             return;
         }
-        step += 0.5;//0.5为文字滚动速度。
+        step += 1.0;//0.5为文字滚动速度。
         if (step > temp_view_plus_two_text_length)
             step = textLength;
         invalidate();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (isStarting)
-            stopScroll();
-        else
-            startScroll();
-    }
+//    @Override
+//    public void onClick(View v) {
+//        if (isStarting) {
+//            stopScroll();
+//        } else {
+//            startScroll();
+//        }
+//    }
 }
