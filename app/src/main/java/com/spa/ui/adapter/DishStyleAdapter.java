@@ -63,6 +63,7 @@ public class DishStyleAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.intro_name.setText(list.get(position).getName());
+        holder.intro_name.setSelected(true);
         Picasso.with(context).load(Uri.parse(list.get(position).getIcon())).into(holder.icon);
 
         if (left_list.isItemChecked(position)) {

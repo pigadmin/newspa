@@ -54,6 +54,7 @@ public class IntroAdapter extends BaseAdapter {
         }
         Picasso.with(context).load(list.get(position).getPath()).into(holder.icon);
         holder.intro_name.setText(list.get(position).getName());
+        holder.intro_name.setSelected(true);
 
         return convertView;
     }

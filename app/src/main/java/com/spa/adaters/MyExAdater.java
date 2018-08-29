@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.spa.R;
 import com.spa.bean.TeachType;
 import com.spa.bean.TechTypes;
-import com.spa.tools.Logger;
-import com.spa.views.AutoScrollTextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,8 +33,6 @@ public class MyExAdater extends BaseExpandableListAdapter {
     public int parentPosition = -1;
     public boolean isState;
     public Activity activity;
-
-    public AutoScrollTextView intro_name_Group;
 
     public MyExAdater(List<TeachType> userBeans, List<List> itemList, Context context, int userLayout, int itemLayout, ExpandableListView left_list, Activity activity) {
         this.userBeans = userBeans;
@@ -166,19 +162,8 @@ public class MyExAdater extends BaseExpandableListAdapter {
         }
         TeachType userBean = (TeachType) getGroup(groupPosition);
         Picasso.with(context).load(userBean.getIcon()).into(holder.icon_Group);
-
         holder.intro_name_Group.setText(userBean.getName());
-        holder.intro_name_Group.init(activity.getWindowManager(), 300);
-        if (holder.intro_name_Group.getText().toString().trim().length() > 4) {
-            holder.intro_name_Group.startScroll();
-        } else {
-            holder.intro_name_Group.stopScroll();
-        }
-
-        intro_name_Group = holder.intro_name_Group;
-
-//        Logger.d(TAG, "." + holder.intro_name_Group.getText().toString());
-//        Logger.d(TAG, ".." + holder.intro_name_Group.isStarting);
+        holder.intro_name_Group.setSelected(true);
 
         if (isExpanded) {
             // 条目展开，设置向下的箭头
@@ -207,7 +192,7 @@ public class MyExAdater extends BaseExpandableListAdapter {
     }
 
     public class ViewHolderGroup {
-        public AutoScrollTextView intro_name_Group;
+        private TextView intro_name_Group;
         private ImageView icon_Group;
     }
 
