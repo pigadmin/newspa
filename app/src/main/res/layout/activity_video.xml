@@ -8,12 +8,11 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="270dp"
+        android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_gravity="right|center|center_horizontal"
         android:background="@mipmap/top_icon_2"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/video_keyword"
@@ -32,7 +31,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="12dp"
             android:src="@mipmap/top_icon_1" />
     </LinearLayout>
 
