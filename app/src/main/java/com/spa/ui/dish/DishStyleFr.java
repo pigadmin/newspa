@@ -304,6 +304,16 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             }
         });
 
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("------------"+Req.notice + notice);
+//                dialog.dismiss();
+//                Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
+//                Req.get(Req.notice + notice);
+//            }
+//        }, 2000);
+
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {

@@ -21,13 +21,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        try {
+            setContentView(R.layout.activity_main);
 
-        Fragments.To(getFragmentManager(), new MainFr());
+            Fragments.To(getFragmentManager(), new MainFr());
 
 
 //        find();
-        init();
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     ImageView wea_icon;

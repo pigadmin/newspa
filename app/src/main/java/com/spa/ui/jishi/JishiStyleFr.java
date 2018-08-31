@@ -522,6 +522,16 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             }
         });
 
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("------------");
+//                dialog.dismiss();
+//                Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
+//            }
+//        }, 2000);
+
+
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
