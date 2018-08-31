@@ -49,6 +49,8 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
     App app;
     Context context;
 
+    private long finshTime = 0;
+
     public Bottom(Context context, AttributeSet attrs) {
         super(context, attrs);
         view = LayoutInflater.from(context).inflate(R.layout.bottom, this);
@@ -163,11 +165,26 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         } else if (v == bottom_menu5) {//消费
             Fragments.Replace(((Activity) context).getFragmentManager(), new OrderFr());
         } else if (v == bottom_menu6) {//呼叫
+            long beginTime = System.currentTimeMillis();
+            if (beginTime - finshTime < 1000) {
+                return;
+            }
             showCall();
+            finshTime = beginTime;
         } else if (v == bottom_menu7) {//留位
+            long beginTime = System.currentTimeMillis();
+            if (beginTime - finshTime < 1000) {
+                return;
+            }
             showLiuwei();
+            finshTime = beginTime;
         } else if (v == bottom_menu8) {//控制
+            long beginTime = System.currentTimeMillis();
+            if (beginTime - finshTime < 1000) {
+                return;
+            }
             showCtrl();
+            finshTime = beginTime;
         } else if (v == bottom_menu9) {//帮助
             Fragments.Replace(((Activity) context).getFragmentManager(), new HelpFr());
         } else if (v == bottom_menu10) {//返回
@@ -247,7 +264,12 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
+                long beginTime = System.currentTimeMillis();
+                if (beginTime - finshTime < 1000) {
+                    return;
+                }
                 showsp(1);
+                finshTime = beginTime;
             }
         });
         down_z = dialog_ctrl.findViewById(R.id.down_z);
@@ -256,7 +278,12 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
+                long beginTime = System.currentTimeMillis();
+                if (beginTime - finshTime < 1000) {
+                    return;
+                }
                 showsp(2);
+                finshTime = beginTime;
             }
         });
 
@@ -266,7 +293,12 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
             @Override
             public void onClick(View v) {
                 dialog_ctrl.dismiss();
+                long beginTime = System.currentTimeMillis();
+                if (beginTime - finshTime < 1000) {
+                    return;
+                }
                 showsp(3);
+                finshTime = beginTime;
             }
         });
     }
