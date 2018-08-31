@@ -52,7 +52,7 @@ public class JishiAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(
-                    R.layout.adapter_jishi, null);
+                    R.layout.adapter_dish, null);
             holder.game_bg = convertView
                     .findViewById(R.id.game_bg);
             holder.game_name = convertView
