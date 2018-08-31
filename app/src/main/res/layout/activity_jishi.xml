@@ -23,14 +23,15 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <Spinner
+        <TextView
             android:id="@+id/spin1"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@mipmap/content_icon_xb"
             android:gravity="center"
-            android:popupBackground="@color/transparent" />
+            android:text="全部"
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="60dp"
@@ -41,14 +42,15 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <Spinner
+        <TextView
             android:id="@+id/spin2"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@mipmap/content_icon_xb"
             android:gravity="center"
-            android:popupBackground="@color/transparent" />
+            android:text="全部"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="200dp"

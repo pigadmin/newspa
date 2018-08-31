@@ -3,6 +3,7 @@ package com.spa.ui.jishi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,14 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,11 +60,8 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     private Activity activity;
     private App app;
 
-    private Spinner spinner1;
-    private Spinner spinner2;
-
-    private String[] SexArray = new String[]{"全部", "男", "女"};
-    private String[] FreeArray = new String[]{"全部", "空闲", "上钟"};
+    private TextView mChoice1;
+    private TextView mChoice2;
 
     private long finshTime = 0;
 
@@ -386,73 +383,121 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void initView() {
-        spinner1 = view.findViewById(R.id.spin1);
-        spinner2 = view.findViewById(R.id.spin2);
+        mChoice1 = view.findViewById(R.id.spin1);
+        mChoice2 = view.findViewById(R.id.spin2);
         iniLiter();
     }
 
-    private void iniLiter() {
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, SexArray);
-        //第三步：为适配器设置下拉列表下拉时的菜单样式。
-        adapter1.setDropDownViewResource(R.layout.powin_layout);
-        //第四步：将适配器添加到下拉列表上
-        spinner1.setAdapter(adapter1);
-        //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
-        spinner1.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                if (arg1 != null) {
-                    TextView tv = (TextView) arg1;
-                    tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
-                }
-                switch (arg2) {
-                    case 0:
-                        sex = "";
-                        break;
-                    case 1:
-                        sex = "&sex=1";
-                        break;
-                    case 2:
-                        sex = "&sex=2";
-                        break;
-                }
+    private void Attribute1(View strView, final PopupWindow window) {
+        final TextView textType1 = strView.findViewById(R.id.text_type_1);
+        final TextView textType2 = strView.findViewById(R.id.text_type_2);
+        final TextView textType3 = strView.findViewById(R.id.text_type_3);
 
+        textType1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice1.setText(textType1.getText().toString());
+                sex = "";
                 Req.get(Req.teach + keywd + sex + status);
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-
+                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
             }
         });
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, FreeArray);
-        //第三步：为适配器设置下拉列表下拉时的菜单样式。
-        adapter2.setDropDownViewResource(R.layout.powin_layout);
-        //第四步：将适配器添加到下拉列表上
-        spinner2.setAdapter(adapter2);
-        //第五步：为下拉列表设置各种事件的响应，这个事响应菜单被选中
-        spinner2.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                if (arg1 != null) {
-                    TextView tv = (TextView) arg1;
-                    tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
-                }
-                switch (arg2) {
-                    case 0:
-                        status = "";
-                        break;
-                    case 1:
-                        status = "&status=2";
-                        break;
-                    case 2:
-                        status = "&status=1";
-                        break;
-                }
-
+        textType2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice1.setText(textType2.getText().toString());
+                sex = "&sex=1";
                 Req.get(Req.teach + keywd + sex + status);
+                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
             }
+        });
 
-            public void onNothingSelected(AdapterView<?> arg0) {
+        textType3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice1.setText(textType3.getText().toString());
+                sex = "&sex=2";
+                Req.get(Req.teach + keywd + sex + status);
+                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
+            }
+        });
+    }
 
+    private void Attribute2(View strView, final PopupWindow window) {
+        final TextView textType1 = strView.findViewById(R.id.text_type_1);
+        final TextView textType2 = strView.findViewById(R.id.text_type_2);
+        final TextView textType3 = strView.findViewById(R.id.text_type_3);
+
+        textType1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice2.setText(textType1.getText().toString());
+                status = "";
+                Req.get(Req.teach + keywd + sex + status);
+                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
+            }
+        });
+
+        textType2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice2.setText(textType2.getText().toString());
+                status = "&status=2";
+                Req.get(Req.teach + keywd + sex + status);
+                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
+            }
+        });
+
+        textType3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoice2.setText(textType3.getText().toString());
+                status = "&status=1";
+                Req.get(Req.teach + keywd + sex + status);
+                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                window.dismiss();
+            }
+        });
+    }
+
+    private void showDiag1() {
+        mChoice1.setBackgroundResource(R.mipmap.polygon_2);
+        View strView = getActivity().getLayoutInflater().inflate(R.layout.serch_powin_layout_dialog1, null, false);
+        final PopupWindow window = new PopupWindow(strView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        window.setOutsideTouchable(true);
+        window.setBackgroundDrawable(new BitmapDrawable());
+        window.showAsDropDown(mChoice1, 0, 0, 0);
+        Attribute1(strView, window);
+    }
+
+    private void showDiag2() {
+        mChoice2.setBackgroundResource(R.mipmap.polygon_2);
+        View strView = getActivity().getLayoutInflater().inflate(R.layout.serch_powin_layout_dialog2, null, false);
+        final PopupWindow window = new PopupWindow(strView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        window.setOutsideTouchable(true);
+        window.setBackgroundDrawable(new BitmapDrawable());
+        window.showAsDropDown(mChoice2, 0, 0, 0);
+        Attribute2(strView, window);
+    }
+
+    private void iniLiter() {
+        mChoice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDiag1();
+            }
+        });
+
+        mChoice2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDiag2();
             }
         });
     }
