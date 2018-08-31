@@ -18,7 +18,7 @@
         android:id="@+id/music_song_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:text="王铮亮"
         android:textColor="@color/white"
         android:textSize="20sp" />
