@@ -158,7 +158,6 @@ public class App extends Application {
                 editor.commit();
             }
             version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-
         } catch (Exception e) {
             e.printStackTrace();
         }

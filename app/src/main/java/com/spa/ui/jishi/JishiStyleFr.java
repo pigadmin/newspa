@@ -561,14 +561,19 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                String result = StringUtils.ListToString(resultList);
-                Logger.d(TAG, "str.." + result);
-                if (!TextUtils.isEmpty(result)) {
-                    result = result.substring(0, result.length() - 1);
-                    showDialogStyle9(result);
-                    dialog.dismiss();
-                } else {
-                    Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
+
+                if (jishi.getStatus() == 1) {
+                    Toast.makeText(activity, jishi.getNumbering() + "号技师正在上钟，请返回重新下单...", Toast.LENGTH_LONG).show();
+                } else if (jishi.getStatus() == 2) {
+                    String result = StringUtils.ListToString(resultList);
+                    Logger.d(TAG, "str.." + result);
+                    if (!TextUtils.isEmpty(result)) {
+                        result = result.substring(0, result.length() - 1);
+                        showDialogStyle9(result);
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
