@@ -137,6 +137,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="4.5"
             android:divider="@null"
+            android:dividerHeight="-3dp"
             android:padding="15dp"
             android:scrollbars="none" />
 
