@@ -487,6 +487,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         window.setOutsideTouchable(true);
         window.setBackgroundDrawable(new BitmapDrawable());
         window.showAsDropDown(mSpin1llt, 0, 0, 0);
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mSpin1Src.setImageResource(R.mipmap.dbx_1);
+            }
+        });
         Attribute1(strView, window);
     }
 
@@ -497,6 +503,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
         window.setOutsideTouchable(true);
         window.setBackgroundDrawable(new BitmapDrawable());
         window.showAsDropDown(mSpin2llt, 0, 0, 0);
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mSpin2Src.setImageResource(R.mipmap.dbx_1);
+            }
+        });
         Attribute2(strView, window);
     }
 
