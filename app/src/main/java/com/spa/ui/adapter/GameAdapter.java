@@ -21,33 +21,27 @@ public class GameAdapter extends BaseAdapter {
     private List<Game> list = new ArrayList<>();
 
     public GameAdapter(Context context, List<Game> list) {
-        // TODO Auto-generated constructor stub
         this.context = context;
         this.list = list;
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -62,19 +56,14 @@ public class GameAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         holder.game_name.setText(list.get(position).getName());
-
         Picasso.with(context).load(list.get(position).getIcon()).into(holder.game_bg);
-
         return convertView;
-
     }
-
 
     public class ViewHolder {
         private ImageView game_bg;
         private TextView game_name;
-
     }
-
 }
