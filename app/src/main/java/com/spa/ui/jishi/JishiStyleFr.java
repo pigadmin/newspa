@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -62,6 +63,13 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
 
     private TextView mChoice1;
     private TextView mChoice2;
+
+    private LinearLayout mSpin1llt;
+    private LinearLayout mSpin2llt;
+
+    private ImageView mSpin1Src;
+    private ImageView mSpin2Src;
+
 
     private long finshTime = 0;
 
@@ -383,6 +391,12 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
     }
 
     private void initView() {
+        mSpin1Src = view.findViewById(R.id.spin1_src);
+        mSpin2Src = view.findViewById(R.id.spin2_src);
+
+        mSpin1llt = view.findViewById(R.id.spin1_llt);
+        mSpin2llt = view.findViewById(R.id.spin2_llt);
+
         mChoice1 = view.findViewById(R.id.spin1);
         mChoice2 = view.findViewById(R.id.spin2);
         iniLiter();
@@ -399,7 +413,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice1.setText(textType1.getText().toString());
                 sex = "";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin1Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
@@ -410,7 +424,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice1.setText(textType2.getText().toString());
                 sex = "&sex=1";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin1Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
@@ -421,7 +435,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice1.setText(textType3.getText().toString());
                 sex = "&sex=2";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice1.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin1Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
@@ -438,7 +452,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice2.setText(textType1.getText().toString());
                 status = "";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin2Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
@@ -449,7 +463,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice2.setText(textType2.getText().toString());
                 status = "&status=2";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin2Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
@@ -460,41 +474,41 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 mChoice2.setText(textType3.getText().toString());
                 status = "&status=1";
                 Req.get(Req.teach + keywd + sex + status);
-                mChoice2.setBackgroundResource(R.mipmap.content_icon_xb);
+                mSpin2Src.setImageResource(R.mipmap.dbx_1);
                 window.dismiss();
             }
         });
     }
 
     private void showDiag1() {
-        mChoice1.setBackgroundResource(R.mipmap.polygon_2);
+        mSpin1Src.setImageResource(R.mipmap.dbx);
         View strView = getActivity().getLayoutInflater().inflate(R.layout.serch_powin_layout_dialog1, null, false);
         final PopupWindow window = new PopupWindow(strView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         window.setOutsideTouchable(true);
         window.setBackgroundDrawable(new BitmapDrawable());
-        window.showAsDropDown(mChoice1, 0, 0, 0);
+        window.showAsDropDown(mSpin1llt, 0, 0, 0);
         Attribute1(strView, window);
     }
 
     private void showDiag2() {
-        mChoice2.setBackgroundResource(R.mipmap.polygon_2);
+        mSpin2Src.setImageResource(R.mipmap.dbx);
         View strView = getActivity().getLayoutInflater().inflate(R.layout.serch_powin_layout_dialog2, null, false);
         final PopupWindow window = new PopupWindow(strView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         window.setOutsideTouchable(true);
         window.setBackgroundDrawable(new BitmapDrawable());
-        window.showAsDropDown(mChoice2, 0, 0, 0);
+        window.showAsDropDown(mSpin2llt, 0, 0, 0);
         Attribute2(strView, window);
     }
 
     private void iniLiter() {
-        mChoice1.setOnClickListener(new View.OnClickListener() {
+        mSpin1llt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDiag1();
             }
         });
 
-        mChoice2.setOnClickListener(new View.OnClickListener() {
+        mSpin2llt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDiag2();
