@@ -30,7 +30,7 @@ public class TypeChooseAdapter extends BAdapter<String> {
 
         //判断position位置是否被选中，改变颜色
         if (mGridView.isItemChecked(position)) {
-            convertView.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+            convertView.setBackgroundColor(context.getResources().getColor(R.color.zz_ys));
         } else {
             convertView.setBackgroundColor(Color.TRANSPARENT);
         }
