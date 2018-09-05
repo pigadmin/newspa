@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/popup_j2" android:state_pressed="true" />
-    <item android:drawable="@mipmap/popup_j2" />
+    <item android:drawable="@mipmap/popup_j3" android:state_pressed="true" />
+    <item android:drawable="@mipmap/popup_j4" />
 </selector>
 
 
