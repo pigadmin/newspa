@@ -81,21 +81,25 @@ public class Head extends LinearLayout {
 
     public Head(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
-        view = LayoutInflater.from(context).inflate(R.layout.head, this);
-        app = (App) context.getApplicationContext();
-        EventBus.getDefault().register(this);
-        find();
-        init();
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        currentVolume = audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC);
+        try {
+            this.context = context;
+            view = LayoutInflater.from(context).inflate(R.layout.head, this);
+            app = (App) context.getApplicationContext();
+            EventBus.getDefault().register(this);
+            find();
+            init();
+            audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            currentVolume = audioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC);
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(App.SHOWNAME);
-        filter.addAction(App.HIDENAME);
-        context.registerReceiver(receiver, filter);
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(App.SHOWNAME);
+            filter.addAction(App.HIDENAME);
+            context.registerReceiver(receiver, filter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

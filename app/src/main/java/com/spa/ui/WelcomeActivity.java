@@ -42,13 +42,17 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        setMediaListene();
-        app = (App) getApplication();
-        find();
+        try {
+            setContentView(R.layout.activity_welcome);
+            setMediaListene();
+            app = (App) getApplication();
+            find();
 //        System.out.println(Req.check);
 //        System.out.println(App.mac);
-        reg();
+            reg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private MediaPlayer mediaPlayer;
@@ -83,7 +87,7 @@ public class WelcomeActivity extends BaseActivity {
                     welcome_tips.setText("");
                     check();
                 } else {
-                    welcome_tips.setText(getString(R.string.disnetwork));
+//                    welcome_tips.setText(getString(R.string.disnetwork));
                 }
             } catch (Exception e) {
 //                e.printStackTrace();

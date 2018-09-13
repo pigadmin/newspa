@@ -63,13 +63,17 @@ public class MyService extends Service implements IScrollState, Runnable {
 
     @Override
     public void onCreate() {
-        System.out.println("---MyService_onCreate()---");
-        super.onCreate();
-        app = (App) getApplication();
-        EventBus.getDefault().register(this);
+        try {
+            System.out.println("---MyService_onCreate()---");
+            super.onCreate();
+            app = (App) getApplication();
+            EventBus.getDefault().register(this);
 
-        getmarquee();
-        regtime();
+            getmarquee();
+            regtime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void regtime() {

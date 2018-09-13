@@ -45,8 +45,12 @@ public class SocketService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        mobile();
-        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        try {
+            mobile();
+            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String url = App.socketurl;
