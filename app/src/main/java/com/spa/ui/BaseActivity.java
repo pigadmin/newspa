@@ -162,28 +162,28 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
 
     public void onEvent(final NetChange event) {
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toas toas = new Toas();
-                switch (event.getType()) {
-                    case -1:
-                        toas.setMsg(getString(R.string.disnetwork));
-                        break;
-                    case 0:
-                        toas.setMsg(getString(R.string.gps_network));
-                        break;
-                    case 1:
-                        toas.setMsg(getString(R.string.wifi_network));
-                        break;
-                    case 9:
-                        toas.setMsg(getString(R.string.eth_network));
-                        break;
-                }
-                toas.show(BaseActivity.this);
-                toas = null;
-            }
-        });
+//        handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toas toas = new Toas();
+//                switch (event.getType()) {
+//                    case -1:
+//                        toas.setMsg(getString(R.string.disnetwork));
+//                        break;
+//                    case 0:
+//                        toas.setMsg(getString(R.string.gps_network));
+//                        break;
+//                    case 1:
+//                        toas.setMsg(getString(R.string.wifi_network));
+//                        break;
+//                    case 9:
+//                        toas.setMsg(getString(R.string.eth_network));
+//                        break;
+//                }
+//                toas.show(BaseActivity.this);
+//                toas = null;
+//            }
+//        });
 
 
     }

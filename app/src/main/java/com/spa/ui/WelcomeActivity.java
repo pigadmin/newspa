@@ -293,7 +293,8 @@ public class WelcomeActivity extends BaseActivity {
     private CountDownTimer timer = new CountDownTimer(60 * 1000, 1000) {
         @Override
         public void onTick(long l) {
-            welcome_tips.setText(getString(R.string.connect_error) + "\n" + (l / 1000) + "s后重新连接");
+//            welcome_tips.setText(getString(R.string.connect_error) + "\n" + (l / 1000) + "s后重新连接");
+            welcome_tips.setText(getString(R.string.connect_error) + "（" + (l / 1000) + "）");
         }
 
         @Override

@@ -97,34 +97,33 @@ public class App extends Application {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                ConnectivityManager connectivityManager = (ConnectivityManager) context
-                        .getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo activeNetworkInfo = connectivityManager
-                        .getActiveNetworkInfo();
-                network_type = activeNetworkInfo.getType();
-                System.out.println("网络类型&Net Type：" + network_type);
-
-                switch (network_type) {
-                    case -1:
-                        toas.setMsg(getString(R.string.disnetwork));
-                        break;
-                    case 0:
-                        toas.setMsg(getString(R.string.gps_network));
-                        break;
-                    case 1:
-                        toas.setMsg(getString(R.string.wifi_network));
-                        break;
-                    case 9:
-                        toas.setMsg(getString(R.string.eth_network));
-                        break;
-                }
-                EventBus.getDefault().post(new NetChange(network_type));
-                toas.show(App.this);
-
+//                ConnectivityManager connectivityManager = (ConnectivityManager) context
+//                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+//                NetworkInfo activeNetworkInfo = connectivityManager
+//                        .getActiveNetworkInfo();
+//                network_type = activeNetworkInfo.getType();
+//                System.out.println("网络类型&Net Type：" + network_type);
+//
+//                switch (network_type) {
+//                    case -1:
+//                        toas.setMsg(getString(R.string.disnetwork));
+//                        break;
+//                    case 0:
+//                        toas.setMsg(getString(R.string.gps_network));
+//                        break;
+//                    case 1:
+//                        toas.setMsg(getString(R.string.wifi_network));
+//                        break;
+//                    case 9:
+//                        toas.setMsg(getString(R.string.eth_network));
+//                        break;
+//                }
+//                EventBus.getDefault().post(new NetChange(network_type));
+//                toas.show(App.this);
             } else if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
                 EventBus.getDefault().post(new UpdateTime(System.currentTimeMillis()));
             } else if (intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {
-                System.out.println("同步服务器时间&synchronous server time");
+                System.out.println("更改系统时间");
             }
 
         }

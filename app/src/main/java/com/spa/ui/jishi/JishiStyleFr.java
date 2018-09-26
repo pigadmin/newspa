@@ -563,7 +563,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
             public void onClick(View arg0) {
 
                 if (jishi.getStatus() == 1) {
-                    Toast.makeText(activity, jishi.getNumbering() + "号技师正在上钟，请返回重新下单...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, jishi.getNumbering() + getString(R.string.isbusy), Toast.LENGTH_LONG).show();
                 } else if (jishi.getStatus() == 2) {
                     String result = StringUtils.ListToString(resultList);
                     Logger.d(TAG, "str.." + result);
@@ -572,7 +572,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                         showDialogStyle9(result);
                         dialog.dismiss();
                     } else {
-                        Toast.makeText(activity, "选择服务项目", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, R.string.c_project, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -615,7 +615,7 @@ public class JishiStyleFr extends BaseFr implements AdapterView.OnItemClickListe
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     System.out.println("------------");
                     dialog.dismiss();
-                    Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, R.string.order_success, Toast.LENGTH_LONG).show();
                 }
                 return false;
             }

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">麦吉SPA</string>
 
-    <string name="connect_error">设备不上服务器，请联系工作人员</string>
+    <!--<string name="connect_error">设备不上服务器，请联系工作人员</string>-->
+    <string name="connect_error">设备不上服务器，正在尝试重新连接</string>
     <string name="play_error">播放异常</string>
     <string name="live_none">没有此频道</string>
     <string name="exit">再按一次退出应用</string>
@@ -18,25 +19,25 @@
     <string name="search_hit">在这里输入影片内容</string>
     <string name="search_jishi">在这里输入技师编号</string>
     <string name="searchjishi_hit">搜索技师</string>
-    <string name="main_menu1">服务介绍</string>
-    <string name="main_menu2">电视直播</string>
-    <string name="main_menu3">影音娱乐</string>
-    <string name="main_menu4">技师服务</string>
-    <string name="main_menu5">酒水饮料</string>
-    <string name="main_menu6">游戏应用</string>
-
+    <string name="menu_title_4">服务介绍</string>
+    <string name="menu_title_2">电视直播</string>
+    <string name="menu_title_8">影音娱乐</string>
+    <string name="menu_title_11">技师服务</string>
+    <string name="menu_title_10">酒水饮料</string>
+    <string name="menu_title_13">游戏应用</string>
 
     <string name="bottom_menu1">主页</string>
     <string name="bottom_menu2">介绍</string>
-    <string name="bottom_menu3">技师</string>
-    <string name="bottom_menu4">消费</string>
-    <string name="bottom_menu5">优惠</string>
+    <string name="bottom_menu3">优惠</string>
+    <string name="bottom_menu4">技师</string>
+    <string name="bottom_menu5">消费</string>
     <string name="bottom_menu6">呼叫</string>
     <string name="bottom_menu7">留位</string>
-    <string name="bottom_menu8">帮助</string>
-    <string name="bottom_menu9">控制</string>
+    <string name="bottom_menu8">设置</string>
+    <string name="bottom_menu9">帮助</string>
     <string name="bottom_menu10">返回</string>
 
+    <string name="c_project">选择服务项目</string>
     <string name="sp_tips">请刷手牌</string>
     <string name="showsp_tips">手牌号码显示区</string>
     <string name="call_tips">是否呼叫服务员？</string>
@@ -47,6 +48,9 @@
     <string name="jia_z">加钟</string>
     <string name="ok">确认</string>
     <string name="cancle">取消</string>
+    <string name="isbusy">号技师正在上钟，请返回重新下单...</string>
+
+    <string name="tips">温馨提示</string>
 
     <string name="Download">应用下载</string>
     <string name="Downloading_update">正在下载升级包。请稍后...</string>
@@ -70,29 +74,29 @@
 
     <string name="video_time">上一次观看到x,是否继续播放?</string>
 
-    <string name="dish_name">名称：</string>
-    <string name="no">编号：</string>
-    <string name="dish_time">供应时间：</string>
-    <string name="dish_price">价格：</string>
+    <string name="dish_name">名称:</string>
+    <string name="no">编号:</string>
+    <string name="dish_time">供应时间:</string>
+    <string name="dish_price">价格:</string>
     <string name="dish_num">数量:</string>
     <string name="dish_req">要求:</string>
     <string name="dish_des">详情:</string>
     <string name="order">下单</string>
 
     <string name="all">全部</string>
-    <string name="jishi_sex">性别：</string>
+    <string name="jishi_sex">性别:</string>
     <string name="jishi_sex1">男</string>
     <string name="jishi_sex2">女</string>
 
-    <string name="jishi_city">籍贯：</string>
-    <string name="jishi_kg">体重：</string>
-    <string name="jishi_height">身高：</string>
-    <string name="jishi_status">状态：</string>
+    <string name="jishi_city">籍贯:</string>
+    <string name="jishi_kg">体重:</string>
+    <string name="jishi_height">身高:</string>
+    <string name="jishi_status">状态:</string>
     <string name="jishi_status1">上钟</string>
     <string name="jishi_status2">空闲</string>
     <string name="jishi_status3">当前:\t当值</string>
     <string name="jishi_status4">当前:\t未当值</string>
-    <string name="jishi_project">项目：</string>
+    <string name="jishi_project">项目:</string>
 
     <string-array name="sex">
         <item>全部</item>
@@ -106,7 +110,20 @@
         <item>上钟</item>
     </string-array>
 
-    <string name="msginsname">计划插播：</string>
-    <string name="insname">即时插播：</string>
-    <string name="weekname">周计划插播：</string>
+    <string name="msginsname">计划插播:</string>
+    <string name="insname">即时插播:</string>
+    <string name="weekname">周计划插播:</string>
+
+    <string name="cancle_call_tips">是否取消呼叫?</string>
+    <string name="sp_no">手牌号码显示区</string>
+    <string name="jishi_detail">技师详情:</string>
+    <string name="positions">位置:</string>
+    <string name="sp_tips2">请您确认后刷手牌:</string>
+    <string name="dish_detail">商品明细:</string>
+    <string name="remakes">请输入需求...</string>
+    <string name="total">合计:</string>
+    <string name="feature">技师功能</string>
+    <string name="volume">音         量</string>
+    <string name="brightness">屏幕亮度</string>
+    <string name="langualge">语言选择</string>
 </resources>

@@ -12,7 +12,7 @@
         android:background="@drawable/pow_text_bg"
         android:gravity="center"
         android:padding="5dp"
-        android:text="全部"
+        android:text="@string/all"
         android:textColor="@color/white"
         android:textSize="13sp" />
 
@@ -29,7 +29,7 @@
         android:background="@drawable/pow_text_bg"
         android:gravity="center"
         android:padding="5dp"
-        android:text=" 男 "
+        android:text="@string/jishi_sex1"
         android:textColor="@color/white"
         android:textSize="13sp" />
 
@@ -46,7 +46,7 @@
         android:background="@drawable/pow_text_bg"
         android:gravity="center"
         android:padding="5dp"
-        android:text=" 女 "
+        android:text="@string/jishi_sex2"
         android:textColor="@color/white"
         android:textSize="13sp" />
 

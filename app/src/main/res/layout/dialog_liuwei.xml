@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
-            android:text="请刷手牌"
+            android:text="@string/sp_tips"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
 
@@ -34,14 +34,14 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
             android:background="@null"
-            android:gravity="center"
             android:enabled="false"
             android:focusable="false"
-            android:hint="手牌号码显示区"
+            android:gravity="center"
+            android:hint="@string/sp_no"
             android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
             android:textColorHint="@color/result_minor_text"
             android:textSize="18sp" />
 
@@ -56,7 +56,7 @@
             android:background="@drawable/select_btn_bg_style4"
             android:gravity="center"
             android:padding="10dp"
-            android:text="取消"
+            android:text="@string/cancle"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
     </LinearLayout>

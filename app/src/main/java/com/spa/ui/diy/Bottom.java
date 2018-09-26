@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -29,6 +33,7 @@ import com.spa.app.Req;
 import com.spa.bean.EvaluateBean;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
+import com.spa.ui.MainActivity;
 import com.spa.ui.MainFr;
 import com.spa.ui.bottom.OrderFr;
 import com.spa.ui.bottom.YouhuiFr;
@@ -36,12 +41,14 @@ import com.spa.ui.bottom.help.HelpFr;
 import com.spa.ui.bottom.liuwei.LiuweiActivity;
 import com.spa.ui.intro.IntroFr;
 import com.spa.ui.jishi.JishiStyleFr;
+import com.spa.ui.video.PlayerActivity;
 import com.spa.views.BtmDialog;
 import com.spa.views.BtmDialogList2;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Bottom extends LinearLayout implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     View view;
@@ -65,7 +72,7 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
     private int maxVolume;
     private int currentVolume;
 
-    ImageView bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
+    private FrameLayout bottom_menu1, bottom_menu2, bottom_menu3, bottom_menu4, bottom_menu5, bottom_menu6, bottom_menu7, bottom_menu8, bottom_menu9, bottom_menu10;
 
     private void find() {
         bottom_menu1 = findViewById(R.id.bottom_menu1);
@@ -111,9 +118,9 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
         cancle = dialog_call.findViewById(R.id.cancle);
         call_context = dialog_call.findViewById(R.id.call_context);
         if (app.isCall()) {
-            call_context.setText("是否取消呼叫?");
+            call_context.setText(context.getString(R.string.cancle_call_tips));
         } else {
-            call_context.setText("是否呼叫服务员?");
+            call_context.setText(context.getString(R.string.call_tips));
         }
         ok.setOnClickListener(new OnClickListener() {
 
@@ -238,6 +245,8 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
     private AlertDialog dialog_ctrl;
     private Button up_z, down_z, jia_z;
     private SeekBar audio, light;
+    private Button zh, en, ja, ko;
+
 
     private void showCtrl() {
         currentVolume = audioManager
@@ -301,6 +310,58 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
                 finshTime = beginTime;
             }
         });
+
+        zh = dialog_ctrl.findViewById(R.id.zh);
+        zh.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SwitchLanguage("ZH");
+            }
+        });
+        en = dialog_ctrl.findViewById(R.id.en);
+        en.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SwitchLanguage("EN");
+            }
+        });
+        ja = dialog_ctrl.findViewById(R.id.ja);
+        ja.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SwitchLanguage("JA");
+            }
+        });
+        ko = dialog_ctrl.findViewById(R.id.ko);
+        ko.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SwitchLanguage("KO");
+            }
+        });
+
+
+    }
+
+    private void SwitchLanguage(String city) {
+        // TODO Auto-generated method stub
+
+        try {
+            System.out.println(city);
+            Locale locale = new Locale(city);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private int getScreenBrightness() {
@@ -337,13 +398,13 @@ public class Bottom extends LinearLayout implements View.OnClickListener, SeekBa
                     } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         switch (cut) {
                             case 1:
-                                Toast.makeText(context, "上钟成功", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
                                 break;
                             case 2:
-                                Toast.makeText(context, "下钟成功", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
                                 break;
                             case 3:
-                                Toast.makeText(context, "加钟成功", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
                                 break;
                         }
                         dialog_liuwei.dismiss();

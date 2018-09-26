@@ -43,4 +43,42 @@
         android:textColor="@color/white"
         android:textSize="30sp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+
+        <Button
+            android:id="@+id/ch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中" />
+
+        <Button
+            android:id="@+id/en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ch"
+            android:text="英" />
+
+        <Button
+            android:id="@+id/ko"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ch"
+            android:text="韩" />
+
+        <Button
+            android:id="@+id/jp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/en"
+            android:layout_toRightOf="@+id/ko"
+            android:text="日" />
+
+    </RelativeLayout>
+
+
 </FrameLayout>

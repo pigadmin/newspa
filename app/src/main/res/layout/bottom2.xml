@@ -7,54 +7,225 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/bottom_menu1"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_zhuye_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_zhuye_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu1"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/bottom_menu2"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_jieshao_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
-        android:id="@+id/bottom_menu4"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_jishi_menu" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_jieshao_menu" />
 
-    <ImageView
-        android:id="@+id/bottom_menu5"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_xiaofei_menu" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu2"
+            android:textColor="@color/white" />
 
-    <ImageView
+    </FrameLayout>
+
+
+    <FrameLayout
         android:id="@+id/bottom_menu3"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_youhui_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_youhui_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu3"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/bottom_menu4"
+        style="@style/bottom_menu_style_two">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_jishi_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu4"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/bottom_menu5"
+        style="@style/bottom_menu_style_two">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_xiaofei_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu5"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/bottom_menu6"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_hujiao_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_hujiao_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu6"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/bottom_menu7"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_liuwei_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
-        android:id="@+id/bottom_menu9"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_bangzhu_menu" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_liuwei_menu" />
 
-    <ImageView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu7"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/bottom_menu8"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_kongzhi_menu" />
+        style="@style/bottom_menu_style_two">
 
-    <ImageView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_kongzhi_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu8"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/bottom_menu9"
+        style="@style/bottom_menu_style_two">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_bangzhu_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu9"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/bottom_menu10"
-        style="@style/bottom_menu_style_two"
-        android:src="@drawable/select_fanhui_menu" />
+        style="@style/bottom_menu_style_two">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/select_fanhui_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/bottom_menu10"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
 
 </LinearLayout>

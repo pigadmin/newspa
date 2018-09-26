@@ -40,7 +40,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="技师:"
+                        android:text="@string/no"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -63,7 +63,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="位置:"
+                        android:text="@string/positions"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -86,7 +86,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="项目:"
+                        android:text="@string/jishi_project"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -118,7 +118,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="请您确认后刷手牌"
+                android:text="@string/sp_tips2"
                 android:textColor="@color/sbc_snippet_text"
                 android:textSize="20sp" />
 
@@ -130,7 +130,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn"
                 android:gravity="center"
-                android:text="取消"
+                android:text="@string/cancle"
                 android:textColor="@color/sbc_snippet_text"
                 android:textSize="20sp" />
         </LinearLayout>

@@ -76,7 +76,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
 
     private ListView left_list;
     private GridView right_grid;
-    private ImageView zhangdanchaxun;
+    private TextView zhangdanchaxun;
 
     private void find() {
         left_list = view.findViewById(R.id.left_list);
@@ -218,7 +218,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
         dish_no = dialog_dish.findViewById(R.id.dish_no);
         dish_no.setText(getString(R.string.dish_time) + dish.getSupply_time());
         dish_price = dialog_dish.findViewById(R.id.dish_price);
-        dish_price.setText(getString(R.string.dish_price) + dish.getPrice() + "");
+        dish_price.setText(dish.getPrice() + "");
 
         order = dialog_dish.findViewById(R.id.order);
         cancle = dialog_dish.findViewById(R.id.cancle);
@@ -235,7 +235,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
             @Override
             public void onClick(View v) {
                 count = Integer.parseInt(dish_num.getText().toString());
-                if(count<98){
+                if (count < 98) {
                     count++;
                 }
                 dish_num.setText(count + "");
@@ -320,7 +320,7 @@ public class DishStyleFr extends BaseFr implements AdapterView.OnItemClickListen
                 System.out.println("@@@@@food" + keyCode);
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
-                    System.out.println("------------"+Req.notice + notice);
+                    System.out.println("------------" + Req.notice + notice);
                     dialog.dismiss();
                     Toast.makeText(activity, "下单成功", Toast.LENGTH_LONG).show();
                     Req.get(Req.notice + notice);

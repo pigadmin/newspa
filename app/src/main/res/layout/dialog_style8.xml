@@ -43,7 +43,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="40dp"
                     android:singleLine="true"
-                    android:text="技师详情:"
+                    android:text="@string/jishi_detail"
                     android:textColor="@color/sbc_snippet_text"
                     android:textSize="22sp" />
 
@@ -57,7 +57,7 @@
                         android:id="@+id/dish_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="编号:"
+                        android:text="@string/no"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -80,7 +80,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="性别:"
+                        android:text="@string/jishi_sex"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="50dp"
-                        android:text="籍贯:"
+                        android:text="@string/jishi_city"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="体重:"
+                        android:text="@string/jishi_kg"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:text="身高:"
+                        android:text="@string/jishi_height"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -167,7 +167,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="状态:"
+                        android:text="@string/jishi_status"
                         android:textColor="@color/sbc_snippet_text"
                         android:textSize="20sp" />
 
@@ -196,7 +196,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="10dp"
                     android:singleLine="true"
-                    android:text="项目:"
+                    android:text="@string/jishi_project"
                     android:textColor="@color/sbc_snippet_text"
                     android:textSize="20sp" />
 

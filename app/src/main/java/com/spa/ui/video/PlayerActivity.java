@@ -208,8 +208,8 @@ public class PlayerActivity extends BaseActivity implements MediaPlayer.OnPrepar
         TextView confirm = dialog.findViewById(R.id.confirm);
         TextView mTitle = dialog.findViewById(R.id.title);
         TextView mEssage = dialog.findViewById(R.id.message);
-        mTitle.setText("温馨提示");
-        mEssage.setText("播放异常");
+        mTitle.setText(getString(R.string.tips));
+        mEssage.setText(getString(R.string.play_error));
         cancel.setVisibility(View.GONE);
         confirm.setBackgroundResource(R.drawable.selector_back3_shape);
         confirm.setOnClickListener(new View.OnClickListener() {

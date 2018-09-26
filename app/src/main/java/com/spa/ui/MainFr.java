@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,12 +54,11 @@ public class MainFr extends BaseFr implements View.OnClickListener {
     private Activity activity;
     private App app;
 
-    private ImageView main_menu1, main_menu2, main_menu3, main_menu4, main_menu5, main_menu6;
+    private FrameLayout main_menu1, main_menu2, main_menu3, main_menu4, main_menu5, main_menu6;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("main__ccc");
         view = inflater.inflate(R.layout.fr_main, container, false);
         activity = getActivity();
         app = (App) activity.getApplication();
@@ -213,9 +213,9 @@ public class MainFr extends BaseFr implements View.OnClickListener {
                         @Override
                         public void run() {
                             wea_city.setText(wea.getCity());
-                            wea_tmp.setText(wea.getData().getWendu()+"℃");
-                            wea_maxtmp.setText(wea.getData().getForecast().get(0).getHigh().substring(2, 5)+"℃");
-                            wea_mintmp.setText(wea.getData().getForecast().get(0).getLow().substring(2, 5)+"℃");
+                            wea_tmp.setText(wea.getData().getWendu() + "℃");
+                            wea_maxtmp.setText(wea.getData().getForecast().get(0).getHigh().substring(2, 5) + "℃");
+                            wea_mintmp.setText(wea.getData().getForecast().get(0).getLow().substring(2, 5) + "℃");
                             wea_icon.setImageResource(WeatherImage.parseIcon(wea.getData().getForecast().get(0).getType()));
 
 

@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
-            android:text="是否呼叫服务员?"
+            android:text="@string/call_tips"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
     </LinearLayout>
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:background="@drawable/select_btn_bg_style4"
             android:gravity="center"
-            android:text="确定"
+            android:text="@string/ok"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
 
@@ -63,7 +63,7 @@
             android:layout_weight="1"
             android:background="@drawable/select_btn_bg_style4"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/cancle"
             android:textColor="@color/sbc_snippet_text"
             android:textSize="20sp" />
     </LinearLayout>
