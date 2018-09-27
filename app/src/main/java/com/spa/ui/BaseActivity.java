@@ -10,6 +10,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
 import com.spa.app.App;
@@ -36,9 +41,23 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         app = (App) getApplication();
         activities.add(this);
+
+        init();
+    }
+
+    private void init() {
+        try {
+            if (app.getLogoBg() == null) {
+                getlogo();
+            } else {
+                setbg();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void close() {
@@ -86,21 +105,21 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
         return super.onKeyDown(keyCode, event);
     }
 
-    public void onEvent(ErrorMessage event) {
-        final ErrorMessage errorMessage = event;
-        System.out.println(event.getApi());
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toas toas = new Toas();
-                toas.setMsg(errorMessage.getApi() + "：" + errorMessage.getCode());
-                toas.show(BaseActivity.this);
-                toas = null;
-            }
-        });
-
-    }
+//    public void onEvent(ErrorMessage event) {
+//        final ErrorMessage errorMessage = event;
+//        System.out.println(event.getApi());
+//
+//        handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toas toas = new Toas();
+//                toas.setMsg(errorMessage.getApi() + "：" + errorMessage.getCode());
+//                toas.show(BaseActivity.this);
+//                toas = null;
+//            }
+//        });
+//
+//    }
 
     private final int backsmsg = 0;
     int cutbg = 0;
@@ -156,58 +175,63 @@ public class BaseActivity extends Activity implements MediaPlayer.OnPreparedList
     @Override
     protected void onDestroy() {
         System.out.println("Base onDestroy");
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
-    public void onEvent(final NetChange event) {
+    private void getlogo() {
+        String url = App.requrl("getLogo", "&type=3");
+//        Log.e("@@@", url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String json) {
+                try {
+//                    System.out.println("##########1" + json);
+                    AJson<LogoBg> logobg = App.gson.fromJson(json,
+                            new TypeToken<AJson<LogoBg>>() {
+                            }.getType());
+                    LogoBg lg = logobg.getData();
 
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                Toas toas = new Toas();
-//                switch (event.getType()) {
-//                    case -1:
-//                        toas.setMsg(getString(R.string.disnetwork));
-//                        break;
-//                    case 0:
-//                        toas.setMsg(getString(R.string.gps_network));
-//                        break;
-//                    case 1:
-//                        toas.setMsg(getString(R.string.wifi_network));
-//                        break;
-//                    case 9:
-//                        toas.setMsg(getString(R.string.eth_network));
-//                        break;
-//                }
-//                toas.show(BaseActivity.this);
-//                toas = null;
-//            }
-//        });
+                    if (lg != null) {
+                        app.setLogoBg(lg);
+                        setbg();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5 * 1000,//链接超时时间
+                0,//重新尝试连接次数
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        App.queue.add(request);
+    }
 
+    private void setbg() {
+        try {
+            backs = app.getLogoBg().getBacks();
+            if (backs != null && !backs.isEmpty()) {
+                System.out.println(backs.size() + "@@@@@@@@@@@@@@");
+                handler.sendEmptyMessage(backsmsg);
+            } else {
+//                System.out.println("没有背景@@@@@@@@@@@@@@");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private List<Backs> backs;
 
     public void onEvent(DataMessage event) {
-        System.out.println("-----------------" + event.getApi());
-        try {
-            System.out.println("BGBGBGBGBGBG");
-            if (event.getApi().equals(Req.logo)) {
-                final AJson<LogoBg> data = App.gson.fromJson(event.getData(),
-                        new TypeToken<AJson<LogoBg>>() {
-                        }.getType());
-                backs = data.getData().getBacks();
-                System.out.println(backs.size() + "@@@@@@@@@@@@@@");
-                if (!backs.isEmpty()) {
-//                    handler.sendEmptyMessage(backsmsg);
-                }
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 

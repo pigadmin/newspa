@@ -11,12 +11,18 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
 import com.spa.app.App;
@@ -27,6 +33,7 @@ import com.spa.bean.User;
 import com.spa.event.BitmapMessage;
 import com.spa.event.DataMessage;
 import com.spa.event.UpdateTime;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,40 +45,6 @@ public class Head extends LinearLayout {
     private int currentbg = 0;
     private List<Bitmap> bgbitmap = new ArrayList<>();
     private String bgpath;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case bg:
-                    try {
-                        if (logobg.getData() == null)
-                            return;
-                        if (!logobg.getData().getBacks().isEmpty()) {
-                            if (bgbitmap.size() < logobg.getData().getBacks().size()) {
-                                bgpath = logobg.getData().getBacks().get(currentbg).getPath();
-                                Req.img(bgpath, bgpath);
-                            } else {
-                                ((Activity) context).getWindow().getDecorView().setBackground(new BitmapDrawable(bgbitmap.get(currentbg)));
-                            }
-                            handler.sendEmptyMessageDelayed(bg, logobg.getData().getBacks().get(currentbg).getInter() * 1000);
-                            if (currentbg < logobg.getData().getBacks().size() - 1) {
-                                currentbg++;
-                            } else {
-                                currentbg = 0;
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    break;
-
-            }
-        }
-    };
-
 
 
     private View view;
@@ -85,7 +58,6 @@ public class Head extends LinearLayout {
             this.context = context;
             view = LayoutInflater.from(context).inflate(R.layout.head, this);
             app = (App) context.getApplicationContext();
-            EventBus.getDefault().register(this);
             find();
             init();
             audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -121,88 +93,16 @@ public class Head extends LinearLayout {
     private int currentVolume;
 
     private void init() {
-        EventBus.getDefault().post(new UpdateTime(System.currentTimeMillis()));
-    }
-
-    private ImageView logo;
-    private TextView name;
-
-    private void find() {
-        logo = findViewById(R.id.logo);
-        name = findViewById(R.id.name);
-
-    }
-
-    public void onEvent(final UpdateTime event) {
-        System.out.println("更新时间：" + event.getYmdhmse());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-    }
-
-    private AJson<LogoBg> logobg;
-
-    public void onEvent(final DataMessage event) {
         try {
-//            if (event.getApi().equals(Req.wea)) {
-//                AJson<NewWea> data = App.gson.fromJson(event.getData(),
-//                        new TypeToken<AJson<NewWea>>() {
-//                        }.getType());
-//                final Wea wea = App.gson.fromJson(data.getData().getInfo().toString(), Wea.class);
-//                if (wea != null) {
-//                    handler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//
-//                        }
-//                    });
-//                }
-//            } else
-//
-            if (event.getApi().equals(Req.logo)) {
-                try {
-                    logobg = App.gson.fromJson(event.getData(),
-                            new TypeToken<AJson<LogoBg>>() {
-                            }.getType());
-                    if (logobg.getData() != null) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-//                                Picasso.with(context).load(logobg.getData().getLogo().getLogoPath()).into(logo);
-                                handler.sendEmptyMessageDelayed(bg, 1000);
-                            }
-                        });
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-            } else if (event.getApi().equals(Req.user)) {
-                System.out.println("-------" + event.getData());
-                final AJson<User> data = App.gson.fromJson(event.getData(),
-                        new TypeToken<AJson<User>>() {
-                        }.getType());
-                if (data.getCode().equals("200")) {
-                    if (data.getData() != null) {
-                        app.setUser(data.getData());
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                name.setText(data.getData().getName());
-                            }
-                        });
-                    }
-                } else {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            name.setText(data.getMsg() + App.mac);
-                        }
-                    });
-                }
+            if (app.getUser() == null) {
+                getuser();
+            }
 
+            if (app.getLogoBg() == null) {
+                getlogo();
+            } else {
+                setlogo();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,22 +110,92 @@ public class Head extends LinearLayout {
     }
 
 
-    public void onEvent(final BitmapMessage event) {
-        if (event.getApi().equals(bgpath)) {
-            bgbitmap.add(event.getBitmap());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    ((Activity) context).getWindow().getDecorView().setBackground(new BitmapDrawable(event.getBitmap()));
-                }
-            });
-        }
+    private ImageView logo;
+    private TextView name;
+
+    private void find() {
+        logo = findViewById(R.id.logo);
+        name = findViewById(R.id.name);
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        System.out.println("Head onDetachedFromWindow");
-        EventBus.getDefault().unregister(this);
+    private void setlogo() {
+//        System.out.println("##########2" + app.getLogoBg().getLogo().getLogoPath());
+        Picasso.with(context).load(app.getLogoBg().getLogo().getLogoPath()).error(R.mipmap.top_logo).into(logo);
     }
+
+
+    private void getlogo() {
+        String url = App.requrl("getLogo", "&type=3");
+//        Log.e("@@@", url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String json) {
+                try {
+
+                    AJson<LogoBg> logobg = App.gson.fromJson(json,
+                            new TypeToken<AJson<LogoBg>>() {
+                            }.getType());
+                    LogoBg lg = logobg.getData();
+
+                    if (lg != null) {
+                        app.setLogoBg(lg);
+//                        Log.e("@@@", lg.getLogo().getLogoPath());
+                        setlogo();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5 * 1000,//链接超时时间
+                0,//重新尝试连接次数
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        App.queue.add(request);
+    }
+
+    private void getuser() {
+        String url = App.requrl("getUser", "");
+//        Log.e(tag, url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String json) {
+                try {
+                    System.out.println("-------" + json);
+                    final AJson<User> data = App.gson.fromJson(json,
+                            new TypeToken<AJson<User>>() {
+                            }.getType());
+                    if (data.getCode().equals("200")) {
+                        if (data.getData() != null) {
+                            app.setUser(data.getData());
+                            name.setText(data.getData().getName());
+                        } else {
+                            name.setText(data.getMsg() + App.mac);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5 * 1000,//链接超时时间
+                0,//重新尝试连接次数
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        App.queue.add(request);
+    }
+
+
 }

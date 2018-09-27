@@ -132,7 +132,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void welcomead() {
-        Req.get(Req.welcomead);
+//        Req.get(Req.welcomead);
     }
 
     public void onEvent(DataMessage event) {
@@ -147,7 +147,7 @@ public class WelcomeActivity extends BaseActivity {
                     app.setSystiem(data.getData());
                     welcomead();
                     SystemClock.setCurrentTimeMillis(data.getData());
-
+                    tomain();
 
                 } else {
                     //                System.out.println("===================================");

@@ -1,19 +1,32 @@
 package com.spa.ui;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
 import com.spa.app.App;
 import com.spa.app.Req;
 import com.spa.bean.AJson;
+import com.spa.bean.LiveType;
+import com.spa.bean.LiveTypeApk;
+import com.spa.bean.LiveTypeIP;
 import com.spa.event.DataMessage;
 import com.spa.tools.Fragments;
 import com.spa.tools.Update;
+import com.spa.tools.WebInstaller;
 import com.spa.ui.diy.Toas;
+import com.spa.ui.live.LiveActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -26,77 +39,61 @@ public class MainActivity extends BaseActivity {
 
             Fragments.To(getFragmentManager(), new MainFr());
 
-
-//        find();
             init();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    ImageView wea_icon;
-    TextView wea_tmp, wea_city, wea_maxtmp, wea_mintmp;
-
-    private void find() {
-        wea_icon = findViewById(R.id.wea_icon);
-        wea_tmp = findViewById(R.id.wea_tmp);
-        wea_city = findViewById(R.id.wea_city);
-        wea_maxtmp = findViewById(R.id.wea_maxtmp);
-        wea_mintmp = findViewById(R.id.wea_mintmp);
-    }
-
 
     private void init() {
-        getuser();
-        getlogo();
-//        getwea();
+
         checkupdate();
     }
 
-    private void getuser() {
-        Req.get(Req.user);
-    }
-
-    private void getlogo() {
-        Req.get(Req.logo);
-    }
 
 
-    private void getwea() {
-        Req.get(Req.wea);
-    }
 
     private void checkupdate() {
-        Req.get(Req.update);
+        String url = App.requrl("getUpgrade", "&version=" + App.version);
+//        Log.e(tag, url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String json) {
+                try {
+
+                        final AJson<String> data = App.gson.fromJson(
+                                json, new TypeToken<AJson<String>>() {
+                                }.getType());
+                        if (data.getData() != null) {
+                            System.out.println("准备自动升级...");
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    new Update(MainActivity.this, data.getData()).downloadAndInstall();
+                                }
+                            });
+                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5 * 1000,//链接超时时间
+                0,//重新尝试连接次数
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        App.queue.add(request);
     }
 
     private Handler handler = new Handler();
 
-    public void onEvent(final DataMessage event) {
-        try {
-
-            if (event.getApi().equals(Req.menu)) {
-                if (event.getApi().equals(Req.update)) {
-                    final AJson<String> data = App.gson.fromJson(
-                            event.getData(), new TypeToken<AJson<String>>() {
-                            }.getType());
-                    if (data.getData() != null) {
-                        System.out.println("准备自动升级...");
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                new Update(MainActivity.this, data.getData()).downloadAndInstall();
-                            }
-                        });
-                    }
-
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void onBackPressed() {

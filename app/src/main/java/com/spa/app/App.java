@@ -14,10 +14,13 @@ import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.spa.R;
+import com.spa.bean.LogoBg;
 import com.spa.bean.User;
 import com.spa.event.NetChange;
 import com.spa.event.UpdateTime;
@@ -35,6 +38,7 @@ import de.greenrobot.event.EventBus;
 import okhttp3.OkHttpClient;
 
 public class App extends Application {
+    public static RequestQueue queue;
 
     public static class ScreenType {
 
@@ -71,7 +75,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        queue = Volley.newRequestQueue(this);
 
         config = getSharedPreferences("config", Context.MODE_PRIVATE);
         config();
@@ -175,6 +179,12 @@ public class App extends Application {
         }
     }
 
+    public static String requrl(String api, String parm) {
+        String url = headurl + api + "?mac=" + App.mac + parm;
+
+        return url;
+    }
+
     public static <T> T jsonToObject(String json, TypeToken<T> typeToken) {
         //  new TypeToken<AJson<Object>>() {}.getType()   对象参数
         // new TypeToken<AJson<List<Object>>>() {}.getType() 集合参数
@@ -205,6 +215,16 @@ public class App extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private  LogoBg logoBg = null;
+
+    public LogoBg getLogoBg() {
+        return logoBg;
+    }
+
+    public void setLogoBg(LogoBg logoBg) {
+        this.logoBg = logoBg;
     }
 
     private Bitmap logo = null;

@@ -126,4 +126,5 @@
     <string name="volume">音         量</string>
     <string name="brightness">屏幕亮度</string>
     <string name="langualge">语言选择</string>
+    <string name="zhangdan">账单查询</string>
 </resources>
